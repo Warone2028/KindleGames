@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kindle Bible Apps and Games v11 - Cards, Dice and Battles</title><style>html,body{margin:0;padding:0;background:#fff;color:#000}
+body{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.5}
+#app{max-width:640px;margin:0 auto;padding:12px 14px 28px}
+.bar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px;font-size:16px}
+.bar a,.linkbtn{color:#000;text-decoration:underline;cursor:pointer;background:none;border:none;font:inherit;padding:6px 0}
+h1{font-size:24px;font-weight:bold;margin:8px 0 4px}
+h2{font-size:20px;margin:14px 0 6px}
+p{margin:6px 0}
+.small{font-size:16px;color:#222}
+.btn{display:block;width:100%;box-sizing:border-box;background:#fff;color:#000;border:2px solid #000;font:inherit;font-size:18px;padding:11px 10px;margin:8px 0;text-align:center;cursor:pointer;-webkit-appearance:none;border-radius:0}
+.btn.on,.btn.dark{background:#000;color:#fff}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between}
+.row .btn{width:48.5%}
+.row3 .btn{width:32%}
+.list .btn{text-align:left}
+.ref{font-size:22px;font-weight:bold;margin:10px 0 6px}
+.big{font-size:32px;text-align:center;margin:60px 0}
+.verse{font-size:19px;line-height:1.6;margin:8px 0 12px}
+.verse.long{font-size:17px}
+.note{border-top:2px solid #000;padding-top:8px;margin-top:10px;font-size:17px}
+.w{display:inline-block;padding:2px 3px;margin:1px 0;cursor:pointer}
+.w.hit{background:#000;color:#fff}
+.w.was{border:2px solid #000}
+.blank{display:inline-block;border-bottom:2px solid #000;min-width:70px}
+.built{border:2px dashed #000;min-height:60px;padding:8px;margin:8px 0;font-size:18px}
+.done{text-decoration:line-through}
+.row .btn{width:48.5%}
+.center{text-align:center}
+.big2{font-size:28px;letter-spacing:2px;margin:10px 0}
+.kb{margin:10px 0}
+.kbrow{display:flex;justify-content:center;margin:4px 0}
+.key{min-width:9%;flex:1 1 0;max-width:52px;margin:0 2px;padding:10px 0;border:2px solid #000;background:#fff;color:#000;font:inherit;font-size:18px;border-radius:0;-webkit-appearance:none;cursor:pointer}
+.key.wide{max-width:none;flex:1.6 1 0;font-size:16px}
+.key.big{min-width:44px;max-width:none;flex:none;padding:10px 12px;margin:3px;font-size:20px}
+.key.hit{background:#000;color:#fff}
+.key.near{border-style:dashed;border-width:3px}
+.key.miss{color:#999;border-color:#999}
+.wg{margin:10px auto;width:280px}
+.wgrow{display:flex;margin:5px 0}
+.tile{flex:1;margin:0 3px;border:2px solid #999;text-align:center;font-size:26px;font-weight:bold;padding:6px 0;line-height:1.3}
+.tile.hit{background:#000;color:#fff;border-color:#000}
+.tile.near{border:3px dashed #000}
+.tile.miss{border-color:#000;color:#999}
+table.grid{border-collapse:collapse;margin:8px auto}
+table.grid td{border:1px solid #000;text-align:center;vertical-align:middle;padding:0;cursor:pointer;line-height:1;position:relative}
+table.grid td.on{background:#000;color:#fff}
+table.grid td.sel{outline:3px solid #000;outline-offset:-5px}
+.words{font-size:18px;line-height:1.8}
+.words span{margin-right:10px}
+.cw td.blk{background:#000;cursor:default}
+.cw td.act{background:#e6e6e6}
+.cw td.sel{background:#bbb;outline:none}
+.cw td.wrong{text-decoration:line-through}
+.cw .num{position:absolute;top:1px;left:2px;font-size:16px;line-height:1;transform:scale(0.75);transform-origin:top left}
+.clue{margin:6px 0;cursor:pointer}
+.sud td.given{font-weight:bold}
+.sud td{color:#000}
+.sud td.sel{background:#ccc;outline:none}
+.sud td.wrong{text-decoration:line-through}
+.sud td.br{border-right:3px solid #000}
+.sud td.bb{border-bottom:3px solid #000}
+.sud{border:3px solid #000}
+.numpad{text-align:center;margin:8px 0}
+.ms td.shut{background:#bbb}
+.ms td.open{background:#fff}
+.t2048 td{font-weight:bold;cursor:default}
+.t2048 td.mid{border-width:3px}
+.t2048 td.hi{background:#000;color:#fff}
+.pad{max-width:320px;margin:0 auto}
+.lo td.lit{background:#000}
+.hanoi{display:flex;justify-content:space-between;margin:12px 0}
+.peg{border:2px solid #000;padding:6px 2px 0;cursor:pointer;box-sizing:border-box}
+.peg.sel{border-width:5px}
+.stack{min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.disc{background:#000;color:#fff;text-align:center;font-size:16px;margin:2px 0;padding:2px 0}
+.base{border-top:3px solid #000;text-align:center;font-size:16px;padding:4px 0}
+.mem td{font-size:17px;font-weight:bold}
+.mem td.down{background:#bbb}
+.mem td.got{background:#000;color:#fff}
+.mem td.up{border-width:3px}
+.nono td.cl{border:none;font-size:16px;cursor:default;line-height:1.15}
+.nono td.col{vertical-align:bottom;padding-bottom:3px}
+.nono td.rowc{text-align:right;padding-right:6px;white-space:nowrap}
+.nono td.br{border-right:3px solid #000}
+.nono td.bb{border-bottom:3px solid #000}
+table.hist{border-collapse:collapse;margin:6px auto;font-size:18px}
+table.hist td{border-bottom:1px solid #000;padding:4px 10px}
+table.hist td.code{font-weight:bold;letter-spacing:3px;font-size:22px}
+table.hist td.pegs{font-size:20px;letter-spacing:2px}
+.ttt td{font-weight:bold}
+.disc4{display:inline-block;width:78%;height:78%;border-radius:50%;vertical-align:middle;box-sizing:border-box}
+.disc4.blk{background:#000}
+.disc4.wht{background:#fff;border:3px solid #000}
+.disc4.last{outline:3px dashed #000;outline-offset:2px}
+.c4 td,.rev td{height:40px}
+.dot{display:inline-block;width:22%;height:22%;border-radius:50%;background:#000;vertical-align:middle}
+.chk td.dk,.chess td.dk{background:#aaa}
+.chk td.lt,.chess td.lt{background:#fff;cursor:default}
+.chk td.sel,.chess td.sel{outline:4px solid #000;outline-offset:-4px}
+.chk td.trail{background:#777}
+.king{color:#888;font-size:18px}
+.disc4.wht .king{color:#000}
+.chess td{line-height:1;color:#000}
+.chess td.lastmv{outline:3px dashed #000;outline-offset:-4px}
+.pl{display:inline-block;min-width:60%;padding:2px 0;font-weight:bold;border:2px solid #000}
+.pl.pw{background:#fff;color:#000}
+.pl.pb{background:#000;color:#fff}
+.hand{margin:6px 0 10px}
+.card{display:inline-block;border:2px solid #000;padding:12px 8px;margin:3px;min-width:44px;text-align:center;font-size:22px;font-weight:bold}
+.card.red,.sc.red{font-style:italic}
+.bs td.hit{font-weight:bold}
+.bs td.sunk{background:#000;color:#fff}
+.bs td.ship{background:#bbb}
+.srow{display:flex;justify-content:space-between;margin:6px 0}
+.spile{width:13.4%;min-height:40px;cursor:pointer}
+.spile.gap{cursor:default}
+.sc{border:2px solid #000;background:#fff;font-size:16px;font-weight:bold;padding:4px 2px;text-align:center;min-height:30px;box-sizing:border-box;white-space:nowrap;overflow:hidden}
+.sc.back{background:#999;color:#fff}
+.sc.empty{border-style:dashed;color:#777}
+.sc.sel{background:#000;color:#fff}
+.stack-card{height:24px;overflow:visible}
+.stack-card:last-child{height:auto}
+.tab .spile{min-height:120px}
+.bg td{font-size:16px;vertical-align:top;padding:2px 0;width:7.2%;height:84px}
+.bg td.bar{background:#ddd;vertical-align:middle}
+.bg td.tgt{background:#e6e6e6}
+.bg td.sel{outline:4px solid #000;outline-offset:-4px}
+.bg .pn{font-size:16px;color:#555}
+.disc4.bgd{width:20px;height:20px;display:block;margin:2px auto}
+.go td{border:none;background:#fff}
+.go .cross{color:#888;font-size:20px}
+.bg td.bar{min-width:38px;width:9%}
+.howbtn{display:block;width:100%;background:#fff;border:2px dashed #000;font:inherit;font-size:17px;padding:8px;margin:0 0 8px;cursor:pointer;border-radius:0;-webkit-appearance:none;color:#000}
+.howbox{border:2px solid #000;padding:10px 12px;margin:0 0 10px;font-size:18px;line-height:1.5}
+
+.winbox{border:6px double #000;padding:8px 8px 10px;text-align:center;margin:8px 0 12px}
+.winbox .fw{display:flex;justify-content:space-between;align-items:center}
+.winbox .burst{font:bold 18px/1.0 monospace;white-space:nowrap;text-align:left}
+.winbox .burst span{display:inline-block;width:0.6em;text-align:center}
+.winbox .mid{flex:1;margin:0 6px;min-width:0}
+.winbox .whead{background:#000;color:#fff;font-size:32px;font-weight:bold;letter-spacing:3px;padding:5px 0;margin:4px 0}
+.winbox .stars{font-size:24px;letter-spacing:6px;margin:2px 0}
+.winbox .wverse{font-size:18px;font-style:italic;margin:8px 4px 2px}
+.winbox .wref{font-size:16px}
+.winbox .wstat{font-size:18px;margin-top:8px;border-top:2px solid #000;padding-top:8px}
+.winbox .wrank{font-size:20px;font-weight:bold}
+.winbox .wagain{width:auto;display:inline-block;padding-left:30px;padding-right:30px;margin-top:10px}
+@media (max-width:480px){.winbox .burst{font-size:16px}.winbox .burst span{width:0.45em}.winbox .whead{font-size:22px;letter-spacing:1px}.winbox .stars{font-size:18px;letter-spacing:3px}.winbox .mid{margin:0 3px}}
+.atext{font-size:19px;line-height:1.5;margin:10px 0}
+.avs{border-left:5px solid #000;padding:4px 0 4px 12px;margin:12px 0;font-style:italic;font-size:18px;line-height:1.45}
+.avref{font-style:normal;font-size:16px;margin-top:4px}
+.astat{border:2px solid #000;padding:4px 8px;margin:8px 0;font-size:18px;text-align:center}
+.term{font-family:"Courier New",Courier,monospace;border:4px double #000;padding:4px 12px;margin-top:8px}
+.term .atext{font-size:19px}.term .btn{font-family:inherit;text-align:left}.term h2{font-family:inherit}
+.btn.locked{border-style:dashed;color:#444}
+.crypt{line-height:1.2;margin:8px 0}.cw2{display:inline-block;margin:0 8px 8px 0;white-space:nowrap}
+.cc{display:inline-block;text-align:center;min-width:22px;margin:0 1px;cursor:pointer}
+.cc .cg{display:block;font-size:20px;font-weight:bold;border-bottom:2px solid #000;min-height:24px}
+.cc .ce{display:block;font-size:16px}.cc.on{background:#000;color:#fff}.cc.on .cg{border-color:#fff}
+</style></head><body><div id="app"><p style="font-size:20px">Loading the games...</p><p style="font-size:18px">If this message stays, this page cannot run its games here. These pages need the Kindle web browser (Menu, Web Browser) opened from a web address. Pages sent to the Kindle as a document, by email or Send to Kindle, show only this text.</p></div><script>window.APP_TITLE="Kindle Bible Apps and Games v11";window.PAGE={"name": "Cards, Dice and Battles", "homeHref": "kindle-home-v11.html"};window.GAME_ORDER=["vapp", "stapp", "adv_david", "adv_joseph", "adv_paul", "wordguess", "hangman", "crossword", "wordsearch", "anagrams", "sudoku", "minesweeper", "g2048", "nonogram", "lightsout", "hanoi", "memory", "mathguess", "lostpin", "hiddencode", "tictactoe", "connect4", "reversi", "checkers", "chess", "backgammon", "go", "solitaire", "blackjack", "battleship", "adv_journeys", "adv_nehemiah", "adv_daniel", "adv_tabernacle", "adv_jonah", "adv_wilderness", "adv_samuel", "adv_esther", "adv_moses", "adv_escape", "adv_jesus", "millionaire", "millionaire_ot", "books66", "missingbook", "timeline", "scramble", "truefalse", "twotruths", "versematch", "detective", "adv_treasure", "millionaire_nt", "exodus", "whichfirst", "otnt", "headlines", "connections", "ch_complete", "ch_history", "ch_teach", "ch_otnt", "ch_master", "trivia", "shogi", "cryptogram", "wordladder", "oddoneout", "quartets", "mindreader"];</script><script>(function(){
+var app=document.getElementById('app');
+var G=window.GS={games:[],add:function(g){g.base=g.name;g.name=G.kt(g.name);this.games.push(g);}};
+/* v11: titles no longer start with the word Kindle (the v8-v10 rule was removed at the user's request) */
+G.kt=function(n){return String(n);};
+G.ktH1=function(){var h=app.querySelector('h1');if(h&&G.current&&h.textContent===G.current.base)h.textContent=G.kt(h.textContent);};
+G.esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');};
+G.shuffle=function(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;};
+G.rnd=function(n){return Math.floor(Math.random()*n);};
+G.pick=function(a){return a[Math.floor(Math.random()*a.length)];};
+G.bar=function(name,right){return '<div class="bar"><span><button class="linkbtn" data-a="home">Menu</button> &middot; <a href="'+(window.PAGE||{}).homeHref+'" data-nav="home">Home</a></span><span>'+G.esc(G.kt(name))+(right?' &middot; '+right:'')+'</span></div>'+(G.howHtml?G.howHtml():'');};
+G.cell=function(n){var w=Math.min(app.clientWidth||600,600);return Math.max(26,Math.floor((w-8)/n)-2);};
+G.keyboard=function(extra,states){
+  var rows=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'],h='<div class="kb">';
+  for(var r=0;r<3;r++){h+='<div class="kbrow">';
+    if(r===2&&extra)h+='<button class="key wide" data-a="enter">'+extra+'</button>';
+    for(var i=0;i<rows[r].length;i++){var c=rows[r].charAt(i),st=states&&states[c]?' '+states[c]:'';h+='<button class="key'+st+'" data-a="key" data-v="'+c+'">'+c+'</button>';}
+    if(r===2&&extra)h+='<button class="key wide" data-a="del">Del</button>';
+    h+='</div>';}
+  return h+'</div>';
+};
+G.current=null;
+G.home=function(){
+  G.current=null; app.onclick=null; G.showHow=false;
+  var P=window.PAGE||{},h='<div class="bar"><a href="'+P.homeHref+'" data-nav="home">Home</a><span>'+G.esc(P.name)+' &middot; '+G.games.length+(G.games.length===1?' item':' items')+'</span></div>';
+  h+='<h1>'+G.esc(P.name)+'</h1><div class="row">';
+  for(var j=0;j<G.games.length;j++)h+='<button class="btn" data-a="open" data-v="'+G.games[j].id+'">'+G.esc(G.games[j].name)+'</button>';
+  h+='</div><p class="small" style="margin-top:16px">Tap one to open it. Tap Menu at the top to come back to this list, or Home for all the sections.</p>';
+  app.innerHTML=h; window.scrollTo(0,0);
+};
+document.addEventListener('click',function(e){
+  var el=e.target; while(el&&el!==document&&!(el.getAttribute&&el.getAttribute('data-a')))el=el.parentNode;
+  if(!el||el===document)return;
+  var a=el.getAttribute('data-a'),v=el.getAttribute('data-v');
+  if(a==='home'){G.home();return;}
+  if(a==='how'){G.showHow=!G.showHow;var hb=document.getElementById('howbox');if(hb)hb.style.display=G.showHow?'block':'none';el.innerHTML=G.showHow?'Hide instructions':'How to play';return;}
+  if(a==='open'){G.wstate=null;for(var i=0;i<G.games.length;i++)if(G.games[i].id===v){G.current=G.games[i];G.games[i].start(app);window.scrollTo(0,0);}if(G.afterRender)G.afterRender();G.ktH1();return;}
+  if(a==='winagain'){G.wstate=null;if(G.playAgain)G.playAgain();window.scrollTo(0,0);return;}
+  if(/^(again|new|deal|game|redo|menu|nextround|start|who|lvl|next|size)$/.test(a))G.wstate=null;
+  if(G.current&&G.current.click)G.current.click(a,v,el);
+  if(G.afterRender)G.afterRender();
+  G.ktH1();
+});
+window.addEventListener('load',function(){G.home();});
+})();
+(function(){
+var G=window.GS;
+G.HOW={
+vapp:'Pick a topic (or all 100), then tap Start. Say the verse to yourself, then tap Show verse to check. Tap Got it if you knew it, or Again to see it later in the round. Choose "Show first: Verse" to practice naming the reference instead.',
+stapp:'Pick a topic, then a verse. Play the three games: Missing word (pick the missing word), Phrase order (tap the phrases in order) and Spot the error (tap the one wrong word). 80% wins a game. Then Memorize it: say the verse aloud from fewer and fewer hints and tap Show the verse to check yourself.',
+wordguess:'Guess the hidden 5-letter Bible word in 6 tries. Type a word with the letters and tap Enter. Black square = right letter in the right spot. Dashed square = the letter is in the word but in another spot. Gray = not in the word.',
+hangman:'Guess the Bible word one letter at a time. The clue tells you what it is. Each wrong letter adds to the drawing; 6 wrong letters and the game is over.',
+wordsearch:'Find the 8 Bible words listed below the grid. Words run across, down or on a slant. Tap the first letter of a word, then its last letter. Found words turn black.',
+anagrams:'The letters of a Bible word are mixed up. Read the clue, then tap the letters in the right order. Undo takes back one letter, Clear starts over, Show it gives the answer. 10 words per round.',
+crossword:'Tap a square or a clue to choose a word; tap the same square again to switch between across and down. Type letters with the keyboard. Check marks wrong letters. Show this word fills in the word you are on.',
+sudoku:'Fill the grid so every row, every column and every 3 by 3 box has the numbers 1 to 9 once each. Tap a square, then tap a number. Bold numbers are part of the puzzle. Check marks any wrong numbers.',
+minesweeper:'Open every square that has no mine. A number tells how many mines touch that square. Use "Tap to flag" to mark squares you think hide mines. Your first tap is always safe.',
+g2048:'Tap Up, Down, Left or Right to slide all the tiles. Two tiles with the same number join into one. Try to reach 2048. The game ends when no move is left.',
+lightsout:'Black squares are lights that are on. Tapping a square flips it and the squares above, below and beside it. Turn every light off in as few taps as you can.',
+hanoi:'Move the whole stack from the left peg to the right peg. Tap a peg to pick up its top disc, then tap the peg to put it on. Move one disc at a time, and never put a bigger disc on a smaller one.',
+memory:'All 16 cards are face down. Tap two cards to turn them over. If the words match, they stay up. If not, tap any card to turn them back. Find all 8 pairs in as few tries as you can.',
+nonogram:'Fill in squares to make a hidden Bible picture. The numbers by each row and column tell how many black squares run together, in order, with at least one white square between runs. Use "Tap to mark X" for squares you know are white.',
+mathguess:'Guess the hidden sum in 6 tries, like 12+5=17 (6 characters). Your guess must be a true sum. Times and divide are done before plus and minus. Black = right spot, dashed = in the sum elsewhere, gray = not in it.',
+lostpin:'Find the 4-digit PIN in 10 tries. No digit is used twice. After each try you see how many digits are in the right place, and how many are in the PIN but in the wrong place.',
+hiddencode:'Find the 4-letter code made from the letters A to F (letters can repeat) in 10 tries. A black dot means a right letter in the right place. A white dot means a right letter in the wrong place.',
+tictactoe:'You are X. Tap a square to place your mark. Get three in a row across, down or on a slant before the other player does.',
+connect4:'You are black. Tap a column to drop a disc; it falls to the lowest empty spot. Get four of your discs in a row across, down or on a slant.',
+reversi:'You are black. Place a disc so that white discs lie in a straight line between your new disc and another black disc; those white discs turn black. Small dots show where you can play. The most discs at the end wins.',
+checkers:'You are black and move up the board on the gray squares. Tap a piece, then a dot to move one square on a slant. Jump over an enemy piece to capture it; if a jump is possible you must take it, and keep jumping when you can. Reach the far side to become a king (K), which can move both ways.',
+blackjack:'Get closer to 21 than the dealer without going over. Number cards count their number, J, Q and K count 10, and A counts 1 or 11. Tap Hit to take a card or Stand to stop. The dealer must take cards until reaching 17. Points only, no betting.',
+battleship:'Your fleet and the enemy fleet each have 5 ships. Tap a square in the enemy waters to fire. X = hit, dot = miss. The computer fires back after each shot. Sink all enemy ships first to win.',
+solitaire:'Build four piles at the top, one for each suit, from A up to K. In the seven columns, build down in alternating colors (red italic cards, black plain cards). Tap a card, then tap where it goes. Tap the deck to turn a card. Only a K can go in an empty column. Move cards up sends any cards that fit to the top.',
+chess:'You are white. Tap a piece, then a dot to move it. Put the black king in checkmate, where it is attacked and cannot escape. Pawns that reach the far side become queens. Show letters changes the pieces to letters if the symbols are hard to see.',
+backgammon:'You are black and move your 15 checkers from point 24 down to point 1, then bear them off. Each turn the dice are rolled for you; move one checker per die. Tap a point with your checkers, then a dot. You cannot land on a point with 2 or more white checkers; landing on a single white checker sends it to the bar. Bear off once all your checkers are on points 1 to 6.',
+go:'You are black. Tap a point to place a stone. Stones with no empty space next to them are captured. Surround empty space to claim it. When there is nothing useful left, tap Pass; when both players pass, stones plus surrounded space are counted. White gets 6.5 extra for going second.'
+};
+G.howHtml=function(){var id=G.current&&G.current.id,t=id&&G.HOW[id];if(!t)return '';
+  return '<button class="howbtn" data-a="how">'+(G.showHow?'Hide instructions':'How to play')+'</button><div id="howbox" class="howbox" style="display:'+(G.showHow?'block':'none')+'">'+G.esc(t)+'</div>';};
+})();
+(function(){
+/* Win banner v4 (design picked by fixed GAME_ORDER so it stays the same on every page): fireworks + stars, a different design per game, KJ2000 victory verse, wins, streak and rank */
+var G=window.GS, app=document.getElementById('app');
+var BURSTS=[
+ ["  \\ | /  ","*   *   *","--  ✸  --","*   *   *","  / | \\  "],
+ [" .  *  . ","*   '   *","' * ✺ * '","*   .   *"," .  *  . "],
+ ["✦       ✦","   \\ /   ","--  ✷  --","   / \\   ","✦       ✦"],
+ ["    ★    ","  *   *  ","★   ✸   ★","  *   *  ","    ★    "],
+ ["*   .   *","  . | .  ","-   ✹   -","  . | .  ","*   .   *"],
+ ["\\   ✦   /","  ✦ | ✦  ","✦   ✸   ✦","  ✦ | ✦  ","/   ✦   \\"],
+ ["  ' . '  ",". \\ | / .","--  ✺  --","' / | \\ '","  . ' .  "],
+ ["✶   |   ✶","  * | *  ","--  ✷  --","  * | *  ","✶   |   ✶"]];
+var STARS=["✦ ✶ ★ ✶ ✦","* ✦ ★ ✦ *","★ ✶ ★ ✶ ★","✶ * ★ * ✶","✦ * ✦ * ✦","★ ✦ ★ ✦ ★","✶ ✦ ✶ ✦ ✶","★ * ✶ * ★"];
+/* every verse below is copied from the user's KJ2000 text (kj2000-improved-2.txt) */
+var VERSES=[
+ ["But thanks be to God, who gives us the victory through our Lord Jesus Christ.","1 Corinthians 15:57"],
+ ["Nay, in all these things we are more than conquerors through him that loved us.","Romans 8:37"],
+ ["Rejoice in the Lord always: and again I say, Rejoice.","Philippians 4:4"],
+ ["I can do all things through Christ who strengthens me.","Philippians 4:13"],
+ ["For whoever is born of God overcomes the world: and this is the victory that overcomes the world, even our faith.","1 John 5:4"],
+ ["Now thanks be unto God, who always causes us to triumph in Christ, and makes manifest the fragrance of his knowledge by us in every place.","2 Corinthians 2:14"],
+ ["Know you not that they who run in a race all run, but one receives the prize? So run, that you may obtain.","1 Corinthians 9:24"],
+ ["I have fought a good fight, I have finished my course, I have kept the faith:","2 Timothy 4:7"],
+ ["A merry heart does good like a medicine: but a broken spirit dries the bones.","Proverbs 17:22"],
+ ["And let us not be weary in well doing: for in due season we shall reap, if we faint not.","Galatians 6:9"],
+ ["The LORD your God in the midst of you is mighty; he will save, he will rejoice over you with joy; he will quiet you with his love, he will rejoice over you with singing.","Zephaniah 3:17"],
+ ["For you shall go out with joy, and be led forth with peace: the mountains and the hills shall break forth before you into singing, and all the trees of the field shall clap their hands.","Isaiah 55:12"]];
+var RANKS=[[50,'More than a conqueror'],[25,'Overcomer'],[10,'Steadfast'],[3,'Faithful'],[1,'Beginner']];
+G.WIN_VERSES=VERSES;
+function rank(w){for(var i=0;i<RANKS.length;i++)if(w>=RANKS[i][0])return RANKS[i][1];return '';}
+var mem={};
+function load(){try{var s=window.localStorage.getItem('kbag_wins');if(s)mem=JSON.parse(s)||{};}catch(e){}}
+function save(){try{window.localStorage.setItem('kbag_wins',JSON.stringify(mem));}catch(e){}}
+load();
+G.winStats=function(id){return mem[id]||{w:0,s:0,b:0};};
+
+var WIN=/You win|Solved|You found it|All 8 found|You got it in|Found it in|Cracked in|All lights out|Done in \d+ moves|All pairs found|You made 2048/;
+var TWO=/(Black|White|X|O) wins\./;
+var LOSE=/computer wins|dealer wins|The word was|The answer was|The PIN was|The code was|Game over|No moves left|Not yet|fleet is sunk/;
+function pageText(){
+  var c=app.cloneNode(true),rm=c.querySelectorAll('#howbox,#winbox,.howbtn');
+  for(var i=0;i<rm.length;i++)rm[i].parentNode.removeChild(rm[i]);
+  return c.textContent||'';
+}
+function status(id,t){
+  var two=TWO.exec(t);
+  if(id==='anagrams'){var m=/You solved (\d+) of 10/.exec(t);if(m)return +m[1]>=8?{k:'win'}:{k:'lose'};}
+  if(id==='vapp'&&/Round done/.test(t))return /needed Again/.test(t)?{k:'lose'}:{k:'win'};
+  if(id==='stapp'){var h1=app.querySelector('h1');if(h1&&h1.textContent==='Won')return {k:'win'};if(h1&&h1.textContent==='Not yet')return {k:'lose'};return null;}
+  if(two&&!/You win/.test(t))return {k:'two',who:two[1]};
+  if(WIN.test(t))return {k:'win'};
+  if(LOSE.test(t))return {k:'lose'};
+  return null;
+}
+G.wstate=null; G.lastVerse=-1; G.lastWin=null;
+G.resetWin=function(){G.wstate=null;};
+function burst(b){var h='<div class="burst">';for(var r=0;r<b.length;r++){for(var i=0;i<b[r].length;i++){var c=b[r].charAt(i);h+='<span>'+(c===' '?'&nbsp;':G.esc(c))+'</span>';}if(r<b.length-1)h+='<br>';}return h+'</div>';}
+function banner(id,st){
+  var idx=0,O=window.GAME_ORDER||[];for(var i=0;i<O.length;i++)if(O[i]===id)idx=i;
+  var b=BURSTS[idx%BURSTS.length],s=STARS[idx%STARS.length],L=G.lastWin||{};
+  var head=st.k==='two'?({X:'X',O:'O',Black:'BLACK',White:'WHITE'}[st.who]||st.who)+' WINS!':'YOU WIN!';
+  var v=VERSES[L.v||0];
+  var h='<div id="winbox" class="winbox"><div class="fw">'+burst(b)+'<div class="mid"><div class="stars">'+s+'</div><div class="whead">'+head+'</div><div class="stars">'+s+'</div></div>'+burst(b)+'</div>';
+  h+='<div class="wverse">"'+G.esc(v[0])+'"</div><div class="wref">'+G.esc(v[1])+'</div>';
+  if(st.k==='win'){var x=G.winStats(id);
+    h+='<div class="wstat"><span class="wrank">★ Rank: '+G.esc(rank(x.w))+' ★</span>'+(L.newRank?'<br><b>New rank!</b>':'')+'<br>'+G.esc(G.current.name)+' wins: '+x.w+' &middot; Streak: '+x.s+' in a row'+(x.s>1&&x.s===x.b?' (best)':'')+'</div>';}
+  return h+'<button class="btn dark wagain" data-a="winagain">Play again</button></div>';
+}
+G.afterRender=function(){
+  if(!G.current){G.wstate=null;return;}
+  var id=G.current.id,old=document.getElementById('winbox');if(old)old.parentNode.removeChild(old);
+  var st=status(id,pageText());
+  if(!st){G.wstate=null;return;}
+  if(st.k==='lose'){if(G.wstate!=='lose'){var y=mem[id]||{w:0,s:0,b:0};y.s=0;mem[id]=y;save();}G.wstate='lose';return;}
+  if(G.wstate!=='won'){
+    G.wstate='won';var v;do{v=Math.floor(Math.random()*VERSES.length);}while(v===G.lastVerse&&VERSES.length>1);G.lastVerse=v;
+    var nr=false;
+    if(st.k==='win'){var x=mem[id]||{w:0,s:0,b:0},before=rank(x.w);x.w++;x.s++;if(x.s>x.b)x.b=x.s;mem[id]=x;save();nr=rank(x.w)!==before&&x.w>1;}
+    G.lastWin={v:v,newRank:nr};
+  }
+  var div=document.createElement('div');div.innerHTML=banner(id,st);
+  var after=document.getElementById('howbox')||app.querySelector('.bar');
+  var box=div.firstChild;
+  if(after&&after.parentNode===app)app.insertBefore(box,after.nextSibling);else app.insertBefore(box,app.firstChild);
+};
+G.playAgain=function(){
+  var order=['again','new','deal','game','redo','menu','nextround','start'];
+  for(var i=0;i<order.length;i++){var els=app.querySelectorAll('[data-a="'+order[i]+'"]');
+    for(var j=0;j<els.length;j++){var e=els[j],p=e,inBox=false;while(p&&p!==app){if(p.id==='winbox')inBox=true;p=p.parentNode;}
+      if(!inBox){e.click();return;}}}
+  G.current.start(app);G.afterRender();
+};
+})();
+(function(){
+var G=window.GS, esc=G.esc;
+function picker(el,name,extra){el.innerHTML=G.bar(name)+'<h1>'+name+'</h1>'+(extra||'')+'<button class="btn" data-a="who" data-v="easy">Play the computer (easy)</button><button class="btn" data-a="who" data-v="medium">Play the computer (medium)</button><button class="btn" data-a="who" data-v="hard">Play the computer (hard)</button><button class="btn" data-a="who" data-v="two">Two players, one Kindle</button>';}
+var SUITS=['♠','♥','♦','♣'],RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+function deck(){var d=[];for(var s=0;s<4;s++)for(var r=0;r<13;r++)d.push({s:s,r:r});return G.shuffle(d);}
+function cardTxt(c){return RANKS[c.r]+SUITS[c.s];}
+
+/* ---------------- Checkers ---------------- */
+(function(){
+var S;
+function own(p,side){return p&&p.toLowerCase()===side;}
+function jumps(b,i,p,path,caps,out){var r=Math.floor(i/8),c=i%8,side=p.toLowerCase(),opp=side==='b'?'w':'b',dirs=p==='b'?[[-1,-1],[-1,1]]:p==='w'?[[1,-1],[1,1]]:[[-1,-1],[-1,1],[1,-1],[1,1]],any=false;
+  for(var d=0;d<dirs.length;d++){var mr=r+dirs[d][0],mc=c+dirs[d][1],tr=r+2*dirs[d][0],tc=c+2*dirs[d][1];if(tr<0||tr>7||tc<0||tc>7)continue;
+    var mi=mr*8+mc,ti=tr*8+tc;if(own(b[mi],opp)&&caps.indexOf(mi)<0&&!b[ti]){any=true;
+      var crowned=(p==='b'&&tr===0)||(p==='w'&&tr===7);
+      if(crowned)out.push({path:path.concat([ti]),caps:caps.concat([mi])});
+      else{var save=b[i];b[i]='';b[ti]=p;jumps(b,ti,p,path.concat([ti]),caps.concat([mi]),out);b[ti]='';b[i]=save;}}}
+  if(!any&&caps.length)out.push({path:path,caps:caps});}
+function allMoves(b,side){var caps=[],steps=[];for(var i=0;i<64;i++){var p=b[i];if(!own(p,side))continue;
+    var out=[];jumps(b,i,p,[],[],out);for(var k=0;k<out.length;k++){out[k].from=i;caps.push(out[k]);}
+    var r=Math.floor(i/8),c=i%8,dirs=p==='b'?[[-1,-1],[-1,1]]:p==='w'?[[1,-1],[1,1]]:[[-1,-1],[-1,1],[1,-1],[1,1]];
+    for(var d=0;d<dirs.length;d++){var tr=r+dirs[d][0],tc=c+dirs[d][1];if(tr>=0&&tr<8&&tc>=0&&tc<8&&!b[tr*8+tc])steps.push({from:i,path:[tr*8+tc],caps:[]});}}
+  return caps.length?caps:steps;}
+function apply(b,m){var p=b[m.from],to=m.path[m.path.length-1];b[m.from]='';for(var k=0;k<m.caps.length;k++)b[m.caps[k]]='';
+  if(p==='b'&&to<8)p='B';if(p==='w'&&to>=56)p='W';b[to]=p;}
+function score(b){var s=0;for(var i=0;i<64;i++){var p=b[i];if(p==='w')s+=10+Math.floor(i/8)*0.3;else if(p==='W')s+=16;else if(p==='b')s-=10+(7-Math.floor(i/8))*0.3;else if(p==='B')s-=16;}return s;}
+function search(b,side,d,al,be){var ms=allMoves(b,side);if(!ms.length)return side==='w'?-1000:1000;if(!d)return score(b);
+  var best=side==='w'?-1e9:1e9;for(var k=0;k<ms.length;k++){var nb=b.slice();apply(nb,ms[k]);var s=search(nb,side==='w'?'b':'w',d-1,al,be);
+    if(side==='w'){if(s>best)best=s;if(best>al)al=best;}else{if(s<best)best=s;if(best<be)be=best;}if(al>=be)break;}return best;}
+function cpu(){var ms=G.shuffle(allMoves(S.b,'w'));if(!ms.length)return;var pick=ms[0];
+  if(S.who==='hard'||S.who==='medium'){var best=-1e9;for(var k=0;k<ms.length;k++){var nb=S.b.slice();apply(nb,ms[k]);var s=search(nb,'b',S.who==='hard'?4:2,-1e9,1e9);if(s>best){best=s;pick=ms[k];}}}
+  else{for(k=0;k<ms.length;k++)if(ms[k].caps.length>pick.caps.length)pick=ms[k];}
+  apply(S.b,pick);S.last=[pick.from].concat(pick.path);}
+function draw(){G.S=S;
+  var ms=S.over?[]:allMoves(S.b,S.turn),sz=Math.min(G.cell(8),70),targets={},movable={};
+  for(var k=0;k<ms.length;k++){movable[ms[k].from]=1;if(S.sel===ms[k].from){var pre=true;for(var q=0;q<S.part.length;q++)if(ms[k].path[q]!==S.part[q])pre=false;if(pre&&ms[k].path.length>S.part.length)targets[ms[k].path[S.part.length]]=1;}}
+  var h=G.bar('Checkers',S.who==='two'?'two players':'you are black')+'<table class="grid chk">';
+  for(var r=0;r<8;r++){h+='<tr>';for(var c=0;c<8;c++){var i=r*8+c,dark=(r+c)%2===1,p=S.b[i],t='';
+      if(p)t='<span class="disc4 '+(p.toLowerCase()==='b'?'blk':'wht')+'">'+(p==='B'||p==='W'?'<b class="king">K</b>':'')+'</span>';else if(targets[i])t='<span class="dot"></span>';
+      var cls=dark?'dk':'lt';if(i===S.sel)cls+=' sel';if(S.last&&S.last.indexOf(i)>=0&&!p&&!targets[i])cls+=' trail';
+      h+='<td class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px" data-a="cell" data-v="'+i+'">'+t+'</td>';}h+='</tr>';}
+  h+='</table><p class="small">Tap your piece, then where it goes. Jumps are required. K = king.</p>';
+  var m=S.msg||'';if(S.over)m=S.over;else m+=(m?' ':'')+(S.turn==='b'?'Black':'White')+' to play.';
+  h+='<p class="note">'+m+'</p><div class="row"><button class="btn'+(S.over?' dark':'')+'" data-a="again">New game</button><button class="btn" data-a="menu">Change opponent</button></div>';
+  S.el.innerHTML=h;S.msg='';
+}
+function after(){S.turn=S.turn==='b'?'w':'b';if(!allMoves(S.b,S.turn).length){S.over=(S.turn==='b'?'White':'Black')+' wins: no moves left for '+(S.turn==='b'?'black.':'white.');if(S.who!=='two')S.over=S.turn==='b'?'The computer wins.':'You win.';return;}
+  if(S.who!=='two'&&S.turn==='w'){cpu();S.turn='b';if(!allMoves(S.b,'b').length)S.over='The computer wins.';}}
+G.add({id:'checkers',name:'Checkers',group:'Board and card games',start:function(el){S={el:el};picker(el,'Checkers','<p>You play black and move first, up the board.</p>');},
+ click:function(a,v){
+  if(a==='menu'){this.start(S.el);return;}
+  if(a==='who'||a==='again'){var b=[];for(var i=0;i<64;i++){var r=Math.floor(i/8),c=i%8;b.push((r+c)%2===1?(r<3?'w':r>4?'b':''):'');}
+    S={el:S.el,who:a==='who'?v:S.who,b:b,turn:'b',sel:null,part:[],over:'',msg:'',last:null};draw();return;}
+  if(a!=='cell'||!S.b||S.over)return;var i2=+v,ms=allMoves(S.b,S.turn);
+  if(S.sel===null||(own(S.b[i2],S.turn)&&!S.part.length)){var can=false;for(var k=0;k<ms.length;k++)if(ms[k].from===i2)can=true;
+    if(can){S.sel=i2;S.part=[];}else if(own(S.b[i2],S.turn))S.msg=ms[0]&&ms[0].caps.length?'A jump is required with another piece.':'That piece cannot move.';draw();return;}
+  var part=S.part.concat([i2]),match=null,prefix=false;
+  for(k=0;k<ms.length;k++){var m=ms[k];if(m.from!==S.sel)continue;var ok=true;for(var q=0;q<part.length;q++)if(m.path[q]!==part[q])ok=false;if(!ok)continue;if(m.path.length===part.length)match=m;else prefix=true;}
+  if(match){apply(S.b,match);S.last=[match.from].concat(match.path);S.sel=null;S.part=[];after();}
+  else if(prefix){S.part=part;S.msg='Keep jumping.';}
+  else{S.msg='That move is not allowed.';}
+  draw();}});
+})();
+
+/* ---------------- Blackjack ---------------- */
+(function(){
+var S;
+function val(h){var t=0,aces=0;for(var i=0;i<h.length;i++){var r=h[i].r;if(r===0){aces++;t+=11;}else t+=Math.min(10,r+1);}while(t>21&&aces){t-=10;aces--;}return t;}
+function show(h,hide){var s='';for(var i=0;i<h.length;i++)s+='<span class="card'+(h[i].s===1||h[i].s===2?' red':'')+'">'+(hide&&i===1?'?':cardTxt(h[i]))+'</span>';return s;}
+function draw(){G.S=S;
+  var h=G.bar('Blackjack','won '+S.w+' &middot; lost '+S.l+' &middot; tied '+S.t)+'<p class="small">Get closer to 21 than the dealer without going over. Points only, no betting.</p>';
+  h+='<h2>Dealer'+(S.done?' ('+val(S.dealer)+')':'')+'</h2><div class="hand">'+show(S.dealer,!S.done)+'</div>';
+  h+='<h2>You ('+val(S.you)+')</h2><div class="hand">'+show(S.you,false)+'</div>';
+  if(S.msg)h+='<p class="note">'+S.msg+'</p>';
+  if(S.done)h+='<button class="btn dark" data-a="deal">Deal again</button>';
+  else h+='<div class="row"><button class="btn" data-a="hit">Hit (take a card)</button><button class="btn dark" data-a="stand">Stand</button></div>';
+  S.el.innerHTML=h;
+}
+function finish(){S.done=true;var y=val(S.you);if(y>21){S.msg='Over 21. The dealer wins.';S.l++;return;}
+  while(val(S.dealer)<17)S.dealer.push(S.d.pop());var d=val(S.dealer);
+  if(d>21){S.msg='The dealer went over 21. You win.';S.w++;}else if(y>d){S.msg='You win, '+y+' to '+d+'.';S.w++;}else if(y<d){S.msg='The dealer wins, '+d+' to '+y+'.';S.l++;}else{S.msg='A tie at '+y+'.';S.t++;}}
+function deal(){if(S.d.length<15)S.d=deck();S.you=[S.d.pop(),S.d.pop()];S.dealer=[S.d.pop(),S.d.pop()];S.done=false;S.msg='';
+  if(val(S.you)===21){S.done=true;if(val(S.dealer)===21){S.msg='Both have 21. A tie.';S.t++;}else{S.msg='Blackjack. You win.';S.w++;}}}
+G.add({id:'blackjack',name:'Blackjack',group:'Board and card games',start:function(el){S={el:el,d:deck(),w:0,l:0,t:0};deal();draw();},
+ click:function(a){
+  if(a==='deal'){deal();draw();return;}if(S.done)return;
+  if(a==='hit'){S.you.push(S.d.pop());if(val(S.you)>21)finish();else if(val(S.you)===21)finish();}
+  else if(a==='stand')finish();
+  draw();}});
+})();
+
+/* ---------------- Battleship ---------------- */
+(function(){
+var S,N=8,SHIPS=[4,3,3,2,2];
+function place(){var b=[],i;for(i=0;i<N*N;i++)b.push(0);for(var s=0;s<SHIPS.length;s++){for(;;){var L=SHIPS[s],h=Math.random()<0.5,r=G.rnd(h?N:N-L+1),c=G.rnd(h?N-L+1:N),ok=true,cells=[];
+      for(var k=0;k<L;k++){var j=(r+(h?0:k))*N+c+(h?k:0);if(b[j])ok=false;cells.push(j);}if(!ok)continue;for(k=0;k<L;k++)b[cells[k]]=s+1;break;}}return b;}
+function sunk(b,shots,id){for(var i=0;i<N*N;i++)if(b[i]===id&&!shots[i])return false;return true;}
+function allSunk(b,shots){for(var i=0;i<N*N;i++)if(b[i]&&!shots[i])return false;return true;}
+function cpuShot(){var cand=[],i;
+  for(i=0;i<N*N;i++)if(S.cshots[i]&&S.mine[i]&&!sunk(S.mine,S.cshots,S.mine[i])){var r=Math.floor(i/N),c=i%N,nb=[[r-1,c],[r+1,c],[r,c-1],[r,c+1]];
+      for(var k=0;k<4;k++){var rr=nb[k][0],cc=nb[k][1];if(rr>=0&&rr<N&&cc>=0&&cc<N&&!S.cshots[rr*N+cc])cand.push(rr*N+cc);}}
+  if(!cand.length||S.who==='easy')for(i=0;i<N*N;i++)if(!S.cshots[i]&&(S.who!=='hard'||(Math.floor(i/N)+i%N)%2===0))cand.push(i);
+  if(!cand.length)for(i=0;i<N*N;i++)if(!S.cshots[i])cand.push(i);
+  var t=G.pick(cand);S.cshots[t]=1;return t;}
+function grid(b,shots,show,act,sz){var h='<table class="grid bs">';for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){var i=r*N+c,t='',cls='';
+      if(shots[i])t=b[i]?'X':'&bull;';if(shots[i]&&b[i])cls='hit';if(b[i]&&shots[i]&&sunk(b,shots,b[i]))cls='sunk';else if(show&&b[i]&&!shots[i])cls='ship';
+      h+='<td class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px"'+(act?' data-a="shot" data-v="'+i+'"':'')+'>'+t+'</td>';}h+='</tr>';}return h+'</table>';}
+function draw(){G.S=S;
+  var sz=Math.min(G.cell(N),52),h=G.bar('Battleship')+'<h2>Enemy waters (tap to fire)</h2>'+grid(S.enemy,S.pshots,S.over,!S.over,sz);
+  if(S.msg)h+='<p class="note">'+S.msg+'</p>';
+  h+='<h2>Your fleet</h2>'+grid(S.mine,S.cshots,true,false,Math.round(sz*0.75))+'<p class="small">X = hit, dot = miss, gray = your ship, black = sunk. Ships: 4, 3, 3, 2, 2.</p>';
+  h+='<div class="row"><button class="btn'+(S.over?' dark':'')+'" data-a="again">New game</button><button class="btn" data-a="menu">Change level</button></div>';
+  S.el.innerHTML=h;
+}
+G.add({id:'battleship',name:'Battleship',group:'Board and card games',start:function(el){S={el:el};el.innerHTML=G.bar('Battleship')+'<h1>Battleship</h1><p>Sink all 5 enemy ships before the computer sinks yours. Your ships are placed for you.</p><button class="btn" data-a="who" data-v="easy">Easy computer</button><button class="btn" data-a="who" data-v="medium">Medium computer</button><button class="btn" data-a="who" data-v="hard">Hard computer</button>';},
+ click:function(a,v){
+  if(a==='menu'){this.start(S.el);return;}
+  if(a==='who'||a==='again'){S={el:S.el,who:a==='who'?v:S.who,mine:place(),enemy:place(),pshots:{},cshots:{},over:false,msg:'Fire at the enemy grid.'};draw();return;}
+  if(a!=='shot'||S.over)return;var i=+v;if(S.pshots[i]){S.msg='You already fired there.';draw();return;}
+  S.pshots[i]=1;var m=S.enemy[i]?(sunk(S.enemy,S.pshots,S.enemy[i])?'Hit and sunk.':'Hit.'):'Miss.';
+  if(allSunk(S.enemy,S.pshots)){S.over=true;S.msg='You sank the whole fleet. You win.';draw();return;}
+  var t=cpuShot();m+=' The computer fired at '+String.fromCharCode(65+Math.floor(t/N))+(t%N+1)+': '+(S.mine[t]?(sunk(S.mine,S.cshots,S.mine[t])?'hit and sunk.':'hit.'):'miss.');
+  if(allSunk(S.mine,S.cshots)){S.over=true;m+=' Your fleet is sunk. The computer wins.';}
+  S.msg=m;draw();}});
+})();
+
+/* ---------------- Solitaire (Klondike, draw one) ---------------- */
+(function(){
+var S;
+function red(c){return c.s===1||c.s===2;}
+function canFound(c,pile){return pile.length?pile[pile.length-1].s===c.s&&pile[pile.length-1].r===c.r-1:c.r===0;}
+function canTab(c,pile){if(!pile.length)return c.r===12;var t=pile[pile.length-1];return t.up&&red(t)!==red(c)&&t.r===c.r+1;}
+function cardHtml(c,sel){if(!c.up)return '<div class="sc back"></div>';return '<div class="sc'+(red(c)?' red':'')+(sel?' sel':'')+'">'+cardTxt(c)+'</div>';}
+function draw(){G.S=S;
+  var h=G.bar('Solitaire',S.moves+' moves')+'<div class="srow">';
+  h+='<div class="spile" data-a="stock">'+(S.stock.length?'<div class="sc back">'+S.stock.length+'</div>':'<div class="sc empty">Turn</div>')+'</div>';
+  var w=S.waste;h+='<div class="spile" data-a="waste">'+(w.length?cardHtml(w[w.length-1],S.sel&&S.sel.from==='w'):'<div class="sc empty"></div>')+'</div><div class="spile gap"></div>';
+  for(var f=0;f<4;f++){var fp=S.found[f];h+='<div class="spile" data-a="found" data-v="'+f+'">'+(fp.length?cardHtml(fp[fp.length-1],false):'<div class="sc empty">'+SUITS[f]+'</div>')+'</div>';}
+  h+='</div><div class="srow tab">';
+  for(var t=0;t<7;t++){var p=S.tab[t];h+='<div class="spile col" data-a="tab" data-v="'+t+'">';if(!p.length)h+='<div class="sc empty"></div>';
+    for(var k=0;k<p.length;k++){var sel=S.sel&&S.sel.from==='t'&&S.sel.t===t&&k>=S.sel.k;h+='<div class="stack-card" data-a="card" data-v="'+t+','+k+'">'+cardHtml(p[k],sel)+'</div>';}h+='</div>';}
+  h+='</div><p class="small">Tap a card, then tap where it goes. Tap the deck to turn a card. Build down in alternating colors; build each suit up from A to K at the top.</p>';
+  if(S.msg)h+='<p class="note">'+S.msg+'</p>';
+  h+='<div class="row"><button class="btn" data-a="auto">Move cards up</button><button class="btn'+(S.won?' dark':'')+'" data-a="new">New deal</button></div>';
+  S.el.innerHTML=h;
+}
+function selCards(){if(!S.sel)return [];if(S.sel.from==='w')return [S.waste[S.waste.length-1]];return S.tab[S.sel.t].slice(S.sel.k);}
+function removeSel(){if(S.sel.from==='w')S.waste.pop();else{S.tab[S.sel.t].splice(S.sel.k);var p=S.tab[S.sel.t];if(p.length&&!p[p.length-1].up)p[p.length-1].up=true;}}
+function checkWin(){var n=0;for(var f=0;f<4;f++)n+=S.found[f].length;if(n===52){S.won=true;S.msg='All cards are home. You win.';}}
+function autoUp(){var moved=true,count=0;while(moved){moved=false;
+    if(S.waste.length){var c=S.waste[S.waste.length-1];if(canFound(c,S.found[c.s])){S.found[c.s].push(S.waste.pop());moved=true;count++;continue;}}
+    for(var t=0;t<7;t++){var p=S.tab[t];if(!p.length)continue;var d=p[p.length-1];if(d.up&&canFound(d,S.found[d.s])){S.found[d.s].push(p.pop());if(p.length&&!p[p.length-1].up)p[p.length-1].up=true;moved=true;count++;break;}}}
+  return count;}
+G.add({id:'solitaire',name:'Solitaire',group:'Board and card games',start:function(el){var d=deck();S={el:el,tab:[],found:[[],[],[],[]],waste:[],stock:[],sel:null,moves:0,msg:'',won:false};
+  for(var t=0;t<7;t++){S.tab.push([]);for(var k=0;k<=t;k++){var c=d.pop();c.up=k===t;S.tab[t].push(c);}}
+  while(d.length){var x=d.pop();x.up=true;S.stock.push(x);}draw();},
+ click:function(a,v){
+  if(a==='new'){this.start(S.el);return;}
+  if(S.won)return;S.msg='';
+  if(a==='stock'){S.sel=null;if(S.stock.length)S.waste.push(S.stock.pop());else{while(S.waste.length)S.stock.push(S.waste.pop());}S.moves++;}
+  else if(a==='auto'){S.sel=null;var n=autoUp();S.msg=n?'Moved '+n+' card'+(n===1?'':'s')+' up.':'No cards can move up right now.';if(n)S.moves++;checkWin();}
+  else if(a==='waste'){if(S.waste.length)S.sel=S.sel&&S.sel.from==='w'?null:{from:'w'};}
+  else if(a==='card'){var p=v.split(','),t=+p[0],k=+p[1],c=S.tab[t][k];
+    if(S.sel&&!(S.sel.from==='t'&&S.sel.t===t)){a='tab';v=String(t);}
+    else if(c.up){S.sel=(S.sel&&S.sel.from==='t'&&S.sel.t===t&&S.sel.k===k)?null:{from:'t',t:t,k:k};}
+  }
+  if(a==='tab'&&S.sel){var cs=selCards(),dest=S.tab[+v];if(S.sel.from==='t'&&S.sel.t===+v){S.sel=null;}else if(canTab(cs[0],dest)){removeSel();for(var q=0;q<cs.length;q++)dest.push(cs[q]);S.moves++;S.sel=null;}else{S.msg='That card cannot go there.';S.sel=null;}}
+  else if(a==='found'&&S.sel){var cs2=selCards();if(cs2.length===1&&canFound(cs2[0],S.found[cs2[0].s])){removeSel();S.found[cs2[0].s].push(cs2[0]);S.moves++;checkWin();}else S.msg='That card cannot go up yet.';S.sel=null;}
+  draw();}});
+})();
+})();
+(function(){var k=["solitaire", "blackjack", "battleship"],G=window.GS,o=[];for(var i=0;i<k.length;i++)for(var j=0;j<G.games.length;j++)if(G.games[j].id===k[i])o.push(G.games[j]);G.games=o;})();</script></body></html>
