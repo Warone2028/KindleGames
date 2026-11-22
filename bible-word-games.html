@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kindle Bible Apps and Games v11 - Bible Word Games</title><style>html,body{margin:0;padding:0;background:#fff;color:#000}
+body{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.5}
+#app{max-width:640px;margin:0 auto;padding:12px 14px 28px}
+.bar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px;font-size:16px}
+.bar a,.linkbtn{color:#000;text-decoration:underline;cursor:pointer;background:none;border:none;font:inherit;padding:6px 0}
+h1{font-size:24px;font-weight:bold;margin:8px 0 4px}
+h2{font-size:20px;margin:14px 0 6px}
+p{margin:6px 0}
+.small{font-size:16px;color:#222}
+.btn{display:block;width:100%;box-sizing:border-box;background:#fff;color:#000;border:2px solid #000;font:inherit;font-size:18px;padding:11px 10px;margin:8px 0;text-align:center;cursor:pointer;-webkit-appearance:none;border-radius:0}
+.btn.on,.btn.dark{background:#000;color:#fff}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between}
+.row .btn{width:48.5%}
+.row3 .btn{width:32%}
+.list .btn{text-align:left}
+.ref{font-size:22px;font-weight:bold;margin:10px 0 6px}
+.big{font-size:32px;text-align:center;margin:60px 0}
+.verse{font-size:19px;line-height:1.6;margin:8px 0 12px}
+.verse.long{font-size:17px}
+.note{border-top:2px solid #000;padding-top:8px;margin-top:10px;font-size:17px}
+.w{display:inline-block;padding:2px 3px;margin:1px 0;cursor:pointer}
+.w.hit{background:#000;color:#fff}
+.w.was{border:2px solid #000}
+.blank{display:inline-block;border-bottom:2px solid #000;min-width:70px}
+.built{border:2px dashed #000;min-height:60px;padding:8px;margin:8px 0;font-size:18px}
+.done{text-decoration:line-through}
+.row .btn{width:48.5%}
+.center{text-align:center}
+.big2{font-size:28px;letter-spacing:2px;margin:10px 0}
+.kb{margin:10px 0}
+.kbrow{display:flex;justify-content:center;margin:4px 0}
+.key{min-width:9%;flex:1 1 0;max-width:52px;margin:0 2px;padding:10px 0;border:2px solid #000;background:#fff;color:#000;font:inherit;font-size:18px;border-radius:0;-webkit-appearance:none;cursor:pointer}
+.key.wide{max-width:none;flex:1.6 1 0;font-size:16px}
+.key.big{min-width:44px;max-width:none;flex:none;padding:10px 12px;margin:3px;font-size:20px}
+.key.hit{background:#000;color:#fff}
+.key.near{border-style:dashed;border-width:3px}
+.key.miss{color:#999;border-color:#999}
+.wg{margin:10px auto;width:280px}
+.wgrow{display:flex;margin:5px 0}
+.tile{flex:1;margin:0 3px;border:2px solid #999;text-align:center;font-size:26px;font-weight:bold;padding:6px 0;line-height:1.3}
+.tile.hit{background:#000;color:#fff;border-color:#000}
+.tile.near{border:3px dashed #000}
+.tile.miss{border-color:#000;color:#999}
+table.grid{border-collapse:collapse;margin:8px auto}
+table.grid td{border:1px solid #000;text-align:center;vertical-align:middle;padding:0;cursor:pointer;line-height:1;position:relative}
+table.grid td.on{background:#000;color:#fff}
+table.grid td.sel{outline:3px solid #000;outline-offset:-5px}
+.words{font-size:18px;line-height:1.8}
+.words span{margin-right:10px}
+.cw td.blk{background:#000;cursor:default}
+.cw td.act{background:#e6e6e6}
+.cw td.sel{background:#bbb;outline:none}
+.cw td.wrong{text-decoration:line-through}
+.cw .num{position:absolute;top:1px;left:2px;font-size:16px;line-height:1;transform:scale(0.75);transform-origin:top left}
+.clue{margin:6px 0;cursor:pointer}
+.sud td.given{font-weight:bold}
+.sud td{color:#000}
+.sud td.sel{background:#ccc;outline:none}
+.sud td.wrong{text-decoration:line-through}
+.sud td.br{border-right:3px solid #000}
+.sud td.bb{border-bottom:3px solid #000}
+.sud{border:3px solid #000}
+.numpad{text-align:center;margin:8px 0}
+.ms td.shut{background:#bbb}
+.ms td.open{background:#fff}
+.t2048 td{font-weight:bold;cursor:default}
+.t2048 td.mid{border-width:3px}
+.t2048 td.hi{background:#000;color:#fff}
+.pad{max-width:320px;margin:0 auto}
+.lo td.lit{background:#000}
+.hanoi{display:flex;justify-content:space-between;margin:12px 0}
+.peg{border:2px solid #000;padding:6px 2px 0;cursor:pointer;box-sizing:border-box}
+.peg.sel{border-width:5px}
+.stack{min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.disc{background:#000;color:#fff;text-align:center;font-size:16px;margin:2px 0;padding:2px 0}
+.base{border-top:3px solid #000;text-align:center;font-size:16px;padding:4px 0}
+.mem td{font-size:17px;font-weight:bold}
+.mem td.down{background:#bbb}
+.mem td.got{background:#000;color:#fff}
+.mem td.up{border-width:3px}
+.nono td.cl{border:none;font-size:16px;cursor:default;line-height:1.15}
+.nono td.col{vertical-align:bottom;padding-bottom:3px}
+.nono td.rowc{text-align:right;padding-right:6px;white-space:nowrap}
+.nono td.br{border-right:3px solid #000}
+.nono td.bb{border-bottom:3px solid #000}
+table.hist{border-collapse:collapse;margin:6px auto;font-size:18px}
+table.hist td{border-bottom:1px solid #000;padding:4px 10px}
+table.hist td.code{font-weight:bold;letter-spacing:3px;font-size:22px}
+table.hist td.pegs{font-size:20px;letter-spacing:2px}
+.ttt td{font-weight:bold}
+.disc4{display:inline-block;width:78%;height:78%;border-radius:50%;vertical-align:middle;box-sizing:border-box}
+.disc4.blk{background:#000}
+.disc4.wht{background:#fff;border:3px solid #000}
+.disc4.last{outline:3px dashed #000;outline-offset:2px}
+.c4 td,.rev td{height:40px}
+.dot{display:inline-block;width:22%;height:22%;border-radius:50%;background:#000;vertical-align:middle}
+.chk td.dk,.chess td.dk{background:#aaa}
+.chk td.lt,.chess td.lt{background:#fff;cursor:default}
+.chk td.sel,.chess td.sel{outline:4px solid #000;outline-offset:-4px}
+.chk td.trail{background:#777}
+.king{color:#888;font-size:18px}
+.disc4.wht .king{color:#000}
+.chess td{line-height:1;color:#000}
+.chess td.lastmv{outline:3px dashed #000;outline-offset:-4px}
+.pl{display:inline-block;min-width:60%;padding:2px 0;font-weight:bold;border:2px solid #000}
+.pl.pw{background:#fff;color:#000}
+.pl.pb{background:#000;color:#fff}
+.hand{margin:6px 0 10px}
+.card{display:inline-block;border:2px solid #000;padding:12px 8px;margin:3px;min-width:44px;text-align:center;font-size:22px;font-weight:bold}
+.card.red,.sc.red{font-style:italic}
+.bs td.hit{font-weight:bold}
+.bs td.sunk{background:#000;color:#fff}
+.bs td.ship{background:#bbb}
+.srow{display:flex;justify-content:space-between;margin:6px 0}
+.spile{width:13.4%;min-height:40px;cursor:pointer}
+.spile.gap{cursor:default}
+.sc{border:2px solid #000;background:#fff;font-size:16px;font-weight:bold;padding:4px 2px;text-align:center;min-height:30px;box-sizing:border-box;white-space:nowrap;overflow:hidden}
+.sc.back{background:#999;color:#fff}
+.sc.empty{border-style:dashed;color:#777}
+.sc.sel{background:#000;color:#fff}
+.stack-card{height:24px;overflow:visible}
+.stack-card:last-child{height:auto}
+.tab .spile{min-height:120px}
+.bg td{font-size:16px;vertical-align:top;padding:2px 0;width:7.2%;height:84px}
+.bg td.bar{background:#ddd;vertical-align:middle}
+.bg td.tgt{background:#e6e6e6}
+.bg td.sel{outline:4px solid #000;outline-offset:-4px}
+.bg .pn{font-size:16px;color:#555}
+.disc4.bgd{width:20px;height:20px;display:block;margin:2px auto}
+.go td{border:none;background:#fff}
+.go .cross{color:#888;font-size:20px}
+.bg td.bar{min-width:38px;width:9%}
+.howbtn{display:block;width:100%;background:#fff;border:2px dashed #000;font:inherit;font-size:17px;padding:8px;margin:0 0 8px;cursor:pointer;border-radius:0;-webkit-appearance:none;color:#000}
+.howbox{border:2px solid #000;padding:10px 12px;margin:0 0 10px;font-size:18px;line-height:1.5}
+
+.winbox{border:6px double #000;padding:8px 8px 10px;text-align:center;margin:8px 0 12px}
+.winbox .fw{display:flex;justify-content:space-between;align-items:center}
+.winbox .burst{font:bold 18px/1.0 monospace;white-space:nowrap;text-align:left}
+.winbox .burst span{display:inline-block;width:0.6em;text-align:center}
+.winbox .mid{flex:1;margin:0 6px;min-width:0}
+.winbox .whead{background:#000;color:#fff;font-size:32px;font-weight:bold;letter-spacing:3px;padding:5px 0;margin:4px 0}
+.winbox .stars{font-size:24px;letter-spacing:6px;margin:2px 0}
+.winbox .wverse{font-size:18px;font-style:italic;margin:8px 4px 2px}
+.winbox .wref{font-size:16px}
+.winbox .wstat{font-size:18px;margin-top:8px;border-top:2px solid #000;padding-top:8px}
+.winbox .wrank{font-size:20px;font-weight:bold}
+.winbox .wagain{width:auto;display:inline-block;padding-left:30px;padding-right:30px;margin-top:10px}
+@media (max-width:480px){.winbox .burst{font-size:16px}.winbox .burst span{width:0.45em}.winbox .whead{font-size:22px;letter-spacing:1px}.winbox .stars{font-size:18px;letter-spacing:3px}.winbox .mid{margin:0 3px}}
+.atext{font-size:19px;line-height:1.5;margin:10px 0}
+.avs{border-left:5px solid #000;padding:4px 0 4px 12px;margin:12px 0;font-style:italic;font-size:18px;line-height:1.45}
+.avref{font-style:normal;font-size:16px;margin-top:4px}
+.astat{border:2px solid #000;padding:4px 8px;margin:8px 0;font-size:18px;text-align:center}
+.term{font-family:"Courier New",Courier,monospace;border:4px double #000;padding:4px 12px;margin-top:8px}
+.term .atext{font-size:19px}.term .btn{font-family:inherit;text-align:left}.term h2{font-family:inherit}
+.btn.locked{border-style:dashed;color:#444}
+.crypt{line-height:1.2;margin:8px 0}.cw2{display:inline-block;margin:0 8px 8px 0;white-space:nowrap}
+.cc{display:inline-block;text-align:center;min-width:22px;margin:0 1px;cursor:pointer}
+.cc .cg{display:block;font-size:20px;font-weight:bold;border-bottom:2px solid #000;min-height:24px}
+.cc .ce{display:block;font-size:16px}.cc.on{background:#000;color:#fff}.cc.on .cg{border-color:#fff}
+</style></head><body><div id="app"><p style="font-size:20px">Loading the games...</p><p style="font-size:18px">If this message stays, this page cannot run its games here. These pages need the Kindle web browser (Menu, Web Browser) opened from a web address. Pages sent to the Kindle as a document, by email or Send to Kindle, show only this text.</p></div><script>window.APP_TITLE="Kindle Bible Apps and Games v11";window.PAGE={"name": "Bible Word Games", "homeHref": "kindle-home-v11.html"};window.GAME_ORDER=["vapp", "stapp", "adv_david", "adv_joseph", "adv_paul", "wordguess", "hangman", "crossword", "wordsearch", "anagrams", "sudoku", "minesweeper", "g2048", "nonogram", "lightsout", "hanoi", "memory", "mathguess", "lostpin", "hiddencode", "tictactoe", "connect4", "reversi", "checkers", "chess", "backgammon", "go", "solitaire", "blackjack", "battleship", "adv_journeys", "adv_nehemiah", "adv_daniel", "adv_tabernacle", "adv_jonah", "adv_wilderness", "adv_samuel", "adv_esther", "adv_moses", "adv_escape", "adv_jesus", "millionaire", "millionaire_ot", "books66", "missingbook", "timeline", "scramble", "truefalse", "twotruths", "versematch", "detective", "adv_treasure", "millionaire_nt", "exodus", "whichfirst", "otnt", "headlines", "connections", "ch_complete", "ch_history", "ch_teach", "ch_otnt", "ch_master", "trivia", "shogi", "cryptogram", "wordladder", "oddoneout", "quartets", "mindreader"];window.BANK=[{"w": "ADAM", "c": "The first man", "r": "Genesis 2:19"}, {"w": "EVE", "c": "Mother of all living", "r": "Genesis 3:20"}, {"w": "EDEN", "c": "The garden God planted eastward", "r": "Genesis 2:8"}, {"w": "NOAH", "c": "Found grace in the eyes of the LORD", "r": "Genesis 6:8"}, {"w": "ARK", "c": "Noah built it of gopher wood", "r": "Genesis 6:14"}, {"w": "RAINBOW", "c": "Round about the throne, like an emerald", "r": "Revelation 4:3"}, {"w": "BABEL", "c": "Tower where the language was confused", "r": "Genesis 11:9"}, {"w": "ABRAHAM", "c": "Father of many nations", "r": "Genesis 17:5"}, {"w": "SARAH", "c": "Bore a son at ninety years old", "r": "Genesis 17:17"}, {"w": "ISAAC", "c": "Son of promise, nearly offered on Moriah", "r": "Genesis 22:2"}, {"w": "JACOB", "c": "Renamed Israel", "r": "Genesis 32:28"}, {"w": "ESAU", "c": "Sold his birthright for stew", "r": "Genesis 25:34"}, {"w": "JOSEPH", "c": "Given a coat of many colors", "r": "Genesis 37:3"}, {"w": "EGYPT", "c": "Land where Joseph was sold", "r": "Genesis 37:28"}, {"w": "MOSES", "c": "Drawn out of the water", "r": "Exodus 2:10"}, {"w": "PHARAOH", "c": "King who hardened his heart", "r": "Exodus 8:15"}, {"w": "MANNA", "c": "Bread from heaven in the wilderness", "r": "Exodus 16:31"}, {"w": "SINAI", "c": "Mount where the law was given", "r": "Exodus 19:20"}, {"w": "AARON", "c": "Moses' brother, the first high priest", "r": "Exodus 28:1"}, {"w": "JOSHUA", "c": "Led Israel into Canaan", "r": "Joshua 1:1"}, {"w": "JERICHO", "c": "By faith its walls fell down", "r": "Hebrews 11:30"}, {"w": "RAHAB", "c": "Received the spies with peace", "r": "Hebrews 11:31"}, {"w": "GIDEON", "c": "Defeated Midian with three hundred men", "r": "Judges 7:7"}, {"w": "SAMSON", "c": "Strong judge, betrayed by Delilah", "r": "Judges 16:9"}, {"w": "RUTH", "c": "Said, your people shall be my people", "r": "Ruth 1:16"}, {"w": "NAOMI", "c": "Ruth's mother-in-law", "r": "Ruth 1:22"}, {"w": "BOAZ", "c": "Kinsman-redeemer of Bethlehem", "r": "Ruth 4:13"}, {"w": "HANNAH", "c": "Prayed for a son at Shiloh", "r": "1 Samuel 1:20"}, {"w": "SAMUEL", "c": "Heard the LORD call in the night", "r": "1 Samuel 3:10"}, {"w": "SAUL", "c": "Israel's first king", "r": "1 Samuel 10:21"}, {"w": "DAVID", "c": "Shepherd boy who faced Goliath", "r": "1 Samuel 17:45"}, {"w": "GOLIATH", "c": "Giant of Gath", "r": "1 Samuel 17:4"}, {"w": "JONATHAN", "c": "Saul's son and David's friend", "r": "1 Samuel 18:1"}, {"w": "SOLOMON", "c": "King who asked for wisdom", "r": "1 Kings 3:5"}, {"w": "TEMPLE", "c": "House Solomon built for the LORD", "r": "1 Kings 6:5"}, {"w": "ELIJAH", "c": "Prophet fed by ravens", "r": "1 Kings 17:1"}, {"w": "CARMEL", "c": "Mount where fire fell on the sacrifice", "r": "1 Kings 18:20"}, {"w": "ELISHA", "c": "Received a double portion", "r": "2 Kings 2:9"}, {"w": "NAAMAN", "c": "Syrian captain healed in the Jordan", "r": "2 Kings 5:11"}, {"w": "JORDAN", "c": "River where Naaman dipped seven times", "r": "2 Kings 5:14"}, {"w": "ESTHER", "c": "Queen who went in unto the king", "r": "Esther 4:15"}, {"w": "JOB", "c": "Perfect and upright man of Uz", "r": "Job 1:1"}, {"w": "ISAIAH", "c": "Prophet who said, Here am I; send me", "r": "Isaiah 1:1"}, {"w": "JEREMIAH", "c": "The weeping prophet, known before birth", "r": "Jeremiah 1:11"}, {"w": "DANIEL", "c": "Thrown into the lions' den", "r": "Daniel 6:16"}, {"w": "LIONS", "c": "Their mouths were shut", "r": "Daniel 6:22"}, {"w": "JONAH", "c": "Swallowed by a great fish", "r": "Jonah 1:17"}, {"w": "NINEVEH", "c": "Great city that repented", "r": "Jonah 3:5"}, {"w": "BETHLEHEM", "c": "Town where Jesus was born", "r": "Matthew 2:1"}, {"w": "MARY", "c": "Mother of Jesus", "r": "Luke 1:30"}, {"w": "MANGER", "c": "Where the baby was laid", "r": "Luke 2:7"}, {"w": "SHEPHERDS", "c": "Abiding in the field at night", "r": "Luke 2:8"}, {"w": "JESUS", "c": "He shall save his people from their sins", "r": "Matthew 1:21"}, {"w": "JOHN", "c": "Baptized in the Jordan", "r": "Mark 1:4"}, {"w": "PETER", "c": "Walked on the water", "r": "Matthew 14:29"}, {"w": "ANDREW", "c": "Brought his brother to Jesus", "r": "John 1:40"}, {"w": "MATTHEW", "c": "Tax collector called to follow", "r": "Matthew 9:9"}, {"w": "THOMAS", "c": "Said, My Lord and my God", "r": "John 20:28"}, {"w": "JUDAS", "c": "Betrayed with a kiss", "r": "Luke 22:48"}, {"w": "LAZARUS", "c": "Raised after four days", "r": "John 11:43"}, {"w": "ZACCHAEUS", "c": "Climbed a sycamore tree", "r": "Luke 19:5"}, {"w": "NICODEMUS", "c": "Came to Jesus by night", "r": "John 3:1"}, {"w": "GALILEE", "c": "Sea where Jesus calmed the storm", "r": "Matthew 4:18"}, {"w": "CANA", "c": "Water made wine at a wedding", "r": "John 2:11"}, {"w": "JERUSALEM", "c": "City where Jesus was crucified and rose", "r": "Luke 24:47"}, {"w": "CROSS", "c": "He endured it, despising the shame", "r": "Hebrews 12:2"}, {"w": "CALVARY", "c": "Place where they crucified him", "r": "Luke 23:33"}, {"w": "TOMB", "c": "Joseph laid him in his own new one", "r": "Matthew 27:60"}, {"w": "PENTECOST", "c": "Day the Holy Spirit came", "r": "Acts 2:1"}, {"w": "STEPHEN", "c": "First martyr, full of faith", "r": "Acts 6:5"}, {"w": "PAUL", "c": "Apostle to the Gentiles", "r": "Romans 1:1"}, {"w": "DAMASCUS", "c": "Road where Saul saw the light", "r": "Acts 9:3"}, {"w": "BARNABAS", "c": "Son of consolation", "r": "Acts 4:36"}, {"w": "TIMOTHY", "c": "Paul's son in the faith", "r": "1 Timothy 1:2"}, {"w": "LYDIA", "c": "Seller of purple", "r": "Acts 16:14"}, {"w": "SILAS", "c": "Sang hymns in prison with Paul", "r": "Acts 16:25"}, {"w": "PATMOS", "c": "Isle where John saw the Revelation", "r": "Revelation 1:9"}, {"w": "GRACE", "c": "By it you are saved through faith", "r": "Ephesians 2:8"}, {"w": "FAITH", "c": "The substance of things hoped for", "r": "Hebrews 11:1"}, {"w": "HOPE", "c": "Anchor of the soul", "r": "Hebrews 6:19"}, {"w": "LOVE", "c": "The greatest of these", "r": "1 Corinthians 13:13"}, {"w": "MERCY", "c": "God is rich in it", "r": "Ephesians 2:4"}, {"w": "PEACE", "c": "Passes all understanding", "r": "Philippians 4:7"}, {"w": "JOY", "c": "The joy of the LORD is your strength", "r": "Nehemiah 8:10"}, {"w": "PRAYER", "c": "Effectual, fervent, availing much", "r": "James 5:16"}, {"w": "GOSPEL", "c": "The power of God unto salvation", "r": "Romans 1:16"}, {"w": "SAVIOR", "c": "Christ the Lord, born in the city of David", "r": "Luke 2:11"}, {"w": "SHEPHERD", "c": "The LORD is my ...", "r": "Psalms 23:1"}, {"w": "LAMB", "c": "Takes away the sin of the world", "r": "John 1:29"}, {"w": "LIGHT", "c": "Jesus is the ... of the world", "r": "John 8:12"}, {"w": "BREAD", "c": "I am the ... of life", "r": "John 6:35"}, {"w": "VINE", "c": "I am the ..., you are the branches", "r": "John 15:5"}, {"w": "WORD", "c": "In the beginning was the ...", "r": "John 1:1"}, {"w": "TRUTH", "c": "The way, the ..., and the life", "r": "John 14:6"}, {"w": "HEAVEN", "c": "God created it in the beginning", "r": "Genesis 1:1"}, {"w": "ANGEL", "c": "Gabriel was sent as one", "r": "Luke 1:26"}, {"w": "SABBATH", "c": "Remember it, to keep it holy", "r": "Exodus 20:8"}, {"w": "PSALMS", "c": "Book of songs and praise", "r": "Luke 20:42"}, {"w": "PROVERBS", "c": "Wise sayings of Solomon", "r": "Proverbs 1:1"}, {"w": "DOVE", "c": "Spirit descended like one", "r": "Matthew 3:16"}, {"w": "RAVEN", "c": "Noah sent it out first", "r": "Genesis 8:7"}, {"w": "OLIVE", "c": "Leaf the dove brought back", "r": "Genesis 8:11"}, {"w": "FISH", "c": "Five loaves and two of these", "r": "Matthew 14:17"}, {"w": "LOAVES", "c": "Five fed five thousand", "r": "Matthew 14:19"}, {"w": "TALENTS", "c": "Servants given five, two, and one", "r": "Matthew 25:15"}, {"w": "SOWER", "c": "Went forth to sow seed", "r": "Matthew 13:3"}, {"w": "MUSTARD", "c": "Smallest seed, greatest herb", "r": "Matthew 13:31"}, {"w": "PEARL", "c": "Merchant sold all for one of great price", "r": "Matthew 13:46"}, {"w": "SAMARITAN", "c": "The good neighbor who showed mercy", "r": "Luke 10:33"}, {"w": "CROWN", "c": "Of thorns, platted for his head", "r": "Matthew 27:29"}, {"w": "THORNS", "c": "Platted into a crown", "r": "John 19:2"}, {"w": "SWORD", "c": "The Word is sharper than any two-edged", "r": "Hebrews 4:12"}, {"w": "SHIELD", "c": "The ... of faith", "r": "Ephesians 6:16"}, {"w": "ARMOR", "c": "Put on the whole ... of God", "r": "Ephesians 6:11"}, {"w": "TABERNACLE", "c": "Tent of meeting in the wilderness", "r": "Exodus 40:2"}, {"w": "ALTAR", "c": "Noah built one after the flood", "r": "Genesis 8:20"}, {"w": "SACRIFICE", "c": "To obey is better than this", "r": "1 Samuel 15:22"}, {"w": "COVENANT", "c": "Agreement God established with Noah", "r": "Genesis 9:9"}, {"w": "PROPHET", "c": "Moses was called one", "r": "Deuteronomy 34:10"}, {"w": "PRIEST", "c": "Melchizedek was one of the most high God", "r": "Genesis 14:18"}, {"w": "KING", "c": "Of kings and Lord of lords", "r": "Revelation 19:16"}, {"w": "CHURCH", "c": "Upon this rock I will build my ...", "r": "Matthew 16:18"}, {"w": "BAPTISM", "c": "Buried with him by it", "r": "Romans 6:4"}, {"w": "RESURRECTION", "c": "I am the ..., and the life", "r": "John 11:25"}, {"w": "ETERNAL", "c": "The gift of God is ... life", "r": "Romans 6:23"}];window.W5=[{"w": "AARON", "r": "Exodus 4:27", "x": "And the LORD said to Aaron, Go into the wilderness to meet Moses. And he went, and met him in the mount of God, and kissed him."}, {"w": "ALTAR", "r": "Genesis 8:20", "x": "And Noah built an altar unto the LORD; and took of every clean beast, and of every clean fowl, and offered burnt offerings on the altar."}, {"w": "ANGEL", "r": "Genesis 16:7", "x": "And the angel of the LORD found her by a spring of water in the wilderness, by the spring on the way to Shur."}, {"w": "ANGER", "r": "Genesis 27:45", "x": "Until your brother’s anger turns away from you, and he forgets that which you have done to him: then I will send, and bring you from there: why should I be deprived also of you both in one day?"}, {"w": "ARMOR", "r": "1 Samuel 17:6", "x": "And he had armor of bronze upon his legs, and a javelin of bronze upon his shoulders."}, {"w": "BEARS", "r": "Leviticus 11:25", "x": "And whosoever bears any part of the carcass of them shall wash his clothes, and be unclean until the evening."}, {"w": "BEAST", "r": "Genesis 1:30", "x": "And to every beast of the earth, and to every fowl of the air, and to everything that creeps upon the earth, wherein there is life, I have given every green plant for food: and it was so."}, {"w": "BLESS", "r": "Genesis 12:2", "x": "And I will make of you a great nation, and I will bless you, and make your name great; and you shall be a blessing:"}, {"w": "BLOOD", "r": "Genesis 4:10", "x": "And he said, What have you done? the voice of your brother’s blood cries unto me from the ground."}, {"w": "BOUGH", "r": "Genesis 49:22", "x": "Joseph is a fruitful bough, even a fruitful bough by a well; whose branches run over the wall:"}, {"w": "BREAD", "r": "Genesis 3:19", "x": "In the sweat of your face shall you eat bread, till you return unto the ground; for out of it were you taken: for dust you are, and unto dust shall you return."}, {"w": "BRIDE", "r": "Isaiah 62:5", "x": "For as a young man marries a virgin, so shall your sons marry you: and as the bridegroom rejoices over the bride, so shall your God rejoice over you."}, {"w": "BRIER", "r": "Isaiah 55:13", "x": "Instead of the thorn shall come up the cypress tree, and instead of the brier shall come up the myrtle tree: and it shall be to the LORD for a name, for an everlasting sign that shall not be cut off."}, {"w": "CAMEL", "r": "Genesis 24:64", "x": "And Rebekah lifted up her eyes, and when she saw Isaac, she alighted from the camel."}, {"w": "CEDAR", "r": "Leviticus 14:4", "x": "Then shall the priest command to take for him that is to be cleansed two birds alive and clean, and cedar wood, and scarlet, and hyssop:"}, {"w": "CHAIN", "r": "Genesis 41:42", "x": "And Pharaoh took off his ring from his hand, and put it upon Joseph’s hand, and arrayed him in clothing of fine linen, and put a gold chain about his neck;"}, {"w": "CHILD", "r": "Genesis 4:25", "x": "And Adam knew his wife again; and she bore a son, and called his name Seth: For God, said she, has appointed me another child instead of Abel, whom Cain slew."}, {"w": "CLOUD", "r": "Genesis 9:13", "x": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth."}, {"w": "CROSS", "r": "Matthew 10:38", "x": "And he that takes not his cross, and follows after me, is not worthy of me."}, {"w": "CROWN", "r": "Exodus 29:6", "x": "And you shall put the turban upon his head, and put the holy crown upon the turban."}, {"w": "DAVID", "r": "Ruth 4:17", "x": "And the women her neighbors gave it a name, saying, There is a son born to Naomi; and they called his name Obed: he is the father of Jesse, the father of David."}, {"w": "DEATH", "r": "Genesis 21:16", "x": "And she went, and sat down apart from him a good way off, as it were a bowshot: for she said, Let me not see the death of the child. And she sat away from him, and lifted up her voice, and wept."}, {"w": "DEVIL", "r": "Matthew 4:1", "x": "Then was Jesus led up by the Spirit into the wilderness to be tempted by the devil."}, {"w": "DOVES", "r": "Song of Solomon 1:15", "x": "Behold, you are fair, my love; behold, you are fair; you have doves’ eyes."}, {"w": "DREAM", "r": "Genesis 20:3", "x": "But God came to Abimelech in a dream by night, and said to him, Behold, you are but a dead man, for the woman that you have taken; for she is a man’s wife ."}, {"w": "EAGLE", "r": "Leviticus 11:13", "x": "And these are they which you shall hold in abomination among the fowls; they shall not be eaten, they are an abomination: the eagle, and the vulture, and the osprey,"}, {"w": "EARTH", "r": "Genesis 1:1", "x": "In the beginning God created the heaven and the earth."}, {"w": "EGYPT", "r": "Genesis 12:10", "x": "And there was a famine in the land: and Abram went down into Egypt to sojourn there; for the famine was severe in the land."}, {"w": "EIGHT", "r": "Genesis 5:4", "x": "And the days of Adam after he had begotten Seth were eight hundred years: and he begat sons and daughters:"}, {"w": "ELDER", "r": "Genesis 10:21", "x": "Unto Shem also, the father of all the children of Eber, the brother of Japheth the elder, even to him were children born."}, {"w": "FAITH", "r": "Deuteronomy 32:20", "x": "And he said, I will hide my face from them, I will see what their end shall be: for they are a very perverse generation, children in whom is no faith."}, {"w": "FEAST", "r": "Genesis 19:3", "x": "And he pressed upon them greatly; and they turned in unto him, and entered into his house; and he made them a feast, and did bake unleavened bread, and they did eat."}, {"w": "FIELD", "r": "Genesis 2:20", "x": "And Adam gave names to all cattle, and to the fowl of the air, and to every beast of the field; but for Adam there was not found a helper suitable for him."}, {"w": "FLESH", "r": "Genesis 2:21", "x": "And the LORD God caused a deep sleep to fall upon Adam, and he slept: and he took one of his ribs, and closed up its place with flesh;"}, {"w": "FLOOD", "r": "Genesis 6:17", "x": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh, in which is the breath of life, from under heaven; and everything that is in the earth shall die."}, {"w": "FRUIT", "r": "Genesis 1:11", "x": "And God said, Let the earth bring forth vegetation, the plants yielding seed, and the fruit tree yielding fruit after its kind, whose seed is in itself, upon the earth: and it was so."}, {"w": "GATES", "r": "Deuteronomy 3:5", "x": "All these cities were fortified with high walls, gates, and bars; besides unwalled towns a great many."}, {"w": "GLORY", "r": "Genesis 45:13", "x": "And you shall tell my father of all my glory in Egypt, and of all that you have seen; and you shall haste and bring down my father here."}, {"w": "GRACE", "r": "Genesis 6:8", "x": "But Noah found grace in the eyes of the LORD."}, {"w": "GRAPE", "r": "Leviticus 19:10", "x": "And you shall not glean your vineyard, neither shall you gather every grape of your vineyard; you shall leave them for the poor and stranger: I am the LORD your God."}, {"w": "GRASS", "r": "Deuteronomy 11:15", "x": "And I will send grass in your fields for your cattle, that you may eat and be full."}, {"w": "GUILT", "r": "Deuteronomy 19:13", "x": "Your eye shall not pity him, but you shall put away the guilt of innocent blood from Israel, that it may go well with you."}, {"w": "HARPS", "r": "2 Samuel 6:5", "x": "And David and all the house of Israel played before the LORD on all manner of instruments made of fir wood, even on harps, and on psalteries, and on tambourines, and on castanets, and on cymbals."}, {"w": "HEART", "r": "Genesis 6:5", "x": "And God saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually."}, {"w": "HERBS", "r": "Exodus 12:8", "x": "And they shall eat the flesh in that night, roasted with fire, and unleavened bread; and with bitter herbs they shall eat it."}, {"w": "HILLS", "r": "Genesis 7:19", "x": "And the waters prevailed exceedingly upon the earth; and all the high hills, that were under the whole heaven, were covered."}, {"w": "HORSE", "r": "Genesis 49:17", "x": "Dan shall be a serpent by the way, an adder in the path, that bites the horse’s heels, so that his rider shall fall backward."}, {"w": "HOUSE", "r": "Genesis 7:1", "x": "And the LORD said unto Noah, Come you and all your house into the ark; for you have I seen righteous before me in this generation."}, {"w": "ISAAC", "r": "Genesis 17:21", "x": "But my covenant will I establish with Isaac, whom Sarah shall bear unto you at this set time in the next year."}, {"w": "JACOB", "r": "Genesis 25:26", "x": "And after that came his brother out, and his hand took hold on Esau’s heel; and his name was called Jacob: and Isaac was three score years old when she bore them."}, {"w": "JESUS", "r": "Matthew 1:1", "x": "The book of the genealogy of Jesus Christ, the son of David, the son of Abraham."}, {"w": "JONAH", "r": "Jonah 1:1", "x": "Now the word of the LORD came unto Jonah the son of Amittai, saying,"}, {"w": "JUDAS", "r": "Matthew 10:4", "x": "Simon the Canaanite, and Judas Iscariot, who also betrayed him."}, {"w": "JUDGE", "r": "Genesis 15:14", "x": "And also that nation, whom they shall serve, will I judge: and afterward shall they come out with great possessions."}, {"w": "LAMBS", "r": "Genesis 21:28", "x": "And Abraham set seven ewe lambs of the flock by themselves."}, {"w": "LEARN", "r": "Genesis 24:21", "x": "And the man wondering at her held his peace, to learn whether the LORD had made his journey prosperous or not."}, {"w": "LIGHT", "r": "Genesis 1:3", "x": "And God said, Let there be light: and there was light."}, {"w": "LIONS", "r": "2 Samuel 1:23", "x": "Saul and Jonathan were lovely and pleasant in their lives, and in their death they were not divided: they were swifter than eagles, they were stronger than lions."}, {"w": "LIVES", "r": "Genesis 9:3", "x": "Every moving thing that lives shall be food for you; even as the green plants have I given you all things."}, {"w": "MANNA", "r": "Exodus 16:15", "x": "And when the children of Israel saw it, they said one to another, It is manna: for they knew not what it was. And Moses said unto them, This is the bread which the LORD has given you to eat."}, {"w": "MERCY", "r": "Genesis 24:27", "x": "And he said, Blessed be the LORD God of my master Abraham, who has not left destitute my master of his mercy and his truth: I being in the way, the LORD led me to the house of my master’s kinsmen."}, {"w": "MOSES", "r": "Exodus 2:10", "x": "And the child grew, and she brought him unto Pharaoh’s daughter, and he became her son. And she called his name Moses: and she said, Because I drew him out of the water."}, {"w": "MOUNT", "r": "Genesis 10:30", "x": "And their territory was from Mesha, as you go unto Sephar a mount of the east."}, {"w": "MYRRH", "r": "Psalms 45:8", "x": "All your garments smell of myrrh, and aloes, and cassia, out of the ivory palaces, by which they have made you glad."}, {"w": "NAOMI", "r": "Ruth 1:3", "x": "And Elimelech Naomi’s husband died; and she was left, and her two sons."}, {"w": "NIGHT", "r": "Genesis 1:5", "x": "And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day."}, {"w": "OLIVE", "r": "Genesis 8:11", "x": "And the dove came in to him in the evening; and, lo, in her mouth was a plucked off olive leaf: so Noah knew that the waters were abated from off the earth."}, {"w": "PALMS", "r": "2 Kings 9:35", "x": "And they went to bury her: but they found no more of her than the skull, and the feet, and the palms of her hands."}, {"w": "PEACE", "r": "Genesis 15:15", "x": "And you shall go to your fathers in peace; you shall be buried in a good old age."}, {"w": "PETER", "r": "Matthew 4:18", "x": "And Jesus, walking by the sea of Galilee, saw two brothers, Simon called Peter, and Andrew his brother, casting a net into the sea: for they were fishers."}, {"w": "PRIDE", "r": "Leviticus 26:19", "x": "And I will break the pride of your power; and I will make your heavens as iron, and your earth as bronze:"}, {"w": "PSALM", "r": "1 Chronicles 16:7", "x": "Then on that day David delivered first this psalm to thank the LORD into the hand of Asaph and his brethren."}, {"w": "RAHAB", "r": "Joshua 2:1", "x": "And Joshua the son of Nun sent out of Shittim two men to spy secretly, saying, Go view the land, even Jericho. And they went, and came into a harlot’s house, named Rahab, and lodged there."}, {"w": "RAVEN", "r": "Genesis 8:7", "x": "And he sent forth a raven, which went forth to and fro, until the waters were dried up from off the earth."}, {"w": "RISEN", "r": "Genesis 19:23", "x": "The sun was risen upon the earth when Lot entered into Zoar."}, {"w": "RIVER", "r": "Genesis 2:10", "x": "And a river went out of Eden to water the garden; and from there it was parted, and became four heads."}, {"w": "ROYAL", "r": "Genesis 49:20", "x": "Out of Asher his food shall be fat, and he shall yield royal dainties."}, {"w": "SAINT", "r": "Psalms 106:16", "x": "They envied Moses also in the camp, and Aaron the saint of the LORD."}, {"w": "SARAH", "r": "Genesis 17:15", "x": "And God said unto Abraham, As for Sarai your wife, you shall not call her name Sarai, but Sarah shall her name be."}, {"w": "SATAN", "r": "1 Chronicles 21:1", "x": "And Satan stood up against Israel, and incited David to number Israel."}, {"w": "SAVED", "r": "Genesis 47:25", "x": "And they said, You have saved our lives: let us find grace in the sight of my lord, and we will be Pharaoh’s servants."}, {"w": "SEEDS", "r": "Numbers 6:4", "x": "All the days of his separation shall he eat nothing that is made of the grapevine, from the seeds even to the skins."}, {"w": "SERVE", "r": "Genesis 15:13", "x": "And he said unto Abram, Know of a surety that your descendants shall be sojourners in a land that is not theirs, and shall serve them; and they shall afflict them four hundred years;"}, {"w": "SEVEN", "r": "Genesis 5:7", "x": "And Seth lived after he begat Enosh eight hundred and seven years, and begat sons and daughters:"}, {"w": "SHAME", "r": "Exodus 32:25", "x": "And when Moses saw that the people were naked; (for Aaron had let them be naked unto their shame among their enemies:)"}, {"w": "SHEEP", "r": "Genesis 4:2", "x": "And she again bore his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground."}, {"w": "SHIPS", "r": "Genesis 49:13", "x": "Zebulun shall dwell at the shore of the sea; and he shall be for a haven of ships; and his border shall be unto Sidon."}, {"w": "SHORE", "r": "Genesis 49:13", "x": "Zebulun shall dwell at the shore of the sea; and he shall be for a haven of ships; and his border shall be unto Sidon."}, {"w": "SILAS", "r": "Acts 15:27", "x": "We have sent therefore Judas and Silas, who shall also tell you the same things by mouth."}, {"w": "SINAI", "r": "Exodus 19:1", "x": "In the third month, when the children of Israel were gone forth out of the land of Egypt, the same day came they into the wilderness of Sinai."}, {"w": "SMOKE", "r": "Genesis 19:28", "x": "And he looked toward Sodom and Gomorrah, and toward all the land of the plain, and beheld, and, lo, the smoke of the country went up as the smoke of a furnace."}, {"w": "SOWER", "r": "Isaiah 55:10", "x": "For as the rain comes down, and the snow from heaven, and returns not there, but waters the earth, and makes it bring forth and bud, that it may give seed to the sower, and bread to the eater:"}, {"w": "SPEAK", "r": "Genesis 18:27", "x": "And Abraham answered and said, Behold now, I have taken upon me to speak unto the Lord, who am but dust and ashes:"}, {"w": "SPICE", "r": "Exodus 35:28", "x": "And spice, and oil for the light, and for the anointing oil, and for the sweet incense."}, {"w": "STONE", "r": "Genesis 2:12", "x": "And the gold of that land is good: there is bdellium and the onyx stone."}, {"w": "STORM", "r": "Job 21:18", "x": "They are as stubble before the wind, and as chaff that the storm carries away."}, {"w": "SWORD", "r": "Genesis 3:24", "x": "So he drove out the man; and he placed at the east of the garden of Eden Cherubim, and a flaming sword which turned every way, to guard the way of the tree of life."}, {"w": "TABLE", "r": "Exodus 25:23", "x": "You shall also make a table of acacia wood: two cubits shall be the length of it, and a cubit the breadth of it, and a cubit and a half the height of it."}, {"w": "TEACH", "r": "Exodus 4:12", "x": "Now therefore go, and I will be with your mouth, and teach you what you shall say."}, {"w": "TENTS", "r": "Genesis 4:20", "x": "And Adah bore Jabal: he was the father of such as dwell in tents, and of such as have cattle."}, {"w": "THORN", "r": "Proverbs 26:9", "x": "As a thorn goes up into the hand of a drunkard, so is a parable in the mouth of fools."}, {"w": "TOWER", "r": "Genesis 11:4", "x": "And they said, Come, let us build us a city and a tower, whose top may reach unto heaven; and let us make us a name, lest we be scattered abroad upon the face of the whole earth."}, {"w": "TRIBE", "r": "Exodus 31:2", "x": "See, I have called by name Bezalel the son of Uri, the son of Hur, of the tribe of Judah:"}, {"w": "TRUST", "r": "Ruth 2:12", "x": "The LORD recompense your work, and a full reward be given you of the LORD God of Israel, under whose wings you have come to trust."}, {"w": "TRUTH", "r": "Genesis 24:27", "x": "And he said, Blessed be the LORD God of my master Abraham, who has not left destitute my master of his mercy and his truth: I being in the way, the LORD led me to the house of my master’s kinsmen."}, {"w": "VOICE", "r": "Genesis 3:8", "x": "And they heard the voice of the LORD God walking in the garden in the cool of the day: and Adam and his wife hid themselves from the presence of the LORD God among the trees of the garden."}, {"w": "WALLS", "r": "Leviticus 14:37", "x": "And he shall look on the disease, and, behold, if the disease is in the walls of the house with hollow streaks, greenish or reddish, which in sight are deep in the wall;"}, {"w": "WATER", "r": "Genesis 2:10", "x": "And a river went out of Eden to water the garden; and from there it was parted, and became four heads."}, {"w": "WAVES", "r": "2 Samuel 22:5", "x": "When the waves of death surrounded me, the floods of ungodly men made me afraid;"}, {"w": "WHEAT", "r": "Genesis 30:14", "x": "And Reuben went in the days of wheat harvest, and found mandrakes in the field, and brought them unto his mother Leah. Then Rachel said to Leah, Give me, I pray you, of your son’s mandrakes."}, {"w": "WINDS", "r": "Jeremiah 49:36", "x": "And upon Elam will I bring the four winds from the four quarters of heaven, and will scatter them toward all those winds; and there shall be no nation where the outcasts of Elam shall not come."}, {"w": "WOMAN", "r": "Genesis 2:22", "x": "And from the rib, which the LORD God had taken from man, made he a woman, and brought her unto the man."}, {"w": "WORDS", "r": "Genesis 24:52", "x": "And it came to pass, that, when Abraham’s servant heard their words, he worshiped the LORD, bowing himself to the earth."}, {"w": "WORKS", "r": "Exodus 5:13", "x": "And the taskmasters pushed them, saying, Fulfill your works, your daily tasks, as when there was straw."}, {"w": "WRATH", "r": "Genesis 39:19", "x": "And it came to pass, when his master heard the words of his wife, which she spoke unto him, saying, After this manner did your servant to me; that his wrath was kindled."}, {"w": "YOUTH", "r": "Genesis 43:33", "x": "And they sat before him, the firstborn according to his birthright, and the youngest according to his youth: and the men marveled one at another."}];window.VERSES=[{"r": "Isaiah 53:5", "x": "But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed.", "t": "Who Is Jesus?"}, {"r": "John 1:14", "x": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.", "t": "Who Is Jesus?"}, {"r": "John 3:16", "x": "For God so loved the world, that he gave his only begotten Son, that whosoever believes in him should not perish, but have everlasting life.", "t": "Who Is Jesus?"}, {"r": "John 14:6", "x": "Jesus said unto him, I am the way, the truth, and the life: no man comes unto the Father, but by me.", "t": "Who Is Jesus?"}, {"r": "Hebrews 12:1–2", "x": "(1) Therefore seeing we also are surrounded with so great a cloud of witnesses, let us lay aside every weight, and the sin which does so easily ensnare us, and let us run with patience the race that is set before us, (2) Looking unto Jesus the author and perfecter of our faith; who for the joy that was set before him endured the cross, despising the shame, and is seated at the right hand of the throne of God.", "t": "Who Is Jesus?"}, {"r": "John 1:1", "x": "In the beginning was the Word, and the Word was with God, and the Word was God.", "t": "Who Is Jesus?"}, {"r": "Colossians 1:16–17", "x": "(16) For by him were all things created, that are in heaven, and that are in earth, visible and invisible, whether they be thrones, or dominions, or principalities, or powers: all things were created by him, and for him: (17) And he is before all things, and by him all things are held together.", "t": "Who Is Jesus?"}, {"r": "Philippians 2:9–11", "x": "(9) Therefore God also has highly exalted him, and given him a name which is above every name: (10) That at the name of Jesus every knee should bow, of things in heaven, and things in earth, and things under the earth; (11) And that every tongue should confess that Jesus Christ is Lord, to the glory of God the Father.", "t": "Who Is Jesus?"}, {"r": "John 11:25–26", "x": "(25) Jesus said unto her, I am the resurrection, and the life: he that believes in me, though he were dead, yet shall he live: (26) And whosoever lives and believes in me shall never die. Do you believe this?", "t": "Who Is Jesus?"}, {"r": "Romans 3:23", "x": "For all have sinned, and come short of the glory of God;", "t": "The Romans Road"}, {"r": "Romans 5:12", "x": "Therefore, as by one man sin entered into the world, and death by sin; and so death passed upon all men, for that all have sinned:", "t": "The Romans Road"}, {"r": "Romans 6:23", "x": "For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord.", "t": "The Romans Road"}, {"r": "Romans 10:9–10", "x": "(9) That if you shall confess with your mouth the Lord Jesus, and shall believe in your heart that God has raised him from the dead, you shall be saved. (10) For with the heart man believes unto righteousness; and with the mouth confession is made unto salvation.", "t": "The Romans Road"}, {"r": "Romans 5:8", "x": "But God commends his love toward us, in that, while we were yet sinners, Christ died for us.", "t": "The Romans Road"}, {"r": "Romans 10:13", "x": "For whosoever shall call upon the name of the Lord shall be saved.", "t": "The Romans Road"}, {"r": "Romans 8:1", "x": "There is therefore now no condemnation to them who are in Christ Jesus, who walk not after the flesh, but after the Spirit.", "t": "The Romans Road"}, {"r": "Ephesians 2:8–9", "x": "(8) For by grace are you saved through faith; and that not of yourselves: it is the gift of God: (9) Not of works, lest any man should boast.", "t": "Salvation by Grace"}, {"r": "Titus 3:5", "x": "Not by works of righteousness which we have done, but according to his mercy he saved us, by the washing of regeneration, and renewing of the Holy Spirit;", "t": "Salvation by Grace"}, {"r": "Acts 4:12", "x": "Neither is there salvation in any other: for there is no other name under heaven given among men, by which we must be saved.", "t": "Salvation by Grace"}, {"r": "John 1:12", "x": "But as many as received him, to them gave he power to become the children of God, even to them that believe on his name:", "t": "Salvation by Grace"}, {"r": "2 Corinthians 5:21", "x": "For he has made him, who knew no sin, to be sin for us; that we might be made the righteousness of God in him.", "t": "Salvation by Grace"}, {"r": "Acts 16:31", "x": "And they said, Believe on the Lord Jesus Christ, and you shall be saved, and your house.", "t": "Salvation by Grace"}, {"r": "John 10:28–29", "x": "(28) And I give unto them eternal life; and they shall never perish, neither shall any man pluck them out of my hand. (29) My Father, who gave them to me, is greater than all; and no man is able to pluck them out of my Father's hand.", "t": "Assurance of Salvation"}, {"r": "1 John 5:13", "x": "These things have I written unto you that believe on the name of the Son of God; that you may know that you have eternal life, and that you may believe on the name of the Son of God.", "t": "Assurance of Salvation"}, {"r": "Romans 8:38–39", "x": "(38) For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, (39) Nor height, nor depth, nor any other creation, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.", "t": "Assurance of Salvation"}, {"r": "Philippians 1:6", "x": "Being confident of this very thing, that he who has begun a good work in you will perform it until the day of Jesus Christ:", "t": "Assurance of Salvation"}, {"r": "2 Timothy 1:12", "x": "For the which cause I also suffer these things: nevertheless I am not ashamed: for I know whom I have believed, and am persuaded that he is able to keep that which I have committed unto him against that day.", "t": "Assurance of Salvation"}, {"r": "Genesis 1:1", "x": "In the beginning God created the heaven and the earth.", "t": "God's Authority"}, {"r": "Matthew 9:6–8", "x": "(6) But that you may know that the Son of man has power on earth to forgive sins, (then said he to the paralytic) Arise, take up your bed, and go unto your house. (7) And he arose, and departed to his house. (8) But when the multitude saw it, they marveled, and glorified God, who had given such power unto men.", "t": "God's Authority"}, {"r": "John 14:26", "x": "But the Comforter, who is the Holy Spirit, whom the Father will send in my name, he shall teach you all things, and bring all things to your remembrance, whatsoever I have said unto you.", "t": "God's Authority"}, {"r": "John 19:11", "x": "Jesus answered, You could have no power at all against me, except it were given you from above: therefore he that delivered me unto you has the greater sin.", "t": "God's Authority"}, {"r": "Matthew 28:18–20", "x": "(18) And Jesus came and spoke unto them, saying, All power is given unto me in heaven and in earth. (19) Go you therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Spirit: (20) Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you always, even unto the end of the world. Amen.", "t": "God's Authority"}, {"r": "Psalm 24:1", "x": "The earth is the LORD'S, and the fullness thereof; the world, and they that dwell therein.", "t": "God's Authority"}, {"r": "Isaiah 46:9–10", "x": "(9) Remember the former things of old: for I am God, and there is none else; I am God, and there is none like me, (10) Declaring the end from the beginning, and from ancient times the things that are not yet done, saying, My counsel shall stand, and I will do all my pleasure:", "t": "God's Authority"}, {"r": "2 Timothy 3:16–17", "x": "(16) All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness: (17) That the man of God may be perfect, thoroughly furnished unto all good works.", "t": "God's Word"}, {"r": "Psalm 119:11", "x": "Your word have I hid in my heart, that I might not sin against you.", "t": "God's Word"}, {"r": "Psalm 119:105", "x": "Your word is a lamp unto my feet, and a light unto my path.", "t": "God's Word"}, {"r": "Hebrews 4:12", "x": "For the word of God is living, and powerful, and sharper than any two-edged sword, piercing even to the dividing asunder of soul and spirit, and of the joints and marrow, and is a discerner of the thoughts and intents of the heart.", "t": "God's Word"}, {"r": "Joshua 1:8", "x": "This book of the law shall not depart out of your mouth; but you shall meditate therein day and night, that you may observe to do according to all that is written therein: for then you shall make your way prosperous, and then you shall have good success.", "t": "God's Word"}, {"r": "Isaiah 40:8", "x": "The grass withers, the flower fades: but the word of our God shall stand forever.", "t": "God's Word"}, {"r": "Proverbs 3:5–6", "x": "(5) Trust in the LORD with all your heart; and lean not unto your own understanding. (6) In all your ways acknowledge him, and he shall direct your paths.", "t": "Faith and Trust"}, {"r": "Hebrews 11:1", "x": "Now faith is the substance of things hoped for, the evidence of things not seen.", "t": "Faith and Trust"}, {"r": "Hebrews 11:6", "x": "But without faith it is impossible to please him: for he that comes to God must believe that he is, and that he is a rewarder of them that diligently seek him.", "t": "Faith and Trust"}, {"r": "Romans 10:17", "x": "So then faith comes by hearing, and hearing by the word of God.", "t": "Faith and Trust"}, {"r": "Isaiah 26:3", "x": "You will keep him in perfect peace, whose mind is stayed on you: because he trusts in you.", "t": "Faith and Trust"}, {"r": "Romans 8:28", "x": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.", "t": "Faith and Trust"}, {"r": "Philippians 4:6–7", "x": "(6) Be anxious for nothing; but in everything by prayer and supplication with thanksgiving let your requests be made known unto God. (7) And the peace of God, which passes all understanding, shall keep your hearts and minds through Christ Jesus.", "t": "Prayer"}, {"r": "1 Thessalonians 5:16–18", "x": "(16) Rejoice evermore. (17) Pray without ceasing. (18) In everything give thanks: for this is the will of God in Christ Jesus concerning you.", "t": "Prayer"}, {"r": "Matthew 7:7", "x": "Ask, and it shall be given you; seek, and you shall find; knock, and it shall be opened unto you:", "t": "Prayer"}, {"r": "Jeremiah 33:3", "x": "Call unto me, and I will answer you, and show you great and mighty things, which you know not.", "t": "Prayer"}, {"r": "Hebrews 4:16", "x": "Let us therefore come boldly unto the throne of grace, that we may obtain mercy, and find grace to help in time of need.", "t": "Prayer"}, {"r": "Psalm 103:10–14", "x": "(10) He has not dealt with us according to our sins; nor rewarded us according to our iniquities. (11) For as the heaven is high above the earth, so great is his mercy toward them that fear him. (12) As far as the east is from the west, so far has he removed our transgressions from us. (13) Like as a father pities his children, so the LORD pities them that fear him. (14) For he knows our frame; he remembers that we are dust.", "t": "Forgiveness"}, {"r": "Isaiah 1:18", "x": "Come now, and let us reason together, says the LORD: though your sins be as scarlet, they shall be as white as snow; though they be red like crimson, they shall be as wool.", "t": "Forgiveness"}, {"r": "Matthew 6:14–15", "x": "(14) For if you forgive men their trespasses, your heavenly Father will also forgive you: (15) But if you forgive not men their trespasses, neither will your Father forgive your trespasses.", "t": "Forgiveness"}, {"r": "Mark 11:25", "x": "And when you stand praying, forgive, if you have anything against any: that your Father also who is in heaven may forgive you your trespasses.", "t": "Forgiveness"}, {"r": "1 John 1:9", "x": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.", "t": "Forgiveness"}, {"r": "Ephesians 4:32", "x": "And be you kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake has forgiven you.", "t": "Forgiveness"}, {"r": "Psalm 23:1–4", "x": "(1) The LORD is my shepherd; I shall not lack. (2) He makes me to lie down in green pastures: he leads me beside the still waters. (3) He restores my soul: he leads me in the paths of righteousness for his name's sake. (4) Yea, though I walk through the valley of the shadow of death, I will fear no evil: for you are with me; your rod and your staff they comfort me.", "t": "Comfort and Strength"}, {"r": "Isaiah 41:10", "x": "Fear not; for I am with you: be not dismayed; for I am your God: I will strengthen you; yea, I will help you; yea, I will uphold you with the right hand of my righteousness.", "t": "Comfort and Strength"}, {"r": "Joshua 1:9", "x": "Have not I commanded you? Be strong and of a good courage; be not afraid, neither be you dismayed: for the LORD your God is with you wherever you go.", "t": "Comfort and Strength"}, {"r": "Matthew 11:28–30", "x": "(28) Come unto me, all you that labor and are heavy laden, and I will give you rest. (29) Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and you shall find rest unto your souls. (30) For my yoke is easy, and my burden is light.", "t": "Comfort and Strength"}, {"r": "Philippians 4:13", "x": "I can do all things through Christ who strengthens me.", "t": "Comfort and Strength"}, {"r": "Isaiah 40:31", "x": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.", "t": "Comfort and Strength"}, {"r": "2 Corinthians 12:9", "x": "And he said unto me, My grace is sufficient for you: for my strength is made perfect in weakness. Most gladly therefore will I rather boast in my weaknesses, that the power of Christ may rest upon me.", "t": "Comfort and Strength"}, {"r": "1 Corinthians 10:13", "x": "There has no temptation taken you but such as is common to man: but God is faithful, who will not allow you to be tempted above that you are able; but will with the temptation also make a way to escape, that you may be able to bear it.", "t": "Temptation and Victory"}, {"r": "James 4:7", "x": "Submit yourselves therefore to God. Resist the devil, and he will flee from you.", "t": "Temptation and Victory"}, {"r": "Ephesians 6:10–11", "x": "(10) Finally, my brethren, be strong in the Lord, and in the power of his might. (11) Put on the whole armor of God, that you may be able to stand against the wiles of the devil.", "t": "Temptation and Victory"}, {"r": "1 John 4:4", "x": "You are of God, little children, and have overcome them: because greater is he that is in you, than he that is in the world.", "t": "Temptation and Victory"}, {"r": "Psalm 119:9", "x": "How shall a young man cleanse his way? by taking heed thereto according to your word.", "t": "Temptation and Victory"}, {"r": "Matthew 4:4", "x": "But he answered and said, It is written, Man shall not live by bread alone, but by every word that proceeds out of the mouth of God.", "t": "The Christian Life"}, {"r": "Matthew 10:38–39", "x": "(38) And he that takes not his cross, and follows after me, is not worthy of me. (39) He that finds his life shall lose it: and he that loses his life for my sake shall find it.", "t": "The Christian Life"}, {"r": "2 Corinthians 5:17", "x": "Therefore if any man be in Christ, he is a new creation: old things are passed away; behold, all things are become new.", "t": "The Christian Life"}, {"r": "Philippians 4:8–9", "x": "(8) Finally, brethren, whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report; if there be any virtue, and if there be any praise, think on these things. (9) Those things, which you have both learned, and received, and heard, and seen in me, do: and the God of peace shall be with you.", "t": "The Christian Life"}, {"r": "2 Timothy 1:7", "x": "For God has not given us the spirit of fear; but of power, and of love, and of a sound mind.", "t": "The Christian Life"}, {"r": "Romans 12:1–2", "x": "(1) I beseech you therefore, brethren, by the mercies of God, that you present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service. (2) And be not conformed to this world: but be transformed by the renewing of your mind, that you may prove what is that good, and acceptable, and perfect, will of God.", "t": "The Christian Life"}, {"r": "Galatians 2:20", "x": "I am crucified with Christ: nevertheless I live; yet not I, but Christ lives in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me.", "t": "The Christian Life"}, {"r": "Galatians 5:22–23", "x": "(22) But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, (23) Meekness, self-control: against such there is no law.", "t": "The Christian Life"}, {"r": "Colossians 3:23", "x": "And whatsoever you do, do it heartily, as to the Lord, and not unto men;", "t": "The Christian Life"}, {"r": "Matthew 6:33", "x": "But seek you first the kingdom of God, and his righteousness; and all these things shall be added unto you.", "t": "The Christian Life"}, {"r": "John 13:34–35", "x": "(34) A new commandment I give unto you, That you love one another; as I have loved you, that you also love one another. (35) By this shall all men know that you are my disciples, if you have love one to another.", "t": "Love"}, {"r": "1 Corinthians 13:4–7", "x": "(4) Love suffers long, and is kind; love envies not; love vaunts not itself, is not puffed up, (5) Does not behave itself rudely, seeks not her own, is not easily provoked, keeps no record of evil; (6) Rejoices not in iniquity, but rejoices in the truth; (7) Bears all things, believes all things, hopes all things, endures all things.", "t": "Love"}, {"r": "1 John 4:19", "x": "We love him, because he first loved us.", "t": "Love"}, {"r": "Matthew 22:37–39", "x": "(37) Jesus said unto him, You shall love the Lord your God with all your heart, and with all your soul, and with all your mind. (38) This is the first and great commandment. (39) And the second is like unto it, You shall love your neighbor as yourself.", "t": "Love"}, {"r": "Acts 1:8", "x": "But you shall receive power, after the Holy Spirit has come upon you: and you shall be witnesses unto me both in Jerusalem, and in all Judea, and in Samaria, and unto the uttermost part of the earth.", "t": "Witnessing"}, {"r": "Romans 1:16", "x": "For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation to every one that believes; to the Jew first, and also to the Greek.", "t": "Witnessing"}, {"r": "1 Peter 3:15", "x": "But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asks you a reason of the hope that is in you with meekness and fear:", "t": "Witnessing"}, {"r": "Matthew 5:16", "x": "Let your light so shine before men, that they may see your good works, and glorify your Father who is in heaven.", "t": "Witnessing"}, {"r": "Matthew 25:13", "x": "Watch therefore, for you know neither the day nor the hour in which the Son of man comes.", "t": "Jesus' Return"}, {"r": "1 Corinthians 15:52", "x": "In a moment, in the twinkling of an eye, at the last trump: for the trumpet shall sound, and the dead shall be raised incorruptible, and we shall be changed.", "t": "Jesus' Return"}, {"r": "Revelation 1:7", "x": "Behold, he comes with clouds; and every eye shall see him, and they also who pierced him: and all tribes of the earth shall wail because of him. Even so, Amen.", "t": "Jesus' Return"}, {"r": "Revelation 19:11–16", "x": "(11) And I saw heaven opened, and behold a white horse; and he that sat upon it was called Faithful and True, and in righteousness he does judge and make war. (12) His eyes were as a flame of fire, and on his head were many crowns; and he had a name written, that no man knew, but he himself. (13) And he was clothed with a robe dipped in blood: and his name is called The Word of God. (14) And the armies which were in heaven followed him upon white horses, clothed in fine linen, white and clean. (15) And out of his mouth goes forth a sharp sword, that with it he should smite the nations: and he shall rule them with a rod of iron: and he treads the winepress of the fierceness and wrath of Almighty God. (16) And he has on his robe and on his thigh a name written, KING OF KINGS, AND LORD OF LORDS.", "t": "Jesus' Return"}, {"r": "1 Thessalonians 4:16–17", "x": "(16) For the Lord himself shall descend from heaven with a shout, with the voice of the archangel, and with the trump of God: and the dead in Christ shall rise first: (17) Then we who are alive and remain shall be caught up together with them in the clouds, to meet the Lord in the air: and so shall we ever be with the Lord.", "t": "Jesus' Return"}, {"r": "John 14:2–3", "x": "(2) In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you. (3) And if I go and prepare a place for you, I will come again, and receive you unto myself; that where I am, there you may be also.", "t": "Jesus' Return"}, {"r": "Titus 2:13", "x": "Looking for that blessed hope, and the glorious appearing of the great God and our Savior Jesus Christ;", "t": "Jesus' Return"}, {"r": "Exodus 15:2", "x": "The LORD is my strength and song, and he is become my salvation: he is my God, and I will prepare him a habitation; my father's God, and I will exalt him.", "t": "Praise"}, {"r": "Psalm 100:1–5", "x": "(1) Make a joyful noise unto the LORD, all you lands. (2) Serve the LORD with gladness: come before his presence with singing. (3) Know you that the LORD he is God: it is he that has made us, and not we ourselves; we are his people, and the sheep of his pasture. (4) Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name. (5) For the LORD is good; his mercy is everlasting; and his truth endures to all generations.", "t": "Praise"}, {"r": "Psalm 150:6", "x": "Let every thing that has breath praise the LORD. Praise you the LORD.", "t": "Praise"}, {"r": "Philippians 4:4", "x": "Rejoice in the Lord always: and again I say, Rejoice.", "t": "Praise"}, {"r": "Psalm 34:1", "x": "I will bless the LORD at all times: his praise shall continually be in my mouth.", "t": "Praise"}, {"r": "Psalm 118:24", "x": "This is the day which the LORD has made; we will rejoice and be glad in it.", "t": "Praise"}];</script><script>(function(){
+var app=document.getElementById('app');
+var G=window.GS={games:[],add:function(g){g.base=g.name;g.name=G.kt(g.name);this.games.push(g);}};
+/* v11: titles no longer start with the word Kindle (the v8-v10 rule was removed at the user's request) */
+G.kt=function(n){return String(n);};
+G.ktH1=function(){var h=app.querySelector('h1');if(h&&G.current&&h.textContent===G.current.base)h.textContent=G.kt(h.textContent);};
+G.esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');};
+G.shuffle=function(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;};
+G.rnd=function(n){return Math.floor(Math.random()*n);};
+G.pick=function(a){return a[Math.floor(Math.random()*a.length)];};
+G.bar=function(name,right){return '<div class="bar"><span><button class="linkbtn" data-a="home">Menu</button> &middot; <a href="'+(window.PAGE||{}).homeHref+'" data-nav="home">Home</a></span><span>'+G.esc(G.kt(name))+(right?' &middot; '+right:'')+'</span></div>'+(G.howHtml?G.howHtml():'');};
+G.cell=function(n){var w=Math.min(app.clientWidth||600,600);return Math.max(26,Math.floor((w-8)/n)-2);};
+G.keyboard=function(extra,states){
+  var rows=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'],h='<div class="kb">';
+  for(var r=0;r<3;r++){h+='<div class="kbrow">';
+    if(r===2&&extra)h+='<button class="key wide" data-a="enter">'+extra+'</button>';
+    for(var i=0;i<rows[r].length;i++){var c=rows[r].charAt(i),st=states&&states[c]?' '+states[c]:'';h+='<button class="key'+st+'" data-a="key" data-v="'+c+'">'+c+'</button>';}
+    if(r===2&&extra)h+='<button class="key wide" data-a="del">Del</button>';
+    h+='</div>';}
+  return h+'</div>';
+};
+G.current=null;
+G.home=function(){
+  G.current=null; app.onclick=null; G.showHow=false;
+  var P=window.PAGE||{},h='<div class="bar"><a href="'+P.homeHref+'" data-nav="home">Home</a><span>'+G.esc(P.name)+' &middot; '+G.games.length+(G.games.length===1?' item':' items')+'</span></div>';
+  h+='<h1>'+G.esc(P.name)+'</h1><div class="row">';
+  for(var j=0;j<G.games.length;j++)h+='<button class="btn" data-a="open" data-v="'+G.games[j].id+'">'+G.esc(G.games[j].name)+'</button>';
+  h+='</div><p class="small" style="margin-top:16px">Tap one to open it. Tap Menu at the top to come back to this list, or Home for all the sections.</p>';
+  app.innerHTML=h; window.scrollTo(0,0);
+};
+document.addEventListener('click',function(e){
+  var el=e.target; while(el&&el!==document&&!(el.getAttribute&&el.getAttribute('data-a')))el=el.parentNode;
+  if(!el||el===document)return;
+  var a=el.getAttribute('data-a'),v=el.getAttribute('data-v');
+  if(a==='home'){G.home();return;}
+  if(a==='how'){G.showHow=!G.showHow;var hb=document.getElementById('howbox');if(hb)hb.style.display=G.showHow?'block':'none';el.innerHTML=G.showHow?'Hide instructions':'How to play';return;}
+  if(a==='open'){G.wstate=null;for(var i=0;i<G.games.length;i++)if(G.games[i].id===v){G.current=G.games[i];G.games[i].start(app);window.scrollTo(0,0);}if(G.afterRender)G.afterRender();G.ktH1();return;}
+  if(a==='winagain'){G.wstate=null;if(G.playAgain)G.playAgain();window.scrollTo(0,0);return;}
+  if(/^(again|new|deal|game|redo|menu|nextround|start|who|lvl|next|size)$/.test(a))G.wstate=null;
+  if(G.current&&G.current.click)G.current.click(a,v,el);
+  if(G.afterRender)G.afterRender();
+  G.ktH1();
+});
+window.addEventListener('load',function(){G.home();});
+})();
+(function(){
+var G=window.GS;
+G.HOW={
+vapp:'Pick a topic (or all 100), then tap Start. Say the verse to yourself, then tap Show verse to check. Tap Got it if you knew it, or Again to see it later in the round. Choose "Show first: Verse" to practice naming the reference instead.',
+stapp:'Pick a topic, then a verse. Play the three games: Missing word (pick the missing word), Phrase order (tap the phrases in order) and Spot the error (tap the one wrong word). 80% wins a game. Then Memorize it: say the verse aloud from fewer and fewer hints and tap Show the verse to check yourself.',
+wordguess:'Guess the hidden 5-letter Bible word in 6 tries. Type a word with the letters and tap Enter. Black square = right letter in the right spot. Dashed square = the letter is in the word but in another spot. Gray = not in the word.',
+hangman:'Guess the Bible word one letter at a time. The clue tells you what it is. Each wrong letter adds to the drawing; 6 wrong letters and the game is over.',
+wordsearch:'Find the 8 Bible words listed below the grid. Words run across, down or on a slant. Tap the first letter of a word, then its last letter. Found words turn black.',
+anagrams:'The letters of a Bible word are mixed up. Read the clue, then tap the letters in the right order. Undo takes back one letter, Clear starts over, Show it gives the answer. 10 words per round.',
+crossword:'Tap a square or a clue to choose a word; tap the same square again to switch between across and down. Type letters with the keyboard. Check marks wrong letters. Show this word fills in the word you are on.',
+sudoku:'Fill the grid so every row, every column and every 3 by 3 box has the numbers 1 to 9 once each. Tap a square, then tap a number. Bold numbers are part of the puzzle. Check marks any wrong numbers.',
+minesweeper:'Open every square that has no mine. A number tells how many mines touch that square. Use "Tap to flag" to mark squares you think hide mines. Your first tap is always safe.',
+g2048:'Tap Up, Down, Left or Right to slide all the tiles. Two tiles with the same number join into one. Try to reach 2048. The game ends when no move is left.',
+lightsout:'Black squares are lights that are on. Tapping a square flips it and the squares above, below and beside it. Turn every light off in as few taps as you can.',
+hanoi:'Move the whole stack from the left peg to the right peg. Tap a peg to pick up its top disc, then tap the peg to put it on. Move one disc at a time, and never put a bigger disc on a smaller one.',
+memory:'All 16 cards are face down. Tap two cards to turn them over. If the words match, they stay up. If not, tap any card to turn them back. Find all 8 pairs in as few tries as you can.',
+nonogram:'Fill in squares to make a hidden Bible picture. The numbers by each row and column tell how many black squares run together, in order, with at least one white square between runs. Use "Tap to mark X" for squares you know are white.',
+mathguess:'Guess the hidden sum in 6 tries, like 12+5=17 (6 characters). Your guess must be a true sum. Times and divide are done before plus and minus. Black = right spot, dashed = in the sum elsewhere, gray = not in it.',
+lostpin:'Find the 4-digit PIN in 10 tries. No digit is used twice. After each try you see how many digits are in the right place, and how many are in the PIN but in the wrong place.',
+hiddencode:'Find the 4-letter code made from the letters A to F (letters can repeat) in 10 tries. A black dot means a right letter in the right place. A white dot means a right letter in the wrong place.',
+tictactoe:'You are X. Tap a square to place your mark. Get three in a row across, down or on a slant before the other player does.',
+connect4:'You are black. Tap a column to drop a disc; it falls to the lowest empty spot. Get four of your discs in a row across, down or on a slant.',
+reversi:'You are black. Place a disc so that white discs lie in a straight line between your new disc and another black disc; those white discs turn black. Small dots show where you can play. The most discs at the end wins.',
+checkers:'You are black and move up the board on the gray squares. Tap a piece, then a dot to move one square on a slant. Jump over an enemy piece to capture it; if a jump is possible you must take it, and keep jumping when you can. Reach the far side to become a king (K), which can move both ways.',
+blackjack:'Get closer to 21 than the dealer without going over. Number cards count their number, J, Q and K count 10, and A counts 1 or 11. Tap Hit to take a card or Stand to stop. The dealer must take cards until reaching 17. Points only, no betting.',
+battleship:'Your fleet and the enemy fleet each have 5 ships. Tap a square in the enemy waters to fire. X = hit, dot = miss. The computer fires back after each shot. Sink all enemy ships first to win.',
+solitaire:'Build four piles at the top, one for each suit, from A up to K. In the seven columns, build down in alternating colors (red italic cards, black plain cards). Tap a card, then tap where it goes. Tap the deck to turn a card. Only a K can go in an empty column. Move cards up sends any cards that fit to the top.',
+chess:'You are white. Tap a piece, then a dot to move it. Put the black king in checkmate, where it is attacked and cannot escape. Pawns that reach the far side become queens. Show letters changes the pieces to letters if the symbols are hard to see.',
+backgammon:'You are black and move your 15 checkers from point 24 down to point 1, then bear them off. Each turn the dice are rolled for you; move one checker per die. Tap a point with your checkers, then a dot. You cannot land on a point with 2 or more white checkers; landing on a single white checker sends it to the bar. Bear off once all your checkers are on points 1 to 6.',
+go:'You are black. Tap a point to place a stone. Stones with no empty space next to them are captured. Surround empty space to claim it. When there is nothing useful left, tap Pass; when both players pass, stones plus surrounded space are counted. White gets 6.5 extra for going second.'
+};
+G.howHtml=function(){var id=G.current&&G.current.id,t=id&&G.HOW[id];if(!t)return '';
+  return '<button class="howbtn" data-a="how">'+(G.showHow?'Hide instructions':'How to play')+'</button><div id="howbox" class="howbox" style="display:'+(G.showHow?'block':'none')+'">'+G.esc(t)+'</div>';};
+})();
+(function(){
+/* Win banner v4 (design picked by fixed GAME_ORDER so it stays the same on every page): fireworks + stars, a different design per game, KJ2000 victory verse, wins, streak and rank */
+var G=window.GS, app=document.getElementById('app');
+var BURSTS=[
+ ["  \\ | /  ","*   *   *","--  ✸  --","*   *   *","  / | \\  "],
+ [" .  *  . ","*   '   *","' * ✺ * '","*   .   *"," .  *  . "],
+ ["✦       ✦","   \\ /   ","--  ✷  --","   / \\   ","✦       ✦"],
+ ["    ★    ","  *   *  ","★   ✸   ★","  *   *  ","    ★    "],
+ ["*   .   *","  . | .  ","-   ✹   -","  . | .  ","*   .   *"],
+ ["\\   ✦   /","  ✦ | ✦  ","✦   ✸   ✦","  ✦ | ✦  ","/   ✦   \\"],
+ ["  ' . '  ",". \\ | / .","--  ✺  --","' / | \\ '","  . ' .  "],
+ ["✶   |   ✶","  * | *  ","--  ✷  --","  * | *  ","✶   |   ✶"]];
+var STARS=["✦ ✶ ★ ✶ ✦","* ✦ ★ ✦ *","★ ✶ ★ ✶ ★","✶ * ★ * ✶","✦ * ✦ * ✦","★ ✦ ★ ✦ ★","✶ ✦ ✶ ✦ ✶","★ * ✶ * ★"];
+/* every verse below is copied from the user's KJ2000 text (kj2000-improved-2.txt) */
+var VERSES=[
+ ["But thanks be to God, who gives us the victory through our Lord Jesus Christ.","1 Corinthians 15:57"],
+ ["Nay, in all these things we are more than conquerors through him that loved us.","Romans 8:37"],
+ ["Rejoice in the Lord always: and again I say, Rejoice.","Philippians 4:4"],
+ ["I can do all things through Christ who strengthens me.","Philippians 4:13"],
+ ["For whoever is born of God overcomes the world: and this is the victory that overcomes the world, even our faith.","1 John 5:4"],
+ ["Now thanks be unto God, who always causes us to triumph in Christ, and makes manifest the fragrance of his knowledge by us in every place.","2 Corinthians 2:14"],
+ ["Know you not that they who run in a race all run, but one receives the prize? So run, that you may obtain.","1 Corinthians 9:24"],
+ ["I have fought a good fight, I have finished my course, I have kept the faith:","2 Timothy 4:7"],
+ ["A merry heart does good like a medicine: but a broken spirit dries the bones.","Proverbs 17:22"],
+ ["And let us not be weary in well doing: for in due season we shall reap, if we faint not.","Galatians 6:9"],
+ ["The LORD your God in the midst of you is mighty; he will save, he will rejoice over you with joy; he will quiet you with his love, he will rejoice over you with singing.","Zephaniah 3:17"],
+ ["For you shall go out with joy, and be led forth with peace: the mountains and the hills shall break forth before you into singing, and all the trees of the field shall clap their hands.","Isaiah 55:12"]];
+var RANKS=[[50,'More than a conqueror'],[25,'Overcomer'],[10,'Steadfast'],[3,'Faithful'],[1,'Beginner']];
+G.WIN_VERSES=VERSES;
+function rank(w){for(var i=0;i<RANKS.length;i++)if(w>=RANKS[i][0])return RANKS[i][1];return '';}
+var mem={};
+function load(){try{var s=window.localStorage.getItem('kbag_wins');if(s)mem=JSON.parse(s)||{};}catch(e){}}
+function save(){try{window.localStorage.setItem('kbag_wins',JSON.stringify(mem));}catch(e){}}
+load();
+G.winStats=function(id){return mem[id]||{w:0,s:0,b:0};};
+
+var WIN=/You win|Solved|You found it|All 8 found|You got it in|Found it in|Cracked in|All lights out|Done in \d+ moves|All pairs found|You made 2048/;
+var TWO=/(Black|White|X|O) wins\./;
+var LOSE=/computer wins|dealer wins|The word was|The answer was|The PIN was|The code was|Game over|No moves left|Not yet|fleet is sunk/;
+function pageText(){
+  var c=app.cloneNode(true),rm=c.querySelectorAll('#howbox,#winbox,.howbtn');
+  for(var i=0;i<rm.length;i++)rm[i].parentNode.removeChild(rm[i]);
+  return c.textContent||'';
+}
+function status(id,t){
+  var two=TWO.exec(t);
+  if(id==='anagrams'){var m=/You solved (\d+) of 10/.exec(t);if(m)return +m[1]>=8?{k:'win'}:{k:'lose'};}
+  if(id==='vapp'&&/Round done/.test(t))return /needed Again/.test(t)?{k:'lose'}:{k:'win'};
+  if(id==='stapp'){var h1=app.querySelector('h1');if(h1&&h1.textContent==='Won')return {k:'win'};if(h1&&h1.textContent==='Not yet')return {k:'lose'};return null;}
+  if(two&&!/You win/.test(t))return {k:'two',who:two[1]};
+  if(WIN.test(t))return {k:'win'};
+  if(LOSE.test(t))return {k:'lose'};
+  return null;
+}
+G.wstate=null; G.lastVerse=-1; G.lastWin=null;
+G.resetWin=function(){G.wstate=null;};
+function burst(b){var h='<div class="burst">';for(var r=0;r<b.length;r++){for(var i=0;i<b[r].length;i++){var c=b[r].charAt(i);h+='<span>'+(c===' '?'&nbsp;':G.esc(c))+'</span>';}if(r<b.length-1)h+='<br>';}return h+'</div>';}
+function banner(id,st){
+  var idx=0,O=window.GAME_ORDER||[];for(var i=0;i<O.length;i++)if(O[i]===id)idx=i;
+  var b=BURSTS[idx%BURSTS.length],s=STARS[idx%STARS.length],L=G.lastWin||{};
+  var head=st.k==='two'?({X:'X',O:'O',Black:'BLACK',White:'WHITE'}[st.who]||st.who)+' WINS!':'YOU WIN!';
+  var v=VERSES[L.v||0];
+  var h='<div id="winbox" class="winbox"><div class="fw">'+burst(b)+'<div class="mid"><div class="stars">'+s+'</div><div class="whead">'+head+'</div><div class="stars">'+s+'</div></div>'+burst(b)+'</div>';
+  h+='<div class="wverse">"'+G.esc(v[0])+'"</div><div class="wref">'+G.esc(v[1])+'</div>';
+  if(st.k==='win'){var x=G.winStats(id);
+    h+='<div class="wstat"><span class="wrank">★ Rank: '+G.esc(rank(x.w))+' ★</span>'+(L.newRank?'<br><b>New rank!</b>':'')+'<br>'+G.esc(G.current.name)+' wins: '+x.w+' &middot; Streak: '+x.s+' in a row'+(x.s>1&&x.s===x.b?' (best)':'')+'</div>';}
+  return h+'<button class="btn dark wagain" data-a="winagain">Play again</button></div>';
+}
+G.afterRender=function(){
+  if(!G.current){G.wstate=null;return;}
+  var id=G.current.id,old=document.getElementById('winbox');if(old)old.parentNode.removeChild(old);
+  var st=status(id,pageText());
+  if(!st){G.wstate=null;return;}
+  if(st.k==='lose'){if(G.wstate!=='lose'){var y=mem[id]||{w:0,s:0,b:0};y.s=0;mem[id]=y;save();}G.wstate='lose';return;}
+  if(G.wstate!=='won'){
+    G.wstate='won';var v;do{v=Math.floor(Math.random()*VERSES.length);}while(v===G.lastVerse&&VERSES.length>1);G.lastVerse=v;
+    var nr=false;
+    if(st.k==='win'){var x=mem[id]||{w:0,s:0,b:0},before=rank(x.w);x.w++;x.s++;if(x.s>x.b)x.b=x.s;mem[id]=x;save();nr=rank(x.w)!==before&&x.w>1;}
+    G.lastWin={v:v,newRank:nr};
+  }
+  var div=document.createElement('div');div.innerHTML=banner(id,st);
+  var after=document.getElementById('howbox')||app.querySelector('.bar');
+  var box=div.firstChild;
+  if(after&&after.parentNode===app)app.insertBefore(box,after.nextSibling);else app.insertBefore(box,app.firstChild);
+};
+G.playAgain=function(){
+  var order=['again','new','deal','game','redo','menu','nextround','start'];
+  for(var i=0;i<order.length;i++){var els=app.querySelectorAll('[data-a="'+order[i]+'"]');
+    for(var j=0;j<els.length;j++){var e=els[j],p=e,inBox=false;while(p&&p!==app){if(p.id==='winbox')inBox=true;p=p.parentNode;}
+      if(!inBox){e.click();return;}}}
+  G.current.start(app);G.afterRender();
+};
+})();
+(function(){
+var G=window.GS, esc=G.esc, BANK=window.BANK, W5=window.W5;
+
+/* ---------------- Word Guess ---------------- */
+(function(){
+var S;
+function score(guess,ans){var res=[],left={},i;for(i=0;i<5;i++){if(guess[i]===ans[i])res[i]='hit';else left[ans[i]]=(left[ans[i]]||0)+1;}
+  for(i=0;i<5;i++){if(res[i])continue;if(left[guess[i]]){res[i]='near';left[guess[i]]--;}else res[i]='miss';}return res;}
+function draw(){G.S=S;
+  var h=G.bar('Word Guess','try '+Math.min(S.rows.length+1,6)+' of 6')+'<div class="wg">';
+  for(var r=0;r<6;r++){h+='<div class="wgrow">';
+    for(var c=0;c<5;c++){var ch='',cls='tile';
+      if(r<S.rows.length){ch=S.rows[r].g[c];cls+=' '+S.rows[r].s[c];}
+      else if(r===S.rows.length&&!S.over){ch=S.cur[c]||'';}
+      h+='<span class="'+cls+'">'+(ch||'&nbsp;')+'</span>';}
+    h+='</div>';}
+  h+='</div><p class="small center">Black = right spot. Dashed = in the word. Gray = not in it.</p>';
+  if(S.msg)h+='<p class="note center">'+S.msg+'</p>';
+  if(S.over){h+='<div class="note"><b>'+S.ans+'</b> &middot; '+esc(S.ex.r)+': '+esc(S.ex.x)+'</div><button class="btn dark" data-a="new">New word</button>';}
+  else h+=G.keyboard('Enter',S.keys);
+  S.el.innerHTML=h;
+}
+G.add({id:'wordguess',name:'Word Guess',group:'Bible word games',start:function(el){
+  var w=G.pick(W5);S={el:el,ans:w.w,ex:w,rows:[],cur:'',keys:{},over:false,msg:''};draw();},
+ click:function(a,v){
+  if(a==='new'){this.start(S.el);return;}
+  if(S.over)return; S.msg='';
+  if(a==='key'&&S.cur.length<5)S.cur+=v;
+  else if(a==='del')S.cur=S.cur.slice(0,-1);
+  else if(a==='enter'){
+    if(S.cur.length<5){S.msg='Enter 5 letters first.';}
+    else{var s=score(S.cur,S.ans);S.rows.push({g:S.cur,s:s});
+      for(var i=0;i<5;i++){var k=S.cur[i],old=S.keys[k];if(s[i]==='hit'||(s[i]==='near'&&old!=='hit')||(!old))S.keys[k]=s[i];}
+      if(S.cur===S.ans){S.over=true;S.msg='You got it in '+S.rows.length+'.';}
+      else if(S.rows.length>=6){S.over=true;S.msg='The word was '+S.ans+'.';}
+      S.cur='';}
+  }
+  draw();}});
+})();
+
+/* ---------------- Hangman ---------------- */
+(function(){
+var S;
+function pic(n){
+  var p='<svg width="150" height="150" viewBox="0 0 150 150" style="display:block;margin:0 auto" stroke="#000" stroke-width="4" fill="none">'+
+   '<line x1="10" y1="140" x2="100" y2="140"/><line x1="40" y1="140" x2="40" y2="10"/><line x1="40" y1="10" x2="100" y2="10"/><line x1="100" y1="10" x2="100" y2="28"/>';
+  var parts=['<circle cx="100" cy="42" r="14"/>','<line x1="100" y1="56" x2="100" y2="96"/>','<line x1="100" y1="66" x2="82" y2="82"/>','<line x1="100" y1="66" x2="118" y2="82"/>','<line x1="100" y1="96" x2="84" y2="120"/>','<line x1="100" y1="96" x2="116" y2="120"/>'];
+  for(var i=0;i<n&&i<6;i++)p+=parts[i];
+  return p+'</svg>';
+}
+function draw(){G.S=S;
+  var shown='',done=true;
+  for(var i=0;i<S.w.length;i++){var c=S.w.charAt(i);if(S.got[c]||S.over)shown+=c+' ';else{shown+='_ ';done=false;}}
+  var h=G.bar('Hangman',S.miss+' of 6 misses')+pic(S.miss);
+  h+='<p class="big2 center">'+shown+'</p><p class="small center">Clue: '+esc(S.b.c)+'</p>';
+  if(S.over){h+='<p class="note center">'+(S.won?'You found it.':'The word was '+S.w+'.')+' ('+esc(S.b.r)+')</p><button class="btn dark" data-a="new">New word</button>';}
+  else h+=G.keyboard('',S.keys);
+  S.el.innerHTML=h;
+}
+G.add({id:'hangman',name:'Hangman',group:'Bible word games',start:function(el){
+  var b; do{b=G.pick(BANK);}while(b.w.length<4); S={el:el,b:b,w:b.w,got:{},keys:{},miss:0,over:false};draw();},
+ click:function(a,v){
+  if(a==='new'){this.start(S.el);return;}
+  if(S.over||a!=='key'||S.keys[v])return;
+  if(S.w.indexOf(v)>=0){S.got[v]=1;S.keys[v]='hit';var all=true;for(var i=0;i<S.w.length;i++)if(!S.got[S.w.charAt(i)])all=false;if(all){S.over=true;S.won=true;}}
+  else{S.keys[v]='miss';S.miss++;if(S.miss>=6){S.over=true;S.won=false;}}
+  draw();}});
+})();
+
+/* ---------------- Word Search ---------------- */
+(function(){
+var S,N=10,DIRS=[[0,1],[1,0],[1,1],[-1,1]];
+function build(){
+  for(var tries=0;tries<50;tries++){
+    var grid=[],r,c,placed=[];for(r=0;r<N;r++){grid.push([]);for(c=0;c<N;c++)grid[r].push('');}
+    var pool=G.shuffle(BANK.filter(function(b){return b.w.length>=3&&b.w.length<=N;}));
+    for(var p=0;p<pool.length&&placed.length<8;p++){
+      var w=pool[p].w,ok=false;
+      for(var t=0;t<80&&!ok;t++){var d=G.pick(DIRS),r0=G.rnd(N),c0=G.rnd(N),r1=r0+d[0]*(w.length-1),c1=c0+d[1]*(w.length-1);
+        if(r1<0||r1>=N||c1<0||c1>=N)continue;var fit=true;
+        for(var k=0;k<w.length;k++){var ch=grid[r0+d[0]*k][c0+d[1]*k];if(ch&&ch!==w.charAt(k)){fit=false;break;}}
+        if(!fit)continue;for(k=0;k<w.length;k++)grid[r0+d[0]*k][c0+d[1]*k]=w.charAt(k);
+        placed.push({w:w,r0:r0,c0:c0,r1:r1,c1:c1,found:false});ok=true;}
+    }
+    if(placed.length===8){var L='ABCDEFGHIJKLMNOPRSTUVWY';for(r=0;r<N;r++)for(c=0;c<N;c++)if(!grid[r][c])grid[r][c]=L.charAt(G.rnd(L.length));return {grid:grid,words:placed};}
+  }
+}
+function cellsOf(w){var out={},dr=w.r1===w.r0?0:(w.r1>w.r0?1:-1),dc=w.c1===w.c0?0:(w.c1>w.c0?1:-1),n=Math.max(Math.abs(w.r1-w.r0),Math.abs(w.c1-w.c0));for(var k=0;k<=n;k++)out[(w.r0+dr*k)+','+(w.c0+dc*k)]=1;return out;}
+function draw(){G.S=S;
+  var on={},i,left=0;for(i=0;i<S.words.length;i++){if(S.words[i].found){var cs=cellsOf(S.words[i]);for(var k in cs)on[k]=1;}else left++;}
+  var sz=G.cell(N),h=G.bar('Word Search',left+' left')+'<p class="small">Tap the first letter of a word, then its last letter.</p><table class="grid" style="font-size:'+Math.max(16,Math.floor(sz*0.55))+'px">';
+  for(var r=0;r<N;r++){h+='<tr>';for(var c=0;c<N;c++){var cls=on[r+','+c]?'on':'';if(S.sel&&S.sel[0]===r&&S.sel[1]===c)cls+=' sel';
+    h+='<td class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px" data-a="cell" data-v="'+r+','+c+'">'+S.grid[r][c]+'</td>';}h+='</tr>';}
+  h+='</table>';if(S.msg)h+='<p class="note">'+S.msg+'</p>';h+='<p class="words">';
+  for(i=0;i<S.words.length;i++)h+='<span class="'+(S.words[i].found?'done':'')+'">'+S.words[i].w+'</span> ';
+  h+='</p>';if(!left)h+='<p class="note">All 8 found.</p><button class="btn dark" data-a="new">New puzzle</button>';
+  S.el.innerHTML=h;
+}
+G.add({id:'wordsearch',name:'Word Search',group:'Bible word games',start:function(el){var b=build();S={el:el,grid:b.grid,words:b.words,sel:null,msg:''};draw();},
+ click:function(a,v){
+  if(a==='new'){this.start(S.el);return;}
+  if(a!=='cell')return;var p=v.split(','),r=+p[0],c=+p[1];S.msg='';
+  if(!S.sel){S.sel=[r,c];}
+  else{var hit=null;for(var i=0;i<S.words.length;i++){var w=S.words[i];if(w.found)continue;
+      if((w.r0===S.sel[0]&&w.c0===S.sel[1]&&w.r1===r&&w.c1===c)||(w.r1===S.sel[0]&&w.c1===S.sel[1]&&w.r0===r&&w.c0===c))hit=w;}
+    if(hit){hit.found=true;S.msg='Found '+hit.w+'.';}else if(!(S.sel[0]===r&&S.sel[1]===c))S.msg='No word there. Try again.';
+    S.sel=null;}
+  draw();}});
+})();
+
+/* ---------------- Anagrams ---------------- */
+(function(){
+var S;
+function next(){
+  var b;do{b=G.pick(BANK);}while(b.w.length<4||b.w.length>9||S.used[b.w]);S.used[b.w]=1;
+  var L=b.w.split(''),s;do{s=G.shuffle(L.slice());}while(s.join('')===b.w);
+  S.b=b;S.letters=s;S.taken=[];S.msg='';S.shown=false;
+}
+function draw(){G.S=S;
+  var h=G.bar('Anagrams','word '+S.n+' of 10 &middot; score '+S.score)+'<p class="small">Clue: '+esc(S.b.c)+'</p><div class="built center">';
+  for(var i=0;i<S.taken.length;i++)h+=S.letters[S.taken[i]];
+  h+='&nbsp;</div><div class="center">';
+  for(i=0;i<S.letters.length;i++){var used=S.taken.indexOf(i)>=0;h+='<button class="key big'+(used?' miss':'')+'" data-a="letter" data-v="'+i+'">'+(used?'&nbsp;':S.letters[i])+'</button>';}
+  h+='</div>';if(S.msg)h+='<p class="note">'+S.msg+'</p>';
+  if(S.shown){h+='<button class="btn dark" data-a="next">'+(S.n<10?'Next word':'See score')+'</button>';}
+  else h+='<div class="row3 row"><button class="btn" data-a="undo">Undo</button><button class="btn" data-a="clear">Clear</button><button class="btn" data-a="skip">Show it</button></div>';
+  S.el.innerHTML=h;
+}
+G.add({id:'anagrams',name:'Anagrams',group:'Bible word games',start:function(el){S={el:el,n:1,score:0,used:{}};next();draw();},
+ click:function(a,v){
+  if(a==='again'){this.start(S.el);return;}
+  if(a==='next'){if(S.n>=10){S.el.innerHTML=G.bar('Anagrams')+'<h1>Done</h1><p>You solved '+S.score+' of 10.</p><button class="btn dark" data-a="again">Play again</button>';return;}S.n++;next();draw();return;}
+  if(S.shown)return;
+  if(a==='letter'){var i=+v;if(S.taken.indexOf(i)<0)S.taken.push(i);
+    if(S.taken.length===S.letters.length){var w='';for(var k=0;k<S.taken.length;k++)w+=S.letters[S.taken[k]];
+      if(w===S.b.w){S.score++;S.msg='Right: '+S.b.w+' ('+esc(S.b.r)+').';S.shown=true;}else{S.msg='Not quite. Tap Clear and try again.';}}}
+  else if(a==='undo')S.taken.pop();
+  else if(a==='clear'){S.taken=[];S.msg='';}
+  else if(a==='skip'){S.msg='The word is '+S.b.w+' ('+esc(S.b.r)+').';S.shown=true;}
+  draw();}});
+})();
+
+/* ---------------- Crossword ---------------- */
+(function(){
+var S,M=15;
+function make(){
+  for(var attempt=0;attempt<40;attempt++){
+    var g={},list=[],pool=G.shuffle(BANK.filter(function(b){return b.w.length>=3&&b.w.length<=9;}));
+    function at(r,c){return g[r+','+c];}
+    function can(w,r,c,d){var dr=d?1:0,dc=d?0:1,cross=0;
+      if(at(r-dr,c-dc)||at(r+dr*w.length,c+dc*w.length))return -1;
+      for(var k=0;k<w.length;k++){var rr=r+dr*k,cc=c+dc*k,ch=at(rr,cc);
+        if(rr<0||cc<0||rr>=M||cc>=M)return -1;
+        if(ch){if(ch!==w.charAt(k))return -1;cross++;}
+        else{if(at(rr+dc,cc+dr)||at(rr-dc,cc-dr))return -1;}}
+      return cross;}
+    function put(b,r,c,d){for(var k=0;k<b.w.length;k++)g[(r+(d?k:0))+','+(c+(d?0:k))]=b.w.charAt(k);list.push({b:b,r:r,c:c,d:d});}
+    var f=pool[0];put(f,7,Math.floor((M-f.w.length)/2),0);
+    for(var p=1;p<pool.length&&list.length<9;p++){var w=pool[p].w,best=null;
+      for(var q=0;q<list.length;q++){var o=list[q];
+        for(var i=0;i<o.b.w.length;i++)for(var j=0;j<w.length;j++){if(o.b.w.charAt(i)!==w.charAt(j))continue;
+          var d=o.d?0:1,r=o.d?o.r+i:o.r-j,c=o.d?o.c-j:o.c+i,s=can(w,r,c,d);
+          if(s>0&&(!best||s>best.s))best={r:r,c:c,d:d,s:s};}}
+      if(best)put(pool[p],best.r,best.c,best.d);}
+    if(list.length>=7){
+      var r0=M,c0=M,r1=0,c1=0,k;for(k in g){var a=k.split(',');r0=Math.min(r0,+a[0]);r1=Math.max(r1,+a[0]);c0=Math.min(c0,+a[1]);c1=Math.max(c1,+a[1]);}
+      var sol={};for(k in g){var a2=k.split(',');sol[(a2[0]-r0)+','+(a2[1]-c0)]=g[k];}
+      for(var x=0;x<list.length;x++){list[x].r-=r0;list[x].c-=c0;}
+      list.sort(function(a,b){return a.r-b.r||a.c-b.c;});
+      var num={},n=0;for(x=0;x<list.length;x++){var key=list[x].r+','+list[x].c;if(!num[key])num[key]=++n;list[x].n=num[key];}
+      return {rows:r1-r0+1,cols:c1-c0+1,sol:sol,list:list,num:num};}
+  }
+}
+function wordCells(e){var out=[];for(var k=0;k<e.b.w.length;k++)out.push((e.r+(e.d?k:0))+','+(e.c+(e.d?0:k)));return out;}
+function active(){var e=null;for(var i=0;i<S.p.list.length;i++){var cs=wordCells(S.p.list[i]);if(cs.indexOf(S.sel)>=0&&(!e||S.p.list[i].d===S.dir))e=S.p.list[i];}return e;}
+function draw(){G.S=S;
+  var p=S.p,sz=G.cell(Math.max(p.cols,11)),e=S.sel?active():null,ac=e?wordCells(e):[];
+  var h=G.bar('Crossword')+'<table class="grid cw" style="font-size:'+Math.max(16,Math.floor(sz*0.55))+'px">';
+  for(var r=0;r<p.rows;r++){h+='<tr>';for(var c=0;c<p.cols;c++){var k=r+','+c;
+    if(!p.sol[k]){h+='<td class="blk" style="width:'+sz+'px;height:'+sz+'px"></td>';continue;}
+    var cls=(k===S.sel?'sel':(ac.indexOf(k)>=0?'act':''))+(S.wrong[k]?' wrong':'');
+    h+='<td class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px" data-a="cell" data-v="'+k+'">'+(p.num[k]?'<span class="num">'+p.num[k]+'</span>':'')+(S.fill[k]||'')+'</td>';}h+='</tr>';}
+  h+='</table>';
+  if(e)h+='<p class="note"><b>'+e.n+(e.d?' Down':' Across')+':</b> '+esc(e.b.c)+' <span class="small">('+e.b.w.length+' letters)</span></p>';
+  if(S.msg)h+='<p class="note">'+S.msg+'</p>';
+  if(S.done)h+='<button class="btn dark" data-a="new">New puzzle</button>';
+  else h+=G.keyboard('Check',{})+'<div class="row"><button class="btn" data-a="reveal">Show this word</button><button class="btn" data-a="new">New puzzle</button></div>';
+  for(var d=0;d<2;d++){h+='<h2>'+(d?'Down':'Across')+'</h2>';for(var i=0;i<p.list.length;i++){var x=p.list[i];if(x.d!==d)continue;h+='<p class="clue" data-a="clue" data-v="'+i+'"><b>'+x.n+'.</b> '+esc(x.b.c)+' ('+x.b.w.length+')</p>';}}
+  S.el.innerHTML=h;
+}
+function check(){var all=true,wrong=0;S.wrong={};for(var k in S.p.sol){if(S.fill[k]!==S.p.sol[k]){all=false;if(S.fill[k]){S.wrong[k]=1;wrong++;}}}
+  if(all){S.done=true;S.msg='Solved. Every word is right.';}else S.msg=wrong?wrong+' letter'+(wrong===1?' is':'s are')+' wrong (marked).':'No wrong letters so far. Keep going.';}
+G.add({id:'crossword',name:'Crossword',group:'Bible word games',start:function(el){S={el:el,p:make(),fill:{},wrong:{},sel:null,dir:0,msg:'',done:false};
+  var f=S.p.list[0];S.sel=f.r+','+f.c;S.dir=f.d;draw();},
+ click:function(a,v){
+  if(a==='new'){this.start(S.el);return;}
+  if(S.done)return;S.msg='';
+  if(a==='cell'){if(S.sel===v)S.dir=1-S.dir;S.sel=v;var e=active();if(e)S.dir=e.d;}
+  else if(a==='clue'){var x=S.p.list[+v];S.sel=x.r+','+x.c;S.dir=x.d;}
+  else if(a==='key'&&S.sel){S.fill[S.sel]=v;delete S.wrong[S.sel];var e2=active();if(e2){var cs=wordCells(e2),i=cs.indexOf(S.sel);if(i<cs.length-1)S.sel=cs[i+1];}
+    var full=true;for(var k in S.p.sol)if(!S.fill[k])full=false;if(full)check();}
+  else if(a==='del'&&S.sel){if(S.fill[S.sel])delete S.fill[S.sel];else{var e3=active();if(e3){var cs3=wordCells(e3),j=cs3.indexOf(S.sel);if(j>0){S.sel=cs3[j-1];delete S.fill[S.sel];}}}}
+  else if(a==='enter')check();
+  else if(a==='reveal'){var e4=active();if(e4){var cs4=wordCells(e4);for(var q=0;q<cs4.length;q++){S.fill[cs4[q]]=S.p.sol[cs4[q]];delete S.wrong[cs4[q]];}}
+    var full2=true;for(var k2 in S.p.sol)if(S.fill[k2]!==S.p.sol[k2])full2=false;if(full2){S.done=true;S.msg='All words filled in.';}}
+  draw();}});
+})();
+})();
+window.WX={"dict":["able","acts","adan","afar","aged","alms","also","arms","army","asks","away","back","bade","bake","bald","band","bank","bare","bars","base","beam","bear","beat","beds","been","belt","bend","bent","best","bind","bird","blew","blot","blow","blue","body","boil","bold","bond","bone","book","bore","born","both","bowl","bows","brim","burn","bury","bush","cake","calf","call","came","camp","care","cart","case","cast","cave","city","clay","coat","cock","cold","colt","come","copy","cost","cows","dark","days","dead","deaf","deal","deed","deep","dens","deny","died","dies","doer","does","dogs","done","door","dove","down","draw","drew","drop","dumb","dung","dust","duty","each","ears","ease","east","eats","edge","edom","else","ends","envy","even","ever","evil","eyes","face","fail","fair","fall","fame","fast","fear","feed","feet","fell","felt","figs","fill","find","fine","fire","firm","fish","five","flax","fled","flee","flow","foes","fold","food","fool","foot","form","foul","four","fowl","free","from","full","fury","gain","gall","gate","gave","gets","gift","gird","girl","give","glad","goat","gods","goes","gold","gone","good","gray","grew","grow","hail","hair","half","hall","hand","hang","hard","harm","harp","hate","have","head","heal","heap","hear","heat","heed","heir","held","hell","help","herb","herd","here","hewn","hide","high","hill","hire","hiss","hold","hole","holy","home","hoof","hope","horn","host","hour","hunt","hurt","idle","idol","into","iron","join","just","keep","kept","kids","kill","kind","king","kiss","knew","knob","know","lack","laid","lain","lake","lamb","lame","lamp","land","last","laws","lays","lead","leaf","lean","leap","left","legs","lend","lent","less","lest","liar","lies","life","lift","like","line","lion","lips","live","long","look","lord","lose","loss","lost","lots","loud","love","lust","made","maid","make","male","many","mark","meal","mean","meat","meek","meet","melt","milk","mind","mine","mire","mock","moon","more","most","moth","move","much","mule","must","name","near","neck","need","nest","nets","next","nine","none","noon","nose","oaks","oath","obey","once","ones","only","onyx","open","ours","oven","over","oxen","paid","pain","palm","part","pass","past","path","pine","pins","pity","play","plow","pole","pool","poor","post","pots","pour","pray","prey","pull","pure","puts","rage","rain","rams","read","reap","rear","reed","rest","rich","ride","ring","ripe","rise","road","roar","robe","rock","rode","rods","roof","room","root","rose","rows","ruin","rule","runs","sack","safe","said","sail","sake","salt","same","sand","sang","save","says","seal","seas","seat","seed","seek","seem","seen","seer","sees","self","sell","send","sent","sets","shed","ship","shoe","shot","show","shut","sick","side","sign","sing","sins","sits","skin","slay","slew","slow","snow","sold","sole","some","song","sons","soon","sort","soul","sown","sows","spit","spot","star","stay","stir","such","sure","tail","take","talk","tall","tear","tell","tent","test","than","that","them","then","they","thin","this","thus","tied","till","time","toil","told","took","tops","tore","torn","town","trap","tree","true","turn","unto","upon","used","uses","vain","veil","very","vile","vine","void","vows","wail","wait","walk","wall","want","warm","warn","warp","wars","wash","wave","ways","weak","wear","week","weep","well","went","wept","were","west","what","when","whom","wide","wife","wild","will","wind","wine","wing","wipe","wise","wish","with","womb","wood","woof","wool","word","work","worm","year","yoke","your","zeal"],"lad":[["tent","fear",4],["mind","land",3],["bone","sake",4],["lamp","sake",3],["reap","meek",5],["holy","mind",5],["gold","mind",4],["meek","land",5],["feed","fold",4],["wine","tent",5],["fear","well",4],["bear","bone",5],["dove","gold",5],["gold","king",5],["wine","seed",5],["fire","seed",5],["word","fold",3],["love","mind",4],["gate","lame",4],["hand","well",5],["tent","well",5],["head","gold",3],["lame","mind",5],["meek","sins",5],["king","life",4],["bone","bear",5],["wine","sand",4],["dust","land",5],["lame","gate",4],["holy","land",5],["well","harp",5],["wine","bone",3],["good","feed",5],["word","holy",5],["fold","wine",5],["fold","mind",4],["feed","meek",3],["love","lamp",5],["goat","holy",5],["bear","holy",5],["mind","wall",4],["bone","rest",5],["sown","sing",4],["camp","life",5],["fire","feed",5],["fold","well",4],["hope","foot",5],["goat","fold",4],["gate","sake",3],["bone","fold",3],["dove","fire",4],["holy","fear",5],["song","fire",5],["fold","tent",5],["fold","sake",5],["seed","king",5],["well","holy",4],["camp","sake",3],["tent","sing",5],["holy","lame",5],["lamp","cake",3],["bear","tent",3],["hand","seed",3],["fire","sons",5],["feed","reap",3],["gold","lame",5],["head","wall",4],["well","meek",5],["hand","tent",4],["bone","land",3],["bone","sand",3],["deaf","fold",5],["meek","bear",4],["fold","lame",5],["foot","lord",4],["harp","word",4],["land","feed",4],["sons","fire",5],["home","camp",3],["gold","deaf",5],["tent","mind",4],["bone","sins",5],["sand","feed",3],["fire","song",5],["seed","wine",5],["rest","mind",5],["gate","home",5],["bone","love",3],["tent","fold",5],["fear","hand",5],["fish","wine",3],["sins","love",5],["sake","life",3],["meek","feed",3],["wine","fish",3],["wall","seed",5],["cake","holy",5],["bear","meek",4],["seed","bone",4],["well","mind",4],["home","well",5],["sing","tent",5],["sins","seed",4],["holy","well",4],["love","fire",3],["mind","cake",5],["sons","sand",3],["rest","bone",5],["cake","lamp",3],["sand","reap",5],["well","rest",5],["song","feed",5],["love","goat",5],["hand","bone",3],["good","soul",4],["tent","bear",3],["hand","good",5],["sins","bone",5],["holy","hand",5],["dove","rest",5],["soul","word",5],["goat","gold",4],["king","tent",5],["wine","love",3],["deaf","seed",3],["rest","reap",5],["love","sins",5],["sins","mind",4],["reap","tent",5],["deaf","reap",3],["fold","dove",5],["tent","bone",4],["fire","sake",5],["calf","well",3],["life","bone",4],["rain","land",3],["wall","gold",5],["fear","deaf",4],["head","hope",4],["sing","hand",3],["gold","tent",5],["home","gate",5],["fish","sing",5],["song","mind",4],["lame","life",3],["hand","fold",4],["well","head",3],["rain","sand",4],["goat","cake",5],["lord","foot",4],["bone","tent",4],["wall","tent",5],["sand","well",5],["fold","hand",4],["land","sins",4],["tent","wine",5],["wine","wall",4],["sake","camp",3],["holy","reap",5],["sons","wine",4],["tent","love",5],["harp","bone",5],["sake","fold",5],["sand","wine",4],["hope","feed",5],["bear","fold",5],["holy","goat",5],["seed","fear",4],["camp","home",3],["robe","love",3],["home","gold",3],["home","good",4],["well","fear",4],["head","tent",4],["feed","mind",5],["tent","land",3],["head","mind",5],["reap","deaf",3],["lamb","wine",5],["home","bone",5],["land","tent",3],["love","lame",4],["mind","sake",5],["life","cake",3],["seed","gold",4],["bear","mind",5],["seed","well",4],["hand","song",3],["hand","sing",3],["love","dust",4],["life","robe",5],["sand","wall",4],["feed","fire",5],["gate","camp",4],["land","dove",5],["good","hand",5],["home","fold",3],["king","sand",3],["tree","feed",4],["wall","bear",5],["soul","fold",4],["home","cake",3],["sing","land",3],["fold","wall",5],["sand","dove",5],["holy","deaf",5],["seed","mind",4],["seed","home",5],["cake","lamb",3],["dust","dove",5],["dove","mind",5],["mind","sand",3],["holy","word",5],["bear","land",5],["gold","goat",4],["pray","star",4],["song","harp",5],["well","wine",4],["wall","land",5],["home","sake",3],["hand","meek",5],["foot","soul",3],["sing","fire",4],["gold","hope",3],["fire","fish",5],["holy","camp",5],["gate","lamp",5],["sand","rest",5],["life","lamp",4],["seed","tent",3],["sins","land",4],["wine","dove",4],["dove","sake",5],["holy","sake",5],["soul","gold",5],["song","land",3],["life","fire",3],["well","deaf",4],["fire","head",4],["well","good",5],["lame","gold",5],["lord","gold",4],["robe","sown",5],["wine","lame",4],["well","sing",5],["sown","song",3],["sins","wine",3],["dust","robe",5],["life","song",5],["robe","sons",5],["life","lamb",4],["word","hand",5],["mind","fish",5],["song","life",5],["sake","dove",5],["fire","lord",5],["seed","reap",3],["sand","sown",5],["bone","seed",4],["love","king",5],["land","bear",5],["wine","cake",4],["rest","feed",5],["land","life",5],["lamb","love",5],["tent","reap",5],["meek","reap",5],["wall","feed",5],["sand","meek",4],["seed","rest",5],["mind","harp",5],["reap","seed",3],["gold","reap",5],["robe","dove",4],["fire","bone",4],["lame","fire",5],["reap","holy",5],["love","bone",3],["reap","land",4],["bear","hand",5],["bone","cake",4],["sins","feed",5],["tree","seed",5],["rest","robe",5],["hand","rain",4],["fish","robe",5],["king","fire",4],["fire","land",5],["reap","feed",3],["meek","well",5],["fold","land",4],["king","love",5],["mind","bone",3],["sins","sand",3],["love","cake",4],["life","sins",4],["robe","dust",5],["deaf","fear",4],["robe","wine",4],["head","harp",3],["gold","head",3],["head","rest",4],["feed","tree",4],["well","hand",5],["bone","gold",3],["life","king",4],["feed","sing",5],["harp","fold",5],["sand","fire",5],["dust","cake",5],["tent","dust",4],["sins","hand",4],["land","rest",4],["mind","fire",3],["deaf","feed",3],["land","bone",3],["fold","sand",4],["gate","love",4],["song","bone",5],["rain","hand",4],["hand","gold",4],["meek","head",4],["rest","sand",5],["mind","gold",4],["mind","sing",3],["well","reap",4],["harp","fire",5],["goat","love",5],["reap","hand",5],["fold","fear",5],["feed","song",5],["bone","sown",5],["bone","hand",3],["rest","land",4],["fire","lame",5],["lame","bone",5],["gold","word",3],["tent","song",5],["feed","good",5],["feed","deaf",3],["home","lame",3],["bone","sing",5],["fire","love",3],["seed","deaf",3],["wall","reap",5],["hand","sins",4],["mind","rest",5],["goat","good",5],["head","fold",3],["sake","fire",5],["mind","song",4],["goat","dust",5],["seed","harp",4],["sown","king",5],["dove","dust",5],["home","feed",5],["fold","word",3],["land","good",5],["head","land",3],["wine","fold",5],["reap","gold",5],["love","sake",4],["wine","gold",5],["seed","tree",5],["tent","gold",5],["meek","fear",4],["love","wine",3],["sake","bone",4],["fish","king",5],["camp","gate",4],["wall","deaf",5],["bear","deaf",4],["meek","rest",5],["wine","lamb",5],["wall","king",5],["head","bone",5],["sand","harp",3],["hand","word",5],["hand","deaf",5],["sown","sins",3],["calf","head",5],["lame","hope",4],["love","rest",4],["seed","fold",4],["deaf","gold",5],["sown","robe",5],["fire","gate",4],["dust","tent",4],["hope","seed",5],["lamp","wine",5],["sing","harp",5],["dove","wine",4],["feed","bone",5],["wall","fold",5],["fire","sins",4],["fold","goat",4],["hope","sake",4],["king","seed",5],["mind","feed",5],["sons","life",5],["soul","foot",3],["fold","soul",4],["hope","gold",3],["cake","home",3],["deaf","hand",5],["love","lamb",5],["rest","love",4],["good","mind",5],["hand","fire",5],["word","harp",4],["land","mind",3],["bear","wall",5],["well","feed",4],["head","hand",3],["sand","holy",5],["gold","foot",3],["fire","mind",3],["lamb","home",4],["land","sons",4],["dust","life",5],["wall","holy",5],["bear","gold",5],["mind","holy",5],["harp","mind",5],["wall","mind",4],["tent","wall",5],["life","rest",4],["sake","wine",4],["holy","bear",5],["sand","gold",4],["head","home",4],["mind","head",5],["foot","word",3],["head","holy",3],["reap","well",4],["goat","rest",5],["sake","gate",3],["rest","dust",3],["well","tent",5],["sing","wall",5],["bone","harp",5],["land","rain",3],["bear","sand",5],["well","home",5],["feed","hand",4],["wine","sins",3],["fold","home",3],["bone","mind",3],["lamp","home",4],["land","wall",5],["head","good",4],["good","well",5],["hand","holy",5],["sing","feed",5],["dove","fold",5],["good","land",5],["seed","sons",5],["home","foot",5],["wall","head",4],["sand","deaf",5],["rest","fear",4],["deaf","meek",5],["wall","fear",5],["gold","feed",4],["rest","seed",5],["fish","life",4],["harp","head",3],["mind","dove",5],["word","gold",3],["harp","sing",5],["mind","tent",4],["feed","hope",5],["home","lamp",4],["sins","life",4],["rest","meek",5],["bone","foot",5],["lord","fold",4],["hand","sons",4],["good","seed",5],["gold","dove",5],["king","fold",5],["sins","sown",3],["bone","holy",4],["good","goat",5],["deaf","tent",5],["lame","dove",5],["foot","gold",3],["song","seed",4],["rest","goat",5],["hope","fold",3],["lame","love",4],["head","fire",4],["good","head",4],["hand","wall",5],["sons","land",4],["harp","gold",5],["sand","good",5],["gold","wall",5],["word","soul",5],["foot","holy",4],["fold","harp",5],["wine","lamp",5],["gold","well",4],["dust","love",4],["harp","feed",4],["good","holy",3],["seed","wall",5],["sake","mind",5],["rest","cake",5],["holy","foot",4],["bone","head",5],["well","king",5],["gate","fire",4],["cake","life",3],["wine","well",4],["mind","good",5],["fold","seed",4],["bear","seed",4],["good","lord",3],["deaf","holy",5],["foot","hope",5],["land","song",3],["rest","bear",3],["lamb","hope",5],["word","fire",4],["robe","bone",4],["song","hand",3],["fear","harp",5],["harp","song",5],["sing","sown",4],["seed","bear",4],["hand","dove",5],["reap","sand",5],["fire","king",4],["fire","harp",5],["deaf","sand",5],["lamb","gate",5],["bear","feed",4],["lamb","cake",3],["cake","dust",5],["mind","sins",4],["tent","seed",3],["song","wine",3],["wine","song",3],["sons","hand",4],["king","well",5],["home","lamb",4],["mind","fold",4],["fire","dove",4],["feed","well",4],["sake","home",3],["land","fold",4],["bear","harp",5],["bear","well",4],["bear","rest",3],["feed","gold",4],["feed","fear",4],["head","foot",5],["gate","dove",5],["fire","sing",4],["fear","feed",4],["gold","bone",3],["harp","holy",5],["hand","feed",4],["sing","seed",4],["good","hope",4],["land","meek",5],["life","lame",3],["mind","seed",4],["fold","head",3],["bone","camp",5],["gold","sand",4],["good","sand",5],["well","fold",4],["land","sing",3],["lord","harp",5],["bone","hope",5],["gold","lord",4],["meek","sand",4],["hope","bone",5],["wine","land",4],["mind","sons",5],["dust","goat",5],["hand","head",3],["fire","word",4],["hope","cake",4],["seed","sins",4],["love","robe",3],["fold","lord",4],["bone","wine",3],["soul","good",4],["dust","bear",5],["dove","robe",4],["lame","holy",5],["wall","hand",5],["seed","hope",5],["bone","good",4],["sins","meek",5],["meek","deaf",5],["sake","lamp",3],["fire","cake",5],["cake","bone",4],["lord","good",3],["king","gold",5],["holy","sand",5],["lamb","life",4],["holy","head",3],["lamp","life",4],["harp","well",5],["foot","head",5],["rest","dove",5],["fold","deaf",5],["king","wall",5],["seed","sing",4],["sand","sons",3],["fire","robe",5],["harp","lord",5],["meek","hand",5],["life","sons",5],["deaf","wall",5],["seed","song",4],["hand","fear",5],["lamp","gate",5],["well","gold",4],["sand","king",3],["tent","deaf",5],["bone","king",4],["feed","sand",3],["tent","sand",3],["bear","dust",5],["land","holy",5],["well","hope",5],["king","bone",4],["meek","tent",5],["holy","cake",5],["feed","tent",4],["gold","hand",4],["lamp","love",5],["hand","reap",5],["reap","harp",5],["harp","land",3],["rest","well",5],["fire","sand",5],["rest","life",4],["land","deaf",4],["fish","mind",5],["dove","gate",5],["wine","gate",5],["cake","goat",5],["feed","holy",4],["sing","love",5],["holy","seed",4],["bone","fire",4],["sing","mind",3],["cake","dove",5],["cake","gate",3],["wall","sing",5],["hope","lamb",5],["life","fish",4],["hand","bear",5],["holy","feed",4],["feed","rest",5],["deaf","bear",4],["fear","holy",5],["feed","land",4],["holy","bone",4],["hope","lamp",5],["hand","mind",3],["fear","rest",4],["sown","bone",5],["sing","bone",5],["life","camp",5],["hand","wine",4],["life","mind",3],["fear","tent",4],["harp","reap",5],["fear","gold",5],["bone","life",4],["robe","fire",5],["hope","well",5],["fear","meek",4],["cake","fire",5],["robe","life",5],["hand","rest",5],["bone","song",5],["hope","head",4],["mind","lame",5],["wine","robe",4],["mind","well",4],["king","sown",5],["seed","fire",5],["good","home",4],["sake","lamb",3],["fire","life",3],["deaf","land",4],["feed","harp",4],["life","sake",3],["feed","sins",5],["gold","soul",5],["rest","hand",5],["song","sown",3],["gate","wine",5],["gate","cake",3],["sons","seed",5],["fold","bone",3],["hope","good",4],["gate","life",4],["lord","fire",5],["deaf","well",4],["robe","fish",5],["king","sons",3],["lame","fold",5],["home","head",4],["cake","wine",4],["wine","sons",4],["land","wine",4],["fold","king",5],["life","sing",4],["camp","holy",5],["land","king",4],["seed","good",5],["sown","sand",5],["camp","bone",5],["harp","fear",5],["wall","sand",4],["wine","sake",4],["dove","cake",5],["lame","home",3],["dove","sand",5],["love","sing",5],["dove","hand",5],["reap","wall",5],["sand","bear",5],["gold","wine",5],["fear","seed",4],["well","bear",4],["hope","camp",4],["sins","fire",4],["fold","reap",5],["land","gold",4],["sons","mind",5],["dove","lame",5],["fire","hand",5],["sing","well",5],["camp","hope",4],["mind","love",4],["sand","bone",3],["holy","good",3],["fear","wall",5],["seed","land",3],["gold","fear",5],["dove","land",5],["life","dust",5],["dust","rest",3],["tent","hand",4],["dove","life",3],["mind","life",3],["feed","bear",4],["well","calf",3],["word","foot",3],["sand","fold",4],["fold","hope",3],["tent","feed",4],["tent","head",4],["life","tent",4],["harp","bear",5],["sake","holy",5],["life","gate",4],["reap","rest",5],["wine","hand",4],["well","sand",5],["fear","land",5],["foot","home",5],["wall","wine",4],["bone","home",5],["head","meek",4],["sand","tent",3],["tent","king",5],["fold","bear",5],["fish","fire",5],["gold","seed",4],["hope","lame",4],["cake","rest",5],["land","dust",5],["sing","fish",5],["king","land",4],["fold","feed",4],["feed","wall",5],["sand","sins",3],["mind","hand",3],["feed","home",5],["harp","deaf",5],["life","dove",3],["head","well",3],["sake","love",4],["land","fear",5],["fear","fold",5],["rest","head",4],["land","fire",5],["lamb","sake",3],["land","harp",3],["bone","robe",4],["gold","home",3],["sand","mind",3],["foot","bone",5],["cake","love",4],["sons","robe",5],["cake","hope",4],["head","sand",4],["lamp","hope",5],["reap","fold",5],["well","seed",4],["mind","bear",5],["gold","land",4],["home","seed",5],["robe","rest",5],["tent","life",4],["sake","gold",5],["land","reap",4],["king","hand",4],["life","land",5],["sand","rain",4],["sake","hope",4],["cake","mind",5],["tent","meek",5],["love","tent",5],["holy","harp",5],["star","pray",4],["gold","sake",5],["sons","king",3],["deaf","harp",5],["sand","head",4],["gate","lamb",5],["bone","feed",5],["head","calf",5],["holy","wall",5],["seed","holy",4],["lame","wine",4],["good","bone",4],["land","seed",3],["bone","lame",5],["harp","sand",3],["love","gate",4],["seed","hand",3],["gold","harp",5],["king","fish",5],["hand","king",4],["harp","seed",4],["song","tent",5],["gold","bear",5],["land","head",3],["sing","life",4]],"groups":[["Sons of Jacob",["Reuben","Levi","Judah","Dan"],"people"],["Apostles",["Andrew","Thomas","Philip","Bartholomew"],"people"],["Judges of Israel",["Gideon","Samson","Ehud","Othniel"],"people"],["Kings of Judah",["Hezekiah","Josiah","Uzziah","Asa"],"people"],["Books of the Law",["Genesis","Exodus","Leviticus","Numbers"],"books"],["Minor prophets",["Hosea","Joel","Amos","Micah"],"books"],["Paul's letters",["Romans","Galatians","Ephesians","Colossians"],"books"],["Gospels",["Matthew","Mark","Luke","John"],"books"],["Plagues of Egypt",["frogs","lice","locusts","hail"],"things"],["Fruit of the Spirit",["love","joy","peace","goodness"],"things"],["Armor of God",["breastplate","shield","helmet","sword"],"things"],["Birth of Jesus",["manger","star","shepherds","swaddling"],"things"],["Women in Genesis",["Sarah","Rebekah","Rachel","Leah"],"people"],["Mountains",["Sinai","Carmel","Ararat","Moriah"],"places"],["Rivers",["Jordan","Euphrates","Pison","Gihon"],"places"],["Cities Paul visited",["Corinth","Ephesus","Philippi","Athens"],"places"],["First people",["Adam","Eve","Cain","Abel"],"people"],["Prophets",["Isaiah","Jeremiah","Ezekiel","Daniel"],"people"],["Wives of David",["Michal","Abigail","Bath-sheba","Ahinoam"],"people"],["Kings of Israel",["Jeroboam","Ahab","Jehu","Omri"],"people"],["Birds",["raven","dove","sparrow","eagle"],"things"],["Tabernacle furniture",["ark","lampstand","laver","altar"],"things"],["Musical instruments",["harp","trumpet","cymbal","timbrel"],"things"],["Precious stones",["sapphire","emerald","jasper","onyx"],"things"],["Parables of Jesus",["sower","talents","leaven","mustard"],"things"],["Miracles of Jesus",["wine","loaves","storm","leper"],"things"],["At the cross",["thorns","vinegar","spear","robe"],"things"],["At the tomb",["stone","linen","angel","spices"],"things"],["Disciples who were fishermen",["Peter","Andrew","James","John"],"people"],["Paul's helpers",["Timothy","Titus","Silas","Luke"],"people"],["Early church",["Stephen","Dorcas","Lydia","Cornelius"],"people"],["Rulers in Acts",["Herod","Felix","Festus","Agrippa"],"people"]],"mind":{"q":{"nt":"Is this person from the New Testament?","woman":"Is this person a woman?","king":"Was this person a king of Israel?","prophet":"Is this person known as a prophet or prophetess?","wrote":"Did this person write a book (or part) of the Bible?","genesis":"Does this person appear in the book of Genesis?","apostle":"Was this person an apostle?","knew":"Did this person know Jesus during His life on earth?","leader":"Did this person lead or judge the nation of Israel?","egypt":"Did this person spend time in Egypt?","exile":"Did this person live in Babylon or Persia?","prison":"Was this person ever put in prison?","renamed":"Was this person given a new name?","sheep":"Did this person keep sheep?","first":"Was this person a famous \"first\" (first man, first king, first martyr)?","built":"Did this person build an ark, the temple, or a city wall?","twins":"Did this person have twin sons?","old":"Did this person have a child in very old age?","giant":"Did this person kill a giant or a lion?","army":"Did this person win a battle with trumpets and shouting?","doctor":"Was this person a doctor?","young":"Was this person a young helper of Paul?","stoned":"Was this person stoned?","gentile":"Was this person a Gentile (not born an Israelite)?","tax":"Was this person a tax collector?","fish":"Was this person a fisherman?","tomb":"Did this person see the empty tomb?","swallow":"Was this person swallowed by a great fish?","heaven":"Was this person taken up to heaven without dying?","mantle":"Did this person take up another prophet's mantle?","deny":"Did this person betray or deny Jesus?","doubt":"Is this person known for doubting?","throne":"Did this person see the Lord on His throne in the temple?"},"p":{"Adam":"genesis first","Noah":"genesis built","Abraham":"genesis egypt renamed old","Sarah":"woman genesis egypt renamed old","Isaac":"genesis twins","Jacob":"genesis egypt renamed sheep","Joseph (son of Jacob)":"genesis egypt prison","Moses":"prophet wrote leader egypt sheep","Aaron":"egypt","Miriam":"woman prophet egypt","Joshua":"leader egypt renamed army","Deborah":"woman prophet leader","Gideon":"leader army","Samson":"leader prison giant","Ruth":"woman gentile","Samuel":"prophet leader","King Saul":"king leader first","David":"king wrote leader sheep giant","Solomon":"king wrote leader built","Elijah":"prophet heaven","Elisha":"prophet mantle","Isaiah":"prophet wrote throne","Jeremiah":"prophet wrote egypt prison","Daniel":"prophet wrote exile renamed","Jonah":"prophet swallow","Esther":"woman exile renamed","Nehemiah":"wrote leader exile built","Mary, mother of Jesus":"nt woman knew egypt","John the Baptist":"nt prophet knew prison","Peter":"nt wrote apostle knew prison renamed fish tomb deny","John the apostle":"nt wrote apostle knew prison fish tomb","Matthew":"nt wrote apostle knew tax","Judas Iscariot":"nt apostle knew deny","Thomas":"nt apostle knew doubt","Paul":"nt wrote apostle prison stoned","Luke":"nt wrote doctor","Mary Magdalene":"nt woman knew tomb","Lydia":"nt woman gentile","Timothy":"nt young","Stephen":"nt first stoned"}}};(function(){
+/* Bible Word Games, part 2 (Kindle Bible Apps and Games v10): Cryptogram, Word Ladder, Odd One Out, Quartets, Mind Reader.
+   Data: window.VERSES (100 KJ2000 verses), window.WX (ladder words, word groups, Mind Reader facts). */
+var G=window.GS,esc=G.esc,WX=window.WX||{},VS=window.VERSES||[];
+var AL='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+/* ---------------- Cryptogram ---------------- */
+(function(){
+var S,id='cryptogram';
+function make(){var c=[];for(var i=0;i<VS.length;i++)if(VS[i].x.length<=95)c.push(VS[i]);var v=G.pick(c),t=v.x.toUpperCase();
+  var used={},letters=[];for(i=0;i<t.length;i++){var ch=t.charAt(i);if(AL.indexOf(ch)>=0&&!used[ch]){used[ch]=1;letters.push(ch);}}
+  var key;do{key=G.shuffle(AL.split(''));var ok=true;for(i=0;i<26;i++)if(key[i]===AL.charAt(i))ok=false;}while(!ok);
+  var enc={},dec={};for(i=0;i<26;i++){enc[AL.charAt(i)]=key[i];dec[key[i]]=AL.charAt(i);}
+  return {v:v,t:t,enc:enc,dec:dec,letters:letters};}
+function solved(){for(var i=0;i<S.p.letters.length;i++){var L=S.p.letters[i];if(S.g[S.p.enc[L]]!==L)return false;}return true;}
+function draw(){G.S=S;var p=S.p,h=G.bar('Bible Cryptogram',p.v.r+' &middot; hints left: '+S.hints);
+  var words=p.t.split(' ');h+='<div class="crypt">';
+  for(var w=0;w<words.length;w++){h+='<span class="cw2">';for(var i=0;i<words[w].length;i++){var ch=words[w].charAt(i);
+      if(AL.indexOf(ch)<0){h+='<span class="cc"><span class="cg">'+esc(ch)+'</span><span class="ce">&nbsp;</span></span>';continue;}
+      var e=p.enc[ch],gv=S.g[e]||'';h+='<span class="cc'+(S.sel===e?' on':'')+'" data-a="cl" data-v="'+e+'"><span class="cg">'+(gv||'_')+'</span><span class="ce">'+e+'</span></span>';}
+    h+='</span> ';}
+  h+='</div>';
+  if(S.done){h+='<p class="note">You win! The verse is decoded'+(S.hints<3?' (with '+(3-S.hints)+' hint'+(S.hints===2?'':'s')+')':'')+'.</p><div class="avs">"'+esc(p.v.x)+'"<div class="avref">'+esc(p.v.r)+'</div></div><button class="btn dark" data-a="new">New verse</button>';}
+  else{h+='<p class="small">'+(S.sel?'Code letter '+S.sel+' selected: tap the real letter.':'Tap a code letter (the small letter), then tap the real letter it stands for.')+'</p>'+G.keyboard(null,null);
+    h+='<div class="row"><button class="btn" data-a="clear">Clear this letter</button><button class="btn'+(S.hints?'':' locked')+'" data-a="hint">Hint</button></div>'+(S.msg?'<p class="note">'+esc(S.msg)+'</p>':'');}
+  S.el.innerHTML=h;}
+G.add({id:id,name:'Bible Cryptogram',group:'Bible word games',start:function(el){S={el:el,p:make(),g:{},sel:null,hints:3,done:false,msg:''};draw();},
+ click:function(a,v){if(a==='new'){this.start(S.el);return;}if(S.done)return;S.msg='';
+  if(a==='cl')S.sel=v;
+  else if(a==='key'){if(!S.sel)S.msg='First tap a code letter in the verse.';else{for(var k in S.g)if(S.g[k]===v&&k!==S.sel)delete S.g[k];S.g[S.sel]=v;}}
+  else if(a==='clear'&&S.sel)delete S.g[S.sel];
+  else if(a==='hint'&&S.hints){var miss=[];for(var i=0;i<S.p.letters.length;i++){var L=S.p.letters[i];if(S.g[S.p.enc[L]]!==L)miss.push(L);}
+    if(miss.length){var L2=G.pick(miss);for(var k2 in S.g)if(S.g[k2]===L2)delete S.g[k2];S.g[S.p.enc[L2]]=L2;S.hints--;}}
+  if(solved())S.done=true;draw();}});
+G.HOW[id]='A KJ2000 verse is written in code: every letter stands for a different letter. Tap a code letter, then tap the real letter on the keyboard. The reference is shown to help you. You have 3 hints. Decode the whole verse to win.';
+})();
+
+/* ---------------- Word Ladder ---------------- */
+(function(){
+var S,id='wordladder',DICT={},LIST=WX.dict||[];for(var i=0;i<LIST.length;i++)DICT[LIST[i]]=1;
+function nb(w){var o=[];for(var i=0;i<w.length;i++)for(var j=0;j<26;j++){var c=AL.charAt(j).toLowerCase();if(c===w.charAt(i))continue;var x=w.slice(0,i)+c+w.slice(i+1);if(DICT[x])o.push(x);}return o;}
+function dist(a,b){var d={},q=[b];d[b]=0;while(q.length){var u=q.shift();if(u===a)return d[u];var n=nb(u);for(var i=0;i<n.length;i++)if(d[n[i]]===undefined){d[n[i]]=d[u]+1;q.push(n[i]);}}return 99;}
+function options(){var n=nb(S.cur),good=[],other=[];for(var i=0;i<n.length;i++){if(S.path.indexOf(n[i])>=0)continue;(dist(n[i],S.end)<dist(S.cur,S.end)?good:other).push(n[i]);}
+  var o=[];if(good.length)o.push(G.pick(good));o=o.concat(G.shuffle(other).slice(0,4-o.length));if(o.length<4)o=o.concat(G.shuffle(good).slice(1,1+4-o.length));return G.shuffle(o);}
+function draw(){G.S=S;var h=G.bar('Bible Word Ladder','steps '+S.moves+' of '+S.max);
+  h+='<p class="atext">Change <b>'+S.start.toUpperCase()+'</b> into <b>'+S.end.toUpperCase()+'</b>, one letter at a time. Every word is in the KJ2000 Bible.</p>';
+  h+='<p class="atext center"><b>'+S.path.join(' &rarr; ').toUpperCase()+'</b></p>';
+  if(S.cur===S.end)h+='<p class="note">You win! '+S.start.toUpperCase()+' became '+S.end.toUpperCase()+' in '+S.moves+' steps (best is '+S.best+').</p><button class="btn dark" data-a="new">New ladder</button>';
+  else if(S.moves>=S.max)h+='<p class="note">Not yet: out of steps. A shortest way has '+S.best+' steps.</p><button class="btn dark" data-a="new">New ladder</button>';
+  else{h+=S.opts.length?'<p class="small">Tap the next word:</p><div class="row">':'<p class="note">No new words from here. Tap Undo to go back.</p><div class="row">';for(var i=0;i<S.opts.length;i++)h+='<button class="btn" data-a="step" data-v="'+S.opts[i]+'">'+S.opts[i].toUpperCase()+'</button>';h+='</div>';
+    if(S.path.length>1)h+='<button class="btn" data-a="undo">Undo</button>';}
+  S.el.innerHTML=h;}
+G.add({id:id,name:'Bible Word Ladder',group:'Bible word games',start:function(el){var L=G.pick(WX.lad);S={el:el,start:L[0],end:L[1],best:L[2],max:L[2]+4,cur:L[0],path:[L[0]],moves:0};S.opts=options();draw();},
+ click:function(a,v){if(a==='new'){this.start(S.el);return;}if(S.cur===S.end||S.moves>=S.max)return;
+  if(a==='step'&&S.opts.indexOf(v)>=0){S.moves++;S.path.push(v);S.cur=v;if(S.cur!==S.end)S.opts=options();}
+  else if(a==='undo'&&S.path.length>1){S.path.pop();S.cur=S.path[S.path.length-1];S.opts=options();}
+  draw();}});
+G.HOW[id]='Change the first word into the goal word by changing one letter at a time. Tap one of the words offered for each step. Every word comes from the KJ2000 Bible. Reach the goal within the steps allowed to win. Undo takes back a word, but the step still counts.';
+})();
+
+/* ---------------- Odd One Out ---------------- */
+(function(){
+var S,id='oddoneout',GR=WX.groups||[];
+function make(){var a=G.rnd(GR.length),b;do{b=G.rnd(GR.length);}while(b===a||GR[b][2]===GR[a][2]);
+  var three=G.shuffle(GR[a][1].slice()).slice(0,3),odd;var c=G.shuffle(GR[b][1].slice());for(var i=0;i<c.length;i++)if(three.indexOf(c[i])<0){odd=c[i];break;}
+  var o=G.shuffle(three.concat([odd]));return {o:o,odd:o.indexOf(odd),g:GR[a][0],og:GR[b][0],w:odd};}
+function draw(){G.S=S;var h=G.bar('Bible Odd One Out',S.i<10?'round '+(S.i+1)+' of 10 &middot; right: '+S.score:'done');
+  if(S.i>=10)h+=(S.score>=8?'<p class="note">You win! You got '+S.score+' of 10.</p>':'<p class="note">Not yet: you got '+S.score+' of 10. You need 8 to win.</p>')+'<button class="btn dark" data-a="new">New game</button>';
+  else{h+='<p class="atext">Three of these belong together. Which one is the odd one out?</p>';
+    if(S.fb===null){h+='<div class="row">';for(var i=0;i<4;i++)h+='<button class="btn" data-a="pick" data-v="'+i+'">'+esc(S.q.o[i])+'</button>';h+='</div>';}
+    else h+='<p class="note">'+(S.fb?'Correct! ':'Wrong. ')+esc(S.q.w)+' is the odd one out. The other three are '+esc(S.q.g)+'; '+esc(S.q.w)+' belongs to '+esc(S.q.og)+'.</p><button class="btn dark" data-a="next">Next</button>';}
+  S.el.innerHTML=h;}
+G.add({id:id,name:'Bible Odd One Out',group:'Bible word games',start:function(el){S={el:el,i:0,score:0,fb:null,q:make()};draw();},
+ click:function(a,v){if(a==='new'){this.start(S.el);return;}
+  if(a==='pick'&&S.fb===null){S.fb=+v===S.q.odd;if(S.fb)S.score++;}
+  else if(a==='next'&&S.fb!==null){S.i++;S.fb=null;if(S.i<10)S.q=make();}
+  draw();}});
+G.HOW[id]='Four Bible words are shown. Three belong to the same group, such as apostles, judges or plagues of Egypt. Tap the one that does not belong. Get 8 of 10 right to win.';
+})();
+
+/* ---------------- Quartets ---------------- */
+(function(){
+var S,id='quartets',GR=WX.groups||[];
+function deal(){var pick=[],used={},o=G.shuffle(GR.slice());
+  for(var i=0;i<o.length&&pick.length<7;i++){var ok=true;for(var j=0;j<4;j++)if(used[o[i][1][j]])ok=false;if(!ok)continue;pick.push(o[i]);for(j=0;j<4;j++)used[o[i][1][j]]=1;}
+  var deck=[];for(i=0;i<pick.length;i++)for(j=0;j<4;j++)deck.push({w:pick[i][1][j],g:i});deck=G.shuffle(deck);
+  return {sets:pick,me:deck.splice(0,7),cpu:deck.splice(0,7),pile:deck,mine:[],cpus:[]};}
+function groupsIn(hand){var g={};for(var i=0;i<hand.length;i++)g[hand[i].g]=1;return g;}
+function lay(who){var hand=S.d[who],cnt={},i;for(i=0;i<hand.length;i++)cnt[hand[i].g]=(cnt[hand[i].g]||0)+1;
+  for(var g in cnt)if(cnt[g]===4){S.d[who==='me'?'mine':'cpus'].push(+g);S.d[who]=hand=hand.filter(function(c){return c.g!==+g;});S.log.push((who==='me'?'You lay down ':'The computer lays down ')+S.d.sets[g][0]+'.');}}
+function refill(who){if(!S.d[who].length&&S.d.pile.length)S.d[who].push(S.d.pile.pop());}
+function over(){return S.d.mine.length+S.d.cpus.length===S.d.sets.length;}
+function cpuTurn(){var guard=0;while(!over()&&guard++<20){refill('cpu');var H=S.d.cpu;if(!H.length)return;
+    var gs=groupsIn(H),want=[];for(var g in gs)for(var j=0;j<4;j++){var w=S.d.sets[g][1][j],has=false;for(var k=0;k<H.length;k++)if(H[k].w===w)has=true;if(!has)want.push({w:w,g:+g});}
+    if(!want.length)return;var ask=G.pick(want),idx=-1;for(var m=0;m<S.d.me.length;m++)if(S.d.me[m].w===ask.w)idx=m;
+    if(idx>=0){H.push(S.d.me.splice(idx,1)[0]);S.log.push('The computer asks you for '+ask.w+' and takes it.');lay('cpu');refill('me');continue;}
+    S.log.push('The computer asks you for '+ask.w+'. You do not have it.');if(S.d.pile.length){H.push(S.d.pile.pop());lay('cpu');}return;}}
+function draw(){G.S=S;var d=S.d,h=G.bar('Bible Quartets','your sets '+d.mine.length+' &middot; computer '+d.cpus.length+' &middot; pile '+d.pile.length);
+  if(S.log.length)h+='<div class="note">'+esc(S.log.slice(-4).join(' '))+'</div>';S.log=[];
+  if(over()){var a=d.mine.length,b=d.cpus.length;h+='<p class="note">'+(a>b?'You win! You collected '+a+' sets to '+b+'.':(a<b?'The computer wins, '+b+' sets to '+a+'.':'A tie, '+a+' sets each.'))+'</p><button class="btn dark" data-a="new">New game</button>';}
+  else{h+='<p class="small">Your cards (computer has '+d.cpu.length+'):</p><div class="row">';
+    var hand=d.me.slice().sort(function(x,y){return x.g-y.g;});for(var i=0;i<hand.length;i++)h+='<span class="btn" style="cursor:default">'+esc(hand[i].w)+' <span class="small">('+esc(d.sets[hand[i].g][0])+')</span></span>';h+='</div>';
+    var gs=groupsIn(d.me),opts=[];for(var g in gs)for(var j=0;j<4;j++){var w=d.sets[g][1][j],has=false;for(var k=0;k<d.me.length;k++)if(d.me[k].w===w)has=true;if(!has)opts.push(w);}
+    if(opts.length){h+='<p class="small">Ask the computer for a card you need:</p><div class="row">';for(var o=0;o<opts.length;o++)h+='<button class="btn" data-a="ask" data-v="'+esc(opts[o])+'">'+esc(opts[o])+'</button>';h+='</div>';}
+    else h+='<button class="btn dark" data-a="pass">Draw a card</button>';
+    if(d.mine.length)h+='<p class="small">Your sets: '+esc(d.mine.map(function(g){return d.sets[g][0];}).join(', '))+'</p>';}
+  S.el.innerHTML=h;}
+G.add({id:id,name:'Bible Quartets',group:'Bible word games',start:function(el){S={el:el,d:deal(),log:['Collect sets of four Bible things. You go first.']};lay('me');lay('cpu');draw();},
+ click:function(a,v){if(a==='new'){this.start(S.el);return;}if(over())return;var d=S.d;
+  if(a==='ask'){var idx=-1;for(var i=0;i<d.cpu.length;i++)if(d.cpu[i].w===v)idx=i;
+    if(idx>=0){d.me.push(d.cpu.splice(idx,1)[0]);S.log.push('The computer has '+v+'. Your turn again.');lay('me');refill('cpu');refill('me');}
+    else{S.log.push('The computer does not have '+v+'.');if(d.pile.length){var c=d.pile.pop();d.me.push(c);S.log.push('You draw '+c.w+'.');lay('me');}cpuTurn();refill('me');}}
+  else if(a==='pass'){if(d.pile.length){var c2=d.pile.pop();d.me.push(c2);S.log.push('You draw '+c2.w+'.');lay('me');}cpuTurn();refill('me');}
+  if(!over()&&!d.me.length&&!d.pile.length)cpuTurn();
+  draw();}});
+G.HOW[id]='Collect sets of four Bible things, like the four Gospels or four judges of Israel. On your turn, ask the computer for a card you need to finish a set you have started. If it has the card, you get it and go again. If not, you draw a card and the computer takes a turn. A full set of four is laid down. Collect the most sets to win.';
+})();
+
+/* ---------------- Mind Reader ---------------- */
+(function(){
+var S,id='mindreader',MR=WX.mind||{q:{},p:{}},NAMES=[];for(var n in MR.p)if(MR.p.hasOwnProperty(n))NAMES.push(n);NAMES.sort();
+function has(n,k){return (' '+MR.p[n]+' ').indexOf(' '+k+' ')>=0;}
+function miss(n){var m=0;for(var k in S.ans)if(S.ans.hasOwnProperty(k)&&has(n,k)!==S.ans[k])m++;return m;}
+function ranked(){var r=[];for(var i=0;i<NAMES.length;i++)if(!S.no[NAMES[i]])r.push([miss(NAMES[i]),NAMES[i]]);r.sort(function(a,b){return a[0]-b[0]||(a[1]<b[1]?-1:1);});return r;}
+function nextQ(){var r=ranked(),live=[];for(var i=0;i<r.length;i++)if(r[i][0]<=r[0][0])live.push(r[i][1]);
+  if(live.length<=1||S.asked>=12)return null;
+  var best=null,bs=-1;for(var k in MR.q){if(!MR.q.hasOwnProperty(k)||S.ans.hasOwnProperty(k)||S.skip[k])continue;var y=0;for(var j=0;j<live.length;j++)if(has(live[j],k))y++;var s=Math.min(y,live.length-y);if(s>bs){bs=s;best=k;}}
+  return bs>0?best:null;}
+function draw(){G.S=S;var h=G.bar('Bible Mind Reader',S.mode==='ask'?'question '+(S.asked+1):'');
+  if(S.mode==='intro'){h+='<p class="atext">Think of a Bible person from this list, and the Kindle will try to read your mind with yes-or-no questions.</p><p class="small">'+esc(NAMES.join(', '))+'</p><button class="btn dark" data-a="go">I am ready</button>';}
+  else if(S.mode==='ask'){h+='<p class="atext"><b>'+esc(MR.q[S.q])+'</b></p><div class="row"><button class="btn" data-a="ans" data-v="1">Yes</button><button class="btn" data-a="ans" data-v="0">No</button></div><button class="btn" data-a="ans" data-v="x">Not sure</button>';}
+  else if(S.mode==='guess'){h+='<p class="atext">I think you are thinking of...</p><h2 class="center">'+esc(S.g)+'</h2><div class="row"><button class="btn" data-a="right">Yes, that is right</button><button class="btn" data-a="wrong">No</button></div>';}
+  else if(S.mode==='got')h+='<p class="note">The Kindle read your mind: '+esc(S.g)+'! Think of someone else and try to stump it.</p><button class="btn dark" data-a="new">Play again</button>';
+  else if(S.mode==='who'){h+='<p class="atext">Who were you thinking of?</p><div class="row">';for(var i=0;i<NAMES.length;i++)h+='<button class="btn" data-a="was" data-v="'+esc(NAMES[i])+'">'+esc(NAMES[i])+'</button>';h+='</div>';}
+  else if(S.mode==='stumped')h+='<p class="note">You win! You stumped the Kindle with '+esc(S.was)+'.</p>'+(S.bad.length?'<p class="small">By its facts, your answers did not match on: '+esc(S.bad.join(' '))+'</p>':'')+'<button class="btn dark" data-a="new">Play again</button>';
+  S.el.innerHTML=h;window.scrollTo(0,0);}
+function advance(){S.q=nextQ();if(S.q)S.mode='ask';else{var r=ranked();S.g=r.length?r[0][1]:null;S.mode=S.g?'guess':'who';}}
+G.add({id:id,name:'Bible Mind Reader',group:'Bible word games',start:function(el){S={el:el,mode:'intro',ans:{},skip:{},no:{},asked:0,tries:0};draw();},
+ click:function(a,v){if(a==='new'){this.start(S.el);return;}
+  if(a==='go'){advance();}
+  else if(a==='ans'&&S.mode==='ask'){if(v==='x')S.skip[S.q]=1;else S.ans[S.q]=v==='1';S.asked++;advance();}
+  else if(a==='right'&&S.mode==='guess')S.mode='got';
+  else if(a==='wrong'&&S.mode==='guess'){S.no[S.g]=1;S.tries++;if(S.tries>=3)S.mode='who';else advance();}
+  else if(a==='was'&&S.mode==='who'){S.was=v;S.bad=[];for(var k in S.ans)if(S.ans.hasOwnProperty(k)&&has(v,k)!==S.ans[k])S.bad.push(MR.q[k]);S.mode='stumped';}
+  draw();}});
+G.HOW[id]='Think of one of the Bible people listed. Answer the Kindle\'s yes-or-no questions honestly (Not sure skips a question). The Kindle gets three guesses. If it cannot find your person, you win.';
+})();
+})();
+(function(){var k=["wordguess", "hangman", "crossword", "wordsearch", "anagrams", "cryptogram", "wordladder", "oddoneout", "quartets", "mindreader"],G=window.GS,o=[];for(var i=0;i<k.length;i++)for(var j=0;j<G.games.length;j++)if(G.games[j].id===k[i])o.push(G.games[j]);G.games=o;})();</script></body></html>
