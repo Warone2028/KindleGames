@@ -1,1 +1,1 @@
-html Study Aids, Games and Adventures to help learn the Bible. And a few other games.
+html Study Aids, Games and Adventures to help learn the Bible. And a few other games. Designing to work on kindle, mac, ipad, and iphone, but will likely work on many other platforms using html browsers. Some are still beta and need tuning.
